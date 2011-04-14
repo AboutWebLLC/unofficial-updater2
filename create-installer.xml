@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!--
+this ant build file can be re-run with the following command if Ant is installer locally
+> ant -buildfile create-installer.xml
+-->
+<project name="Create Unofficial Updater2 Installer"  default="MakeSelfExtractor"  basedir=".">
+
+	<path id="taskdef.cp">
+		<fileset dir="/usr/local/AntInstaller-beta0.8/lib/">
+			<include name="ant-installer-ext.jar"/>
+			<include name="ant-installer.jar"/>
+		</fileset>
+	</path>
+	
+	
+	<taskdef 
+		name="installer" 
+		classname="org.tp23.antinstaller.taskdefs.Installer"
+		classpathref="taskdef.cp"/>
+
+
+		<property name="ANT_INSTALL_ROOT"	value="/usr/local/AntInstaller-beta0.8"/>
+		<property name="PROJECT_NAME"		value="Unofficial-Updater2"/>
+		<property name="PROJECT_SHORT_NAME"	value="Uu2"/>
+		<property name="PROJECT_ROOT"		value="."/>
+		<property name="PROJECT_BUILD"		value="/build/unofficial-updater2"/>
+		<property name="PROJECT_SRC"		value="${PROJECT_ROOT}"/>
+		<property name="PROJECT_LIC"		value="/usr/local/AntInstaller-beta0.8/lib/LICENSE-ant-install.txt"/>
+		
+	<!-- This task only needs to run once it can be deleted once the self-extract files exist on the build host  -->
+	<target name="Base">
+			<echo message="Building SelfExtractor runnable jar file"/>
+		
+			<unjar src="${ANT_INSTALL_ROOT}/antlib/ant-nodeps.jar" dest="${PROJECT_BUILD}/nodeps" />
+			<unjar src="${ANT_INSTALL_ROOT}/antlib/ant-contrib-1.0b3.jar" dest="${PROJECT_BUILD}/ant-contrib" />
+	</target>
+
+
+	<target name="MakeSelfExtractor" depends="Base">
+		
+		<installer file="${PROJECT_BUILD}/${PROJECT_NAME}.jar" compress="true"
+				extractType="SelfExtractor"
+				installConfig="${PROJECT_SRC}/antinstall-config.xml"
+				buildFile="${PROJECT_SRC}/build.xml"
+				antInstallLib="${ANT_INSTALL_ROOT}/lib"
+				antLib="${ANT_INSTALL_ROOT}/antlib"
+				validateConfig="true"
+				icons="bluecurve">
+			<zipfileset fullpath="resources/License.txt" file="${PROJECT_LIC}"/>
+		
+			<!-- include ant nodep tasks, not packaged by AntInstaller automatically -->
+			<fileset dir="${PROJECT_BUILD}/nodeps">
+				<exclude name="META-INF/*"/>
+			</fileset>
+			
+			<!-- include ant-contrib tasks -->
+			<fileset dir="${PROJECT_BUILD}/ant-contrib">
+				<exclude name="META-INF/*"/>
+			</fileset>
+			
+			<zipfileset dir="resources" prefix="resources" />
+
+			<fileset dir=".">
+				<include name="README*" />
+			</fileset>
+			
+		</installer>
+	</target>
+
+
+</project>

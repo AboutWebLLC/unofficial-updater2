@@ -1,0 +1,235 @@
+<?xml version="1.0"?>
+<!DOCTYPE installer PUBLIC "-//tp23 //DTD Ant Installer Config//EN" "http://antinstaller.sf.net/dtd/antinstall-config-0.8.dtd">
+<!--
+	Copyright (c) 2011, David C. Epler
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
+<installer
+			ui="swing,text"
+			verbose="true"
+			debug="false"
+			lookAndFeel="native"
+			antialiased="true"
+			name="Unofficial Updater 2"
+			windowIcon="/resources/images/Uu2-icon.png"
+			defaultImageResource="/resources/images/background-bar.png"
+			minJavaVersion="1.5"
+			finishButtonText="Apply Updates"
+			version="1.0.0">
+
+	<page type="text" name="Intro" displayText="Welcome to Unofficial Updater 2" htmlResource="/README.htm" textResource="/README" />
+
+	<!-- need some basic info how ColdFusion is installed, probably a way to probe for this -->
+	<page
+			type="input"
+			name="cf_install"
+			displayText="How is ColdFusion Installed?">
+		<select
+				property="installType"
+				defaultValue="standalone"
+				displayText="Installation Type">
+			<option text="Standalone" value="standalone"/>
+			<option text="Multi-Server JRun 4" value="jrun"/>
+			<option text="J2EE EAR/WAR" value="j2ee"/>
+		</select>
+		<comment displayText="" />
+		<select
+				property="needProxy"
+				defaultValue="n"
+				displayText="Need to use a proxy?">
+			<option text="No" value="n"/>
+			<option text="Yes" value="y"/>
+		</select>
+		<!-- 
+		<select
+				property="webserver"
+				defaultValue="none"
+				displayText="Web Server Connector">
+			<option text="Apache" value="apache"/>
+			<option text="iPlanet" value="iplanet"/>
+			<option text="IIS" value="iis"/>
+			<option text="None" value="none"/>
+		</select>
+		-->
+	</page>
+
+	<!-- get proxy information -->
+	<page
+			type="input"
+			name="proxy"
+			displayText="Proxy Configuration"
+			ifProperty="${needProxy}==y">
+		
+		<text displayText="Proxy Host" property="proxyHost" defaultValue="" />
+		<text displayText="Proxy Port" property="proxyPort" defaultValue="80" />
+		<text displayText="Proxy User" property="proxyUser" defaultValue="" />
+		<password displayText="Proxy Password" regex=".*" property="proxyPassword" defaultValue="" textMask="true" />
+	</page>
+	
+	<!-- get installation values for standalone -->
+	<page
+			type="input"
+			name="cf_install_standalone"
+			displayText="Where is ColdFusion Installed?"
+			ifProperty="${installType}==standalone">
+			
+		<hidden property="install_unix" value="/opt/coldfusion8" />
+		<hidden property="webinf_unix" value="${install_unix}/wwwroot/WEB-INF" />
+		<hidden property="cfide_unix" value="${install_unix}/wwwroot/CFIDE" />
+		<hidden property="install_win" value="C:\ColdFusion8" />
+		<hidden property="webinf_win" value="${install_win}\wwwroot\WEB-INF" />
+		<hidden property="cfide_win" value="${install_win}\wwwroot\CFIDE" />
+		<hidden property="jrunInstallDir" value="" />
+			
+		<app-root
+				property="cfInstallDir"
+				defaultValue="${install_unix}"
+				defaultValueWin="${install_win}"
+				displayText="ColdFusion directory"
+				checkFile1="lib/cfusion.jar"/>
+		<app-root
+				property="webinfDir"
+				defaultValue="${webinf_unix}"
+				defaultValueWin="${webinf_win}"
+				displayText="WEB-INF directory"
+				checkFile1="lib/cfmx_bootstrap.jar"/>
+		<app-root
+				property="cfideDir"
+				defaultValue="${cfide_unix}"
+				defaultValueWin="${cfide_win}"
+				displayText="CFIDE directory"
+				checkFile1="administrator/Application.cfm"/>
+	</page>
+	
+	<!-- get installation values for jrun -->
+	<page
+			type="input"
+			name="cf_install_jrun"
+			displayText="Where is ColdFusion Installed?"
+			ifProperty="${installType}==jrun">
+			
+		<hidden property="cfInstallDir" value="" />
+		<hidden property="install_unix" value="/opt/jrun4" />
+		<hidden property="webinf_unix" value="${install_unix}/servers/cfusion/cfusion-ear/cfusion-war/WEB-INF" />
+		<hidden property="install_win" value="C:\JRun4" />
+		<hidden property="webinf_win" value="${install_win}\servers\cfusion\cfusion-ear\cfusion-war\WEB-INF" />
+		
+		<app-root
+				property="jrunInstallDir"
+				defaultValue="${install_unix}"
+				defaultValueWin="${install_win}"
+				displayText="JRun4 directory"
+				checkFile1="servers/admin/jmc-app.ear"/>
+		<app-root
+				property="webinfDir"
+				defaultValue="${webinf_unix}"
+				defaultValueWin="${webinf_win}"
+				displayText="WEB-INF directory"
+				checkFile1="lib/cfmx_bootstrap.jar"/>
+		<app-root
+				property="cfideDir"
+				defaultValue=""
+				displayText="CFIDE directory"
+				checkFile1="administrator/Application.cfm"/>
+	</page>
+	
+	<!-- get installation values for j2ee -->
+	<page
+			type="input"
+			name="cf_install_j2ee"
+			displayText="Where is ColdFusion Installed?"
+			ifProperty="${installType}==j2ee">
+
+			<hidden property="cfInstallDir" value="" />
+			<hidden property="jrunInstallDir" value="" />
+			
+		<!-- no idea what the values could be given possible setups (JBoss, Tomcat, etc.) -->
+		<app-root
+				property="webinfDir"
+				defaultValue=""
+				displayText="WEB-INF directory"
+				checkFile1="lib/cfmx_bootstrap.jar"/>
+		<app-root
+				property="cfideDir"
+				defaultValue=""
+				displayText="CFIDE directory"
+				checkFile1="administrator/Application.cfm"/>
+	</page>
+
+<!--
+	<page
+			type="input"
+			name="apache_connector"
+			displayText="Update Apache Connector"
+			ifProperty="${webserver}==apache">
+		<target
+			displayText="Apply CVE-2009-1876"
+			target="cve-2009-1876"
+			defaultValue="true"
+			/>			
+		<select
+				property="connectorType"
+				defaultValue="32bit"
+				displayText="Connector Type">
+			<option text="32-bit" value="32bit"/>
+			<option text="64-bit" value="64bit"/>
+		</select>
+		<directory
+				property="apacheConfDir"
+				defaultValue="/opt/apache/conf"
+				defaultValueWin="C:\Program Files\Apache Software Foundation\Apache2.2\conf"
+				displayText="Apache Configuration Directory"/>
+	</page>	
+-->	
+
+	<page
+			type="input"
+			name="confirm"
+			displayText="Confirm Settings"
+			target="updater">
+		<!-- set additional paths -->
+		<conditional ifProperty="${installType}==standalone">
+			<hidden property="cfusionLibDir" value="${cfInstallDir}/lib" />
+		</conditional>
+		<conditional ifProperty="${installType}!=standalone">
+			<hidden property="cfusionLibDir" value="${webinfDir}/cfusion/lib" />
+		</conditional>
+		<hidden property="hotfixDir" value="${cfusionLibDir}/updates" />
+
+		<comment displayText="Install Type:" bold="true" />
+		<comment displayText="${installType}"/>
+		<comment displayText="WEB-INF Directory:" bold="true" />
+		<comment displayText="${webinfDir}"/>
+		<comment displayText="CFIDE Directory:" bold="true" />
+		<comment displayText="${cfideDir}"/>
+		<comment displayText="CFusion Lib Directory:" bold="true" />
+		<comment displayText="${cfusionLibDir}"/>
+		<comment displayText="" />
+		<select
+				property="applyUpdate"
+				defaultValue="y"
+				displayText="Apply Update to the above?">
+			<option text="Yes" value="y"/>
+			<option text="No" value="n"/>
+		</select>
+		
+	</page>
+
+	<page
+			type="progress"
+			name="progress"
+			displayText="Installation progress"
+			showTargets="false">
+	</page>
+</installer>
