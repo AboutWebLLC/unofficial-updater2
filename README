@@ -30,7 +30,7 @@ since it could provide cross platform support. The ant script was
 wrapped with AntInstaller to create a GUI and text based interface which
 only require Java 1.5+ to be installed.  
 
-All hot fixes and security bulletins published as of April 12, 2011 are 
+All hot fixes and security bulletins published as of April 18, 2011 are 
 applied except for the following:
  * kb404026 - Patch for Performance Monitor with ColdFusion 8.0.1
   - http://kb2.adobe.com/cps/404/kb404026.html
