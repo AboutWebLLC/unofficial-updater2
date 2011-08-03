@@ -14,8 +14,8 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 -->
-<project name="Unofficial Updater 2" default="updater">
-	<description>Ant script that will fetch then apply hotfixes and security updates for ColdFusion 8.0.1</description>
+<project name="Unofficial Updater 2" default="preUpdate">
+	<description>Ant script that will fetch then apply hotfixes and security updates for ColdFusion 8.0.1 or 9.0.1</description>
 	
 	<!-- Ant-Contrib makes writting Ant tasks so much easier -->
 	<typedef resource="net/sf/antcontrib/antlib.xml" />	
@@ -32,14 +32,20 @@
 	<property name="kb403411.hf801-71557.zip.SHA-512" value="f1ba6df84ca8b95cfee7846805df421ed2b9acd18d35fa354a2ac4888b0d2af26f3a6f5cbc61e412ee6914cb48cdade06e9051323505b7942f1f1ba08191f9de" />
 	<property name="cpsid_84585.cfapplets_cps_84585.zip.SHA-512" value="0a4cdab9f8acc126004bbe088fda33dcb70183a11d5e1dd122c660add365c9c63f7fe168b5380d1233a7aa5dec6cf032542a81640d39d8abc322b35dd47a710b" />
 	<property name="cpsid_86589.hf801-76563.zip.SHA-512" value="87e66dbcc2a9eb426e05e67b6bf83712b3aeb0c666b484b1141fd9f7e90a0d2e3984d0a2e33365efef9aca7508398c4bfbccc12cb506c228df2149afaea26179" />
-	<property name="cpsid_82241.Coldfusion8.zip.SHA-512" value="75df36baae75992d40e45c5958b505550be3a2b6da993412755677f93b0f9ca3d71a7c2a84fba98ed2d7bb2ad07c6812d8ba17b317f61cfdfb8cfbeca946ca98" />
-	<property name="cpsid_89094.CF801.zip.SHA-512" value="20362c65d3d2d74528c6fd571e8beb9f2253e326818131da4ddfc22afe7ec3462aacb37dec11708c4a2f188d8d8f0e9c57474e3c9d32fc9555cc51ad80188c14" />
+<!--	<property name="cpsid_82241.Coldfusion8.zip.SHA-512" value="75df36baae75992d40e45c5958b505550be3a2b6da993412755677f93b0f9ca3d71a7c2a84fba98ed2d7bb2ad07c6812d8ba17b317f61cfdfb8cfbeca946ca98" /> -->
+<!--	<property name="cpsid_89094.CF801.zip.SHA-512" value="20362c65d3d2d74528c6fd571e8beb9f2253e326818131da4ddfc22afe7ec3462aacb37dec11708c4a2f188d8d8f0e9c57474e3c9d32fc9555cc51ad80188c14" /> -->
+	<property name="cpsid_90784.CF801.zip.SHA-512" value="8911930b7f9b3d7fe5837810356b1cf37cc00dd383e4dcd03b2b3449b41a819fae2f0f45a0f03a79d22f2e688a611b9d4b23757d6ec4cc74d3ecd21f24cb1e83" />
+	<property name="cpsid_90784.CFIDE-801.zip.SHA-512" value="50f96562ef75f390d879e1980654c0feeb45a7a5d7c84ca1f31917d45c7bad3bdeedfefe54adb68f9f2b87313a044dc20b33ac3216ca8349c99d7939c42fbf3c" />
 	<property name="APSB09-12.jmc-app2.zip.SHA-512" value="3dc5276893dd5eb218d7031d041a41a26af3c961b45238339a27afedce4f3236b4bd8f99b013eb152ce7c98385dcf14a10b6245d6930fe228af2dac1ceaabc3a" />
 
+	<property name="cpsid_86263.chf9010001.zip.SHA-512" value="ff66ea0b48a8d0d3af5506b76282ceff480d46cb286792ae55aeaa71f0ae3f1c0e00e7fc1737187a27cd420ce4da37b2fc3994bd1cef07c9ff949060a17683d3" />
+	<property name="cpsid_90784.CF901.zip.SHA-512" value="8209e428387f68ad52fbb535d05caebfecec04744ee1aa5aae4d85d3f90a327032c848029d4dca65cda7aa7019c4d69c9f45e67aa8c8b15c2cfa20ebe3a0f2de" />
+	<property name="cpsid_90784.CFIDE-901.zip.SHA-512" value="f89a769ffab905853d3331be5728f6527b761143e0c3893211686dfc4f40101d66829b83c8c4ad40220c842187e7ed0562d9dfae917ca76f7f561b2428b3119e" />
+	
 	<property name="errorMsg.FileVerification" value="File Verification Failure: SHA-512 signatures do not match" />
 	
 	<!-- if running as standalone Ant script, add depends="get_install_info" to the target below -->
-	<target name="updater" description="main task that calls everything else">
+    <target name="preUpdate" description="Preliminary work for update">
 
 		<if>
 			<equals arg1="${applyUpdate}" arg2="n" />
@@ -54,34 +60,90 @@
 				<setproxy proxyhost="${proxyHost}" proxyport="${proxyPort}" proxyuser="${proxyUser}" proxypassword="${proxyPassword}" />
 			</then>
 		</if>
-		
-		
-		<!-- -->
-		<antcall target="cfVersionCheck" />
-		<antcall target="backup" />
-		<antcall target="directoryPrep" />
-		<antcall target="cpsid_52915" />
-		<antcall target="kb403597" />
-		<antcall target="kb403795" />
-		<antcall target="kb403411" />
-		<antcall target="cpsid_84585" />
-		<antcall target="cpsid_86589" />
-		<antcall target="APSB09-09" />			
-		<antcall target="cpsid_82241" />			
-		<antcall target="cpsid_89094" />
+    
+    	<!-- check ColdFusion version -->
+    	<java classpath="${cfusionLibDir}/cfusion.jar" classname="coldfusion.tools.CfinfoMain" outputproperty="reportedVersion" fork="true">
+            <arg value="-version"/>
+    	</java>
+    	
+    	<echo message="Found ColdFusion version ${reportedVersion}" />
+    	
+		<switch value="${reportedVersion}">
+			<case value="8,0,1,195765">
+				<antcall target="update_801" />
+			</case>
+			<case value="9,0,1,274733">
+				<antcall target="update_901" />
+			</case>
+			<default>
+    			<fail message="Unofficial Updater 2 only runs against ColdFusion 8.0.1 or 9.0.1" />
+			</default>
+		</switch>		
+    	
+    </target>
 
-		<!-- only for jrun installs -->
-		<if>
-			<equals arg1="${installType}" arg2="jrun" />
-			<then>
-				<antcall target="APSB09-12" />
-			</then>
-		</if>
+
+	<target name="backup" description="Create backups of CFIDE, WEB-INF (and lib if standalone or admin if jrun)">
+		<echo message="Creating backup files" />
+
+		<!-- additional backups based upon install type -->		
+		<switch value="${installType}">
+			<case value="standalone">
+				<echo message="Creating backup of ${cfusionLibDir}" />
+				<zip destfile="${cfusionLibDir}/../lib-uu2-${ts.filename}.zip" basedir="${cfusionLibDir}" />
+			</case>
+			<case value="jrun">
+				<echo message="Creating backup of ${jrunInstallDir}/servers/admin" />
+				<zip destfile="${jrunInstallDir}/servers/admin-uu2-${ts.filename}.zip" basedir="${jrunInstallDir}/servers/admin" />
+			</case>
+			<default />
+		</switch>
+
+		<echo message="Creating backup of ${webinfDir}" />
+		<zip destfile="${webinfDir}/../WEB-INF-uu2-${ts.filename}.zip" basedir="${webinfDir}" />
+
+		<echo message="Creating backup of ${cfideDir}" />
+		<zip destfile="${cfideDir}/../CFIDE-uu2-${ts.filename}.zip" basedir="${cfideDir}" />
 		
-		<antcall target="cleanup" />
-				
 	</target>
-	
+
+
+	<target name="directoryPrep" description="">
+		<echo message="Creating Downloads directory" />
+		<mkdir dir="downloads" />
+		
+		<mkdir dir="downloads/cf801" />
+		<mkdir dir="downloads/cf801/cpsid_52915" />
+		<mkdir dir="downloads/cf801/kb403597" />
+		<mkdir dir="downloads/cf801/kb403795" />
+		<mkdir dir="downloads/cf801/kb403411" />
+		<mkdir dir="downloads/cf801/cpsid_84585" />
+		<mkdir dir="downloads/cf801/cpsid_86589" />
+<!--		<mkdir dir="downloads/cf801/cpsid_82241" /> -->
+<!--		<mkdir dir="downloads/cf801/cpsid_89094" /> -->
+		<mkdir dir="downloads/cf801/cpsid_90784" />
+		<mkdir dir="downloads/cf801/APSB09-12" />
+		
+		<mkdir dir="downloads/cf901" />
+		<mkdir dir="downloads/cf901/cpsid_86263" />
+		<mkdir dir="downloads/cf901/cpsid_90784" />
+		
+		<echo message="Clearing all existing Hot Fixes from ${hotfixDir}" />
+		<delete>
+			<fileset dir="${hotfixDir}" includes="*.jar"/>
+		</delete>
+
+	</target>
+
+
+    <target name="cleanup" description="Updater Cleanup">
+		<echo message="Clearing all compiled code from ${webinfDir}/cfclasses" />
+		<delete>
+			<fileset dir="${webinfDir}/cfclasses" includes="*.class"/>
+		</delete>
+    </target>
+
+
 	<target name="get_install_info" description="Get information about ColdFusion installation">
 		<input message="How is ColdFusion Installed" validargs="standalone,jrun,j2ee" addproperty="installType" defaultvalue="standalone" />
 
@@ -183,61 +245,48 @@ Using the following directories:
 		
 	</target>
 	
-	<target name="backup" description="Create backups of CFIDE, WEB-INF (and lib if standalone or admin if jrun)">
-		<echo message="Creating backup files" />
+<!-- *********************************************** -->
+<!-- ColdFusion 8.0.1 Hot Fixes and Security Updates -->
+<!-- *********************************************** -->
+	<target name="update_801" description="everything to update 8.0.1">
 
-		<!-- additional backups based upon install type -->		
-		<switch value="${installType}">
-			<case value="standalone">
-				<echo message="Creating backup of ${cfusionLibDir}" />
-				<zip destfile="${cfusionLibDir}/../lib-uu2-${ts.filename}.zip" basedir="${cfusionLibDir}" />
-			</case>
-			<case value="jrun">
-				<echo message="Creating backup of ${jrunInstallDir}/servers/admin" />
-				<zip destfile="${jrunInstallDir}/servers/admin-uu2-${ts.filename}.zip" basedir="${jrunInstallDir}/servers/admin" />
-			</case>
-			<default />
-		</switch>
-
-		<echo message="Creating backup of ${webinfDir}" />
-		<zip destfile="${webinfDir}/../WEB-INF-uu2-${ts.filename}.zip" basedir="${webinfDir}" />
-
-		<echo message="Creating backup of ${cfideDir}" />
-		<zip destfile="${cfideDir}/../CFIDE-uu2-${ts.filename}.zip" basedir="${cfideDir}" />
+		<!-- -->
+		<antcall target="backup" />
+		<antcall target="directoryPrep" />
+		<antcall target="cpsid_52915" />
+		<antcall target="kb403597" />
+		<antcall target="kb403795" />
+		<antcall target="kb403411" />
+		<antcall target="cpsid_84585" />
+		<antcall target="cpsid_86589" />
+		<antcall target="APSB09-09" />			
+<!--		<antcall target="cpsid_82241" /> -->
+<!--		<antcall target="cpsid_89094" /> -->
+		<antcall target="cpsid_90784_cf801" />
 		
-	</target>
-
-	<target name="directoryPrep" description="">
-		<echo message="Creating Downloads directory" />
-		<mkdir dir="downloads" />
-		<mkdir dir="downloads/cpsid_52915" />
-		<mkdir dir="downloads/kb403597" />
-		<mkdir dir="downloads/kb403795" />
-		<mkdir dir="downloads/kb403411" />
-		<mkdir dir="downloads/cpsid_84585" />
-		<mkdir dir="downloads/cpsid_86589" />
-		<mkdir dir="downloads/cpsid_82241" />
-		<mkdir dir="downloads/cpsid_89094" />
-		<mkdir dir="downloads/APSB09-12" />
+		<!-- only for jrun installs -->
+		<if>
+			<equals arg1="${installType}" arg2="jrun" />
+			<then>
+				<antcall target="APSB09-12" />
+			</then>
+		</if>
 		
-		<echo message="Clearing all existing Hot Fixes from ${hotfixDir}" />
-		<delete>
-			<fileset dir="${hotfixDir}" includes="*.jar"/>
-		</delete>
-
+		<antcall target="cleanup" />
+				
 	</target>
 	
     <target name="cpsid_52915" description="Cumulative Hot Fix 4 for ColdFusion 8.0.1">
     	
 		<echo message="Downloading Cumulative Hot Fix 4 for ColdFusion 8.0.1" />
-    	<get src="http://kb2.adobe.com/cps/529/cpsid_52915/attachments/chf8010004.zip" dest="downloads/cpsid_52915/chf8010004.zip" verbose="true" usetimestamp="true" />
+    	<get src="http://kb2.adobe.com/cps/529/cpsid_52915/attachments/chf8010004.zip" dest="downloads/cf801/cpsid_52915/chf8010004.zip" verbose="true" usetimestamp="true" />
 
-    	<checksum algorithm="SHA-512" file="downloads/cpsid_52915/chf8010004.zip" property="${cpsid_52915.chf8010004.zip.SHA-512}" verifyproperty="cpsid_52915_isOK" />
+    	<checksum algorithm="SHA-512" file="downloads/cf801/cpsid_52915/chf8010004.zip" property="${cpsid_52915.chf8010004.zip.SHA-512}" verifyproperty="cpsid_52915_isOK" />
 
 		<if>
 			<equals arg1="${cpsid_52915_isOK}" arg2="true" />
 			<then>
-				<!-- update of cfmx_bootstrap.jar now from APSB11-04 -->
+				<!-- update of cfmx_bootstrap.jar now from APSB11-14 -->
 				<!--
 				<echo message="Applying cfmx_bootstrap.jar to ${webinfDir}/lib/" />
 				<unzip src="downloads/cpsid_52915/chf8010004.zip" dest="${webinfDir}/lib/">
@@ -247,7 +296,7 @@ Using the following directories:
 				</unzip>
 				-->
 				<echo message="Applying chf8010004.jar to ${hotfixDir}" />
-				<unzip src="downloads/cpsid_52915/chf8010004.zip" dest="${hotfixDir}">
+				<unzip src="downloads/cf801/cpsid_52915/chf8010004.zip" dest="${hotfixDir}">
 					<patternset>
         				<include name="chf8010004.jar"/>
 				    </patternset>
@@ -260,25 +309,26 @@ Using the following directories:
     	
     </target>
 
+
     <target name="kb403597" description="Patch for HTML grid and cfmenu (hf801-71634)">
     	
 		<echo message="Downloading Patch for HTML grid and cfmenu (hf801-71634)" />
-    	<get src="http://www.adobe.com/support/coldfusion/ts/documents/kb403597/hf801-71634.zip" dest="downloads/kb403597/hf801-71634.zip" verbose="true" usetimestamp="true" />
+    	<get src="http://www.adobe.com/support/coldfusion/ts/documents/kb403597/hf801-71634.zip" dest="downloads/cf801/kb403597/hf801-71634.zip" verbose="true" usetimestamp="true" />
     	
-    	<checksum algorithm="SHA-512" file="downloads/kb403597/hf801-71634.zip" property="${kb403597.hf801-71634.zip.SHA-512}" verifyproperty="kb403597_isOK" />
+    	<checksum algorithm="SHA-512" file="downloads/cf801/kb403597/hf801-71634.zip" property="${kb403597.hf801-71634.zip.SHA-512}" verifyproperty="kb403597_isOK" />
 
 		<if>
 			<equals arg1="${kb403597_isOK}" arg2="true" />
 			<then>
 				<!-- hf801-71634.jar not needed was rolled into CHF2+ -->
 				<echo message="Applying trigger.gif to ${cfideDir}/scripts/ajax/resources/ext/images/default/form" />
-				<unzip src="downloads/kb403597/hf801-71634.zip" dest="${cfideDir}/scripts/ajax/resources/ext/images/default/form">
+				<unzip src="downloads/cf801/kb403597/hf801-71634.zip" dest="${cfideDir}/scripts/ajax/resources/ext/images/default/form">
 					<patternset>
         				<include name="trigger.gif"/>
 				    </patternset>
 				</unzip>
 				<echo message="Applying yui.css to ${cfideDir}/scripts/ajax/resources/yui" />
-				<unzip src="downloads/kb403597/hf801-71634.zip" dest="${cfideDir}/scripts/ajax/resources/yui">
+				<unzip src="downloads/cf801/kb403597/hf801-71634.zip" dest="${cfideDir}/scripts/ajax/resources/yui">
 					<patternset>
         				<include name="yui.css"/>
 				    </patternset>
@@ -294,16 +344,16 @@ Using the following directories:
     <target name="kb403795" description="CFPresentation patch for audio issues and flash slide sizing problem (hf801-70839)">
     	
 		<echo message="Downloading CFPresentation patch for audio issues and flash slide sizing problem (hf801-70839)" />
-    	<get src="http://www.adobe.com/support/coldfusion/ts/documents/kb403795/hf801-70839.zip" dest="downloads/kb403795/hf801-70839.zip" verbose="true" usetimestamp="true" />
+    	<get src="http://www.adobe.com/support/coldfusion/ts/documents/kb403795/hf801-70839.zip" dest="downloads/cf801/kb403795/hf801-70839.zip" verbose="true" usetimestamp="true" />
     	
-    	<checksum algorithm="SHA-512" file="downloads/kb403795/hf801-70839.zip" property="${kb403795.hf801-70839.zip.SHA-512}" verifyproperty="kb403795_isOK" />
+    	<checksum algorithm="SHA-512" file="downloads/cf801/kb403795/hf801-70839.zip" property="${kb403795.hf801-70839.zip.SHA-512}" verifyproperty="kb403795_isOK" />
 
 		<if>
 			<equals arg1="${kb403795_isOK}" arg2="true" />
 			<then>
 				<!-- hf801-70839.jar not needed was rolled into CHF2+ -->
 				<echo message="Applying files to ${cfusionLibDir}/preso" />
-				<unzip src="downloads/kb403795/hf801-70839.zip" dest="${cfusionLibDir}/preso">
+				<unzip src="downloads/cf801/kb403795/hf801-70839.zip" dest="${cfusionLibDir}/preso">
 					<patternset>
         				<exclude name="*.jar"/>
         				<exclude name="preso"/>
@@ -321,9 +371,9 @@ Using the following directories:
     <target name="kb403411" description="Patch for CFImage and Image functions in ColdFusion 8.0.1 (hf801-71557)">
     	
 		<echo message="Downloading Patch for CFImage and Image functions in ColdFusion 8.0.1 (hf801-71557)" />
-    	<get src="http://www.adobe.com/support/coldfusion/ts/documents/kb403411/hf801-71557.zip" dest="downloads/kb403411/hf801-71557.zip" verbose="true" usetimestamp="true" />
+    	<get src="http://www.adobe.com/support/coldfusion/ts/documents/kb403411/hf801-71557.zip" dest="downloads/cf801/kb403411/hf801-71557.zip" verbose="true" usetimestamp="true" />
 
-    	<checksum algorithm="SHA-512" file="downloads/kb403411/hf801-71557.zip" property="${kb403411.hf801-71557.zip.SHA-512}" verifyproperty="kb403411_isOK" />
+    	<checksum algorithm="SHA-512" file="downloads/cf801/kb403411/hf801-71557.zip" property="${kb403411.hf801-71557.zip.SHA-512}" verifyproperty="kb403411_isOK" />
 
 		<if>
 			<equals arg1="${kb403411_isOK}" arg2="true" />
@@ -339,13 +389,13 @@ Using the following directories:
 				</delete>
 				
 				<echo message="Applying metadata-extractor-2.3.1.jar to ${cfusionLibDir}" />
-				<unzip src="downloads/kb403411/hf801-71557.zip" dest="${cfusionLibDir}">
+				<unzip src="downloads/cf801/kb403411/hf801-71557.zip" dest="${cfusionLibDir}">
 					<patternset>
         				<include name="metadata-extractor-2.3.1.jar"/>
 				    </patternset>
 				</unzip>
 				<echo message="Applying hf801-71557.jar to ${hotfixDir}" />
-				<unzip src="downloads/kb403411/hf801-71557.zip" dest="${hotfixDir}">
+				<unzip src="downloads/cf801/kb403411/hf801-71557.zip" dest="${hotfixDir}">
 					<patternset>
         				<include name="hf801-71557.jar"/>
 				    </patternset>
@@ -361,15 +411,15 @@ Using the following directories:
     <target name="cpsid_84585" description="Update for expired certificate on CFForm controls (May 2010)">
     	
 		<echo message="Downloading Update for expired certificate on CFForm controls (May 2010)" />
-    	<get src="http://kb2.adobe.com/cps/845/cpsid_84585/attachments/cfapplets_cps_84585.zip" dest="downloads/cpsid_84585/cfapplets_cps_84585.zip" verbose="true" usetimestamp="true" />
+    	<get src="http://kb2.adobe.com/cps/845/cpsid_84585/attachments/cfapplets_cps_84585.zip" dest="downloads/cf801/cpsid_84585/cfapplets_cps_84585.zip" verbose="true" usetimestamp="true" />
 
-    	<checksum algorithm="SHA-512" file="downloads/cpsid_84585/cfapplets_cps_84585.zip" property="${cpsid_84585.cfapplets_cps_84585.zip.SHA-512}" verifyproperty="cpsid_84585_isOK" />
+    	<checksum algorithm="SHA-512" file="downloads/cf801/cpsid_84585/cfapplets_cps_84585.zip" property="${cpsid_84585.cfapplets_cps_84585.zip.SHA-512}" verifyproperty="cpsid_84585_isOK" />
 
 		<if>
 			<equals arg1="${cpsid_84585_isOK}" arg2="true" />
 			<then>
 				<echo message="Applying cfapplets.jar to ${cfideDir}/classes" />
-				<unzip src="downloads/cpsid_84585/cfapplets_cps_84585.zip" dest="${cfideDir}/classes">
+				<unzip src="downloads/cf801/cpsid_84585/cfapplets_cps_84585.zip" dest="${cfideDir}/classes">
 					<patternset>
         				<include name="cfapplets.jar"/>
 				    </patternset>
@@ -382,18 +432,19 @@ Using the following directories:
     	
     </target>
 
+	
     <target name="cpsid_86589" description="Deadlock caused by compiler and cache lock (hf801-76563)">
     	
 		<echo message="Downloading Deadlock caused by compiler and cache lock (hf801-76563)" />
-    	<get src="http://kb2.adobe.com/cps/865/cpsid_86589/attachments/hf801-76563.zip" dest="downloads/cpsid_86589/hf801-76563.zip" verbose="true" usetimestamp="true" />
+    	<get src="http://kb2.adobe.com/cps/865/cpsid_86589/attachments/hf801-76563.zip" dest="downloads/cf801/cpsid_86589/hf801-76563.zip" verbose="true" usetimestamp="true" />
 
-    	<checksum algorithm="SHA-512" file="downloads/cpsid_86589/hf801-76563.zip" property="${cpsid_86589.hf801-76563.zip.SHA-512}" verifyproperty="cpsid_86589_isOK" />
+    	<checksum algorithm="SHA-512" file="downloads/cf801/cpsid_86589/hf801-76563.zip" property="${cpsid_86589.hf801-76563.zip.SHA-512}" verifyproperty="cpsid_86589_isOK" />
 
 		<if>
 			<equals arg1="${cpsid_86589_isOK}" arg2="true" />
 			<then>
 				<echo message="Applying hf801-76563.jar to ${hotfixDir}" />
-				<unzip src="downloads/cpsid_86589/hf801-76563.zip" dest="${hotfixDir}">
+				<unzip src="downloads/cf801/cpsid_86589/hf801-76563.zip" dest="${hotfixDir}">
 					<patternset>
         				<include name="hf801-76563.jar"/>
 				    </patternset>
@@ -406,6 +457,7 @@ Using the following directories:
     	
     </target>
 
+	
     <target name="APSB09-09" description="Hotfix available for potential ColdFusion 8 input sanitization issue">
 
 		<!--
@@ -422,18 +474,20 @@ Using the following directories:
     	
     </target>
 	
+<!-- Superseded by APSB11-14 -->
+<!--	
     <target name="cpsid_82241" description="Security update available for BlazeDS (APSB10-05)">
     	
 		<echo message="Downloading Security update available for BlazeDS (APSB10-05)" />
-    	<get src="http://kb2.adobe.com/cps/822/cpsid_82241/attachments/Coldfusion8.zip" dest="downloads/cpsid_82241/Coldfusion8.zip" verbose="true" usetimestamp="true" />
+    	<get src="http://kb2.adobe.com/cps/822/cpsid_82241/attachments/Coldfusion8.zip" dest="downloads/cf801/cpsid_82241/Coldfusion8.zip" verbose="true" usetimestamp="true" />
 
-    	<checksum algorithm="SHA-512" file="downloads/cpsid_82241/Coldfusion8.zip" property="${cpsid_82241.Coldfusion8.zip.SHA-512}" verifyproperty="cpsid_82241_isOK" />
+    	<checksum algorithm="SHA-512" file="downloads/cf801/cpsid_82241/Coldfusion8.zip" property="${cpsid_82241.Coldfusion8.zip.SHA-512}" verifyproperty="cpsid_82241_isOK" />
 
 		<if>
 			<equals arg1="${cpsid_82241_isOK}" arg2="true" />
 			<then>
 				<echo message="Applying files to ${cfusionLibDir}" />
-				<unzip src="downloads/cpsid_82241/Coldfusion8.zip" dest="${cfusionLibDir}" />
+				<unzip src="downloads/cf801/cpsid_82241/Coldfusion8.zip" dest="${cfusionLibDir}" />
 			</then>
 			<else>
 				<fail message="${errorMsg.FileVerification}" />
@@ -441,30 +495,70 @@ Using the following directories:
 		</if>
     	
     </target>
-
+-->
+	
+<!-- Superseded by APSB11-14 -->
+<!--	
     <target name="cpsid_89094" description="Security update: Hotfix available for ColdFusion (APSB11-04)">
     	
 		<echo message="Downloading Security update: Hotfix available for ColdFusion (APSB11-04)" />
-    	<get src="http://kb2.adobe.com/cps/890/cpsid_89094/attachments/CF801.zip" dest="downloads/cpsid_89094/CF801.zip" verbose="true" usetimestamp="true" />
+    	<get src="http://kb2.adobe.com/cps/890/cpsid_89094/attachments/CF801.zip" dest="downloads/cf801/cpsid_89094/CF801.zip" verbose="true" usetimestamp="true" />
 
- 	   	<checksum algorithm="SHA-512" file="downloads/cpsid_89094/CF801.zip" property="${cpsid_89094.CF801.zip.SHA-512}" verifyproperty="cpsid_89094_isOK" />
+ 	   	<checksum algorithm="SHA-512" file="downloads/cf801/cpsid_89094/CF801.zip" property="${cpsid_89094.CF801.zip.SHA-512}" verifyproperty="cpsid_89094_isOK" />
 
 		<if>
 			<equals arg1="${cpsid_89094_isOK}" arg2="true" />
 			<then>
 				<echo message="Unpacking CF801.zip" />
-				<unzip src="downloads/cpsid_89094/CF801.zip" dest="downloads/cpsid_89094/" />
+				<unzip src="downloads/cf801/cpsid_89094/CF801.zip" dest="downloads/cpsid_89094/" />
 				
 				<echo message="Applying files to ${cfusionLibDir}" />
 				<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
-					<fileset dir="downloads/cpsid_89094/CF801/lib"/>
+					<fileset dir="downloads/cf801/cpsid_89094/CF801/lib"/>
 				</copy>
 				
 				<echo message="Applying files to ${cfideDir}" />
-				<unzip src="downloads/cpsid_89094/CF801/CFIDE.zip" dest="${cfideDir}/.." />
+				<unzip src="downloads/cf801/cpsid_89094/CF801/CFIDE.zip" dest="${cfideDir}/.." />
 
 				<echo message="Applying files to ${webinfDir}" />
-				<unzip src="downloads/cpsid_89094/CF801/WEB-INF.zip" dest="${webinfDir}/.." />
+				<unzip src="downloads/cf801/cpsid_89094/CF801/WEB-INF.zip" dest="${webinfDir}/.." />
+			</then>
+			<else>
+				<fail message="${errorMsg.FileVerification}" />
+			</else>
+		</if>
+    	
+    </target>
+-->
+	
+    <target name="cpsid_90784_cf801" description="Security update: Hotfix available for ColdFusion (APSB11-14)">
+    	
+		<echo message="Downloading Security update: Hotfix available for ColdFusion (APSB11-14)" />
+    	<get src="http://kb2.adobe.com/cps/907/cpsid_90784/attachments/CF801.zip" dest="downloads/cf801/cpsid_90784/CF801.zip" verbose="true" usetimestamp="true" />
+    	<get src="http://kb2.adobe.com/cps/907/cpsid_90784/attachments/CFIDE-801.zip" dest="downloads/cf801/cpsid_90784/CFIDE-801.zip" verbose="true" usetimestamp="true" />
+
+ 	   	<checksum algorithm="SHA-512" file="downloads/cf801/cpsid_90784/CF801.zip" property="${cpsid_90784.CF801.zip.SHA-512}" verifyproperty="cpsid_90784_1_isOK" />
+ 	   	<checksum algorithm="SHA-512" file="downloads/cf801/cpsid_90784/CFIDE-801.zip" property="${cpsid_90784.CFIDE-801.zip.SHA-512}" verifyproperty="cpsid_90784_2_isOK" />
+
+		<if>
+			<and>
+				<equals arg1="${cpsid_90784_1_isOK}" arg2="true" />
+				<equals arg1="${cpsid_90784_2_isOK}" arg2="true" />
+			</and>
+			<then>
+				<echo message="Unpacking CF801.zip" />
+				<unzip src="downloads/cf801/cpsid_90784/CF801.zip" dest="downloads/cf801/cpsid_90784/" />
+				
+				<echo message="Applying files to ${cfusionLibDir}" />
+				<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
+					<fileset dir="downloads/cf801/cpsid_90784/CF801/lib"/>
+				</copy>
+				
+				<echo message="Applying files to ${cfideDir}" />
+				<unzip src="downloads/cf801/cpsid_90784/CFIDE-801.zip" dest="${cfideDir}/.." />
+
+				<echo message="Applying files to ${webinfDir}" />
+				<unzip src="downloads/cf801/cpsid_90784/CF801/WEB-INF.zip" dest="${webinfDir}/.." />
 			</then>
 			<else>
 				<fail message="${errorMsg.FileVerification}" />
@@ -473,18 +567,19 @@ Using the following directories:
     	
     </target>
 
+	
     <target name="APSB09-12" description="Security Update: Hotfixes available for ColdFusion and JRun (APSB09-12)">
     	
 		<echo message="Downloading JRun management console update (CVE-2009-1873 &amp; CVE-2009-1874)" />
-    	<get src="http://download.macromedia.com/pub/coldfusion/updates/jmc-app2.zip" dest="downloads/APSB09-12/jmc-app2.zip" verbose="true" usetimestamp="true" />
+    	<get src="http://download.macromedia.com/pub/coldfusion/updates/jmc-app2.zip" dest="downloads/cf801/APSB09-12/jmc-app2.zip" verbose="true" usetimestamp="true" />
 
-    	<checksum algorithm="SHA-512" file="downloads/APSB09-12/jmc-app2.zip" property="${APSB09-12.jmc-app2.zip.SHA-512}" verifyproperty="APSB09-12_isOK" />
+    	<checksum algorithm="SHA-512" file="downloads/cf801/APSB09-12/jmc-app2.zip" property="${APSB09-12.jmc-app2.zip.SHA-512}" verifyproperty="APSB09-12_isOK" />
 
 		<if>
 			<equals arg1="${APSB09-12_isOK}" arg2="true" />
 			<then>
 				<echo message="Applying jmc-app.ear to ${jrunInstallDir}/servers/admin" />
-				<unzip src="downloads/APSB09-12/jmc-app2.zip" dest="${jrunInstallDir}/servers/admin">
+				<unzip src="downloads/cf801/APSB09-12/jmc-app2.zip" dest="${jrunInstallDir}/servers/admin">
 					<patternset>
         				<include name="jmc-app.ear"/>
 				    </patternset>
@@ -496,29 +591,86 @@ Using the following directories:
 		</if>
     	
     </target>
-	
-    <target name="cfVersionCheck" description="Check ColdFusion Version">
-    	<java classpath="${cfusionLibDir}/cfusion.jar" classname="coldfusion.tools.CfinfoMain" outputproperty="reportedVersion" fork="true">
-            <arg value="-version"/>
-    	</java>
+
+
+<!-- *********************************************** -->
+<!-- ColdFusion 9.0.1 Hot Fixes and Security Updates -->
+<!-- *********************************************** -->
+	<target name="update_901" description="everything to update 9.0.1">
+
+		<!-- -->
+		<antcall target="backup" />
+		<antcall target="directoryPrep" />
+		<antcall target="cpsid_86263" />
+		<antcall target="cpsid_90784_cf901" />
+		<antcall target="cleanup" />
+				
+	</target>
+
+    <target name="cpsid_86263" description="Cumulative Hot Fix 1 for ColdFusion 9.0.1">
     	
-    	<echo message="Found ColdFusion version ${reportedVersion}" />
-    	<if>
-    		<not>
-    			<equals arg1="${reportedVersion}" arg2="8,0,1,195765" />
-    		</not>
-    		<then>
-    			<fail message="Unofficial Updater 2 only runs against ColdFusion 8.0.1" />
-    		</then>
-    	</if>
+		<echo message="Downloading Cumulative Hot Fix 1 for ColdFusion 9.0.1" />
+    	<get src="http://kb2.adobe.com/cps/862/cpsid_86263/attachments/chf9010001.zip" dest="downloads/cf901/cpsid_86263/chf9010001.zip" verbose="true" usetimestamp="true" />
+
+    	<checksum algorithm="SHA-512" file="downloads/cf901/cpsid_86263/chf9010001.zip" property="${cpsid_86263.chf9010001.zip.SHA-512}" verifyproperty="cpsid_86263_isOK" />
+		<if>
+			<equals arg1="${cpsid_86263_isOK}" arg2="true" />
+			<then>
+				<echo message="Unpacking chf9010001.zip" />
+				<unzip src="downloads/cf901/cpsid_86263/chf9010001.zip" dest="downloads/cf901/cpsid_86263/" />
+
+				<echo message="Applying chf8010001.jar to ${hotfixDir}" />
+				<copy file="downloads/cf901/cpsid_86263/chf9010001.jar" todir="${hotfixDir}" verbose="true" overwrite="true" preservelastmodified="true" />
+				
+				<echo message="Applying files to ${cfideDir}" />
+				<unzip src="downloads/cf901/cpsid_86263/CFIDE-901.zip" dest="${cfideDir}/.." />
+
+				<echo message="Applying files to ${webinfDir}" />
+				<unzip src="downloads/cf901/cpsid_86263/WEB-INF-901.zip" dest="${webinfDir}/.." />
+				
+			</then>
+			<else>
+				<fail message="${errorMsg.FileVerification}" />
+			</else>
+		</if>
 
     </target>
-	
-    <target name="cleanup" description="Updater Cleanup">
-		<echo message="Clearing all compiled code from ${webinfDir}/cfclasses" />
-		<delete>
-			<fileset dir="${webinfDir}/cfclasses" includes="*.class"/>
-		</delete>
+
+
+    <target name="cpsid_90784_cf901" description="Security update: Hotfix available for ColdFusion (APSB11-14)">
+    	
+		<echo message="Downloading Security update: Hotfix available for ColdFusion (APSB11-14)" />
+    	<get src="http://kb2.adobe.com/cps/907/cpsid_90784/attachments/CF901.zip" dest="downloads/cf901/cpsid_90784/CF901.zip" verbose="true" usetimestamp="true" />
+    	<get src="http://kb2.adobe.com/cps/907/cpsid_90784/attachments/CFIDE-901.zip" dest="downloads/cf901/cpsid_90784/CFIDE-901.zip" verbose="true" usetimestamp="true" />
+
+ 	   	<checksum algorithm="SHA-512" file="downloads/cf901/cpsid_90784/CF901.zip" property="${cpsid_90784.CF901.zip.SHA-512}" verifyproperty="cpsid_90784_1_isOK" />
+ 	   	<checksum algorithm="SHA-512" file="downloads/cf901/cpsid_90784/CFIDE-901.zip" property="${cpsid_90784.CFIDE-901.zip.SHA-512}" verifyproperty="cpsid_90784_2_isOK" />
+		<if>
+			<and>
+				<equals arg1="${cpsid_90784_1_isOK}" arg2="true" />
+				<equals arg1="${cpsid_90784_2_isOK}" arg2="true" />
+			</and>
+			<then>
+				<echo message="Unpacking CF901.zip" />
+				<unzip src="downloads/cf901/cpsid_90784/CF901.zip" dest="downloads/cf901/cpsid_90784/" />
+
+				<echo message="Applying files to ${cfusionLibDir}" />
+				<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
+					<fileset dir="downloads/cf901/cpsid_90784/CF901/lib"/>
+				</copy>
+				
+				<echo message="Applying files to ${cfideDir}" />
+				<unzip src="downloads/cf901/cpsid_90784/CFIDE-901.zip" dest="${cfideDir}/.." />
+
+				<echo message="Applying files to ${webinfDir}" />
+				<unzip src="downloads/cf901/cpsid_90784/CF901/WEB-INF.zip" dest="${webinfDir}/.." />
+
+			</then>
+			<else>
+				<fail message="${errorMsg.FileVerification}" />
+			</else>
+		</if>
+
     </target>
-	
+
 </project>

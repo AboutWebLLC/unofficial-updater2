@@ -26,7 +26,7 @@
 			defaultImageResource="/resources/images/background-bar.png"
 			minJavaVersion="1.5"
 			finishButtonText="Apply Updates"
-			version="2011.04.18">
+			version="2011.08.02">
 
 	<page type="text" name="Intro" displayText="Welcome to Unofficial Updater 2" htmlResource="/README.htm" textResource="/README" />
 
@@ -197,7 +197,7 @@
 			type="input"
 			name="confirm"
 			displayText="Confirm Settings"
-			target="updater">
+			target="preUpdate">
 		<!-- set additional paths -->
 		<conditional ifProperty="${installType}==standalone">
 			<hidden property="cfusionLibDir" value="${cfInstallDir}/lib" />
