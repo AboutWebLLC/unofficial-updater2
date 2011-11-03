@@ -395,5 +395,6 @@ Added:
 Removed:
 /CFIDE/scripts/ajax/FCKeditor/editor/filemanager/connectors/cfm/cf5_connector.cfm
 /CFIDE/scripts/ajax/FCKeditor/editor/filemanager/connectors/cfm/cf5_upload.cfm
-/WEB-INF/cfclasses/*.jar
+/WEB-INF/cfclasses/*.class
 /WEB-INF/cfusion/lib/metadata-extractor-2.2.2.jar
+/WEB-INF/cfusion/lib/updates/*.jar (UU2 removes all hotfixes before update)

@@ -308,6 +308,7 @@ Modified:
 /WEB-INF/cftags/dump.cfm
 /WEB-INF/cfusion/lib/flex-messaging-common.jar
 /WEB-INF/cfusion/lib/flex-messaging-core.jar
+/WEB-INF/cfusion/lib/jpedal.jar
 /WEB-INF/cfusion/lib/log4j.properties
 /WEB-INF/debug/classic.cfm
 /WEB-INF/exception/coldfusion/filter/FormValidationException.cfm
@@ -321,8 +322,7 @@ Added:
 /CFIDE/administrator/WEB-INF/build.xml
 /CFIDE/administrator/cfadmin.wzrd
 /CFIDE/administrator/securityerror.cfm
-/WEB-INF/cfusion/lib/updates/chf9010001.jar
-/WEB-INF/cfusion/lib/updates/hf901-00002.jar
+/WEB-INF/cfusion/lib/updates/chf9010002.jar
 /WEB-INF/cfusion/lib/commons-fileupload-1.2.jar
 /WEB-INF/cfusion/lib/esapi-2.0_rc10.jar
 /WEB-INF/cfusion/lib/ESAPI.properties
@@ -331,3 +331,4 @@ Added:
 
 Removed:
 /WEB-INF/cfclasses/*.class
+/WEB-INF/cfusion/lib/updates/*.jar (UU2 removes all hotfixes before update)
