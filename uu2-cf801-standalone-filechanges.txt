@@ -358,7 +358,7 @@ Added:
 /lib/preso/blank.swf
 /lib/preso/dummy.swf
 /lib/updates/chf8010004.jar
-/lib/updates/hf801-00003.jar
+/lib/updates/hf801-00004.jar
 /lib/updates/hf801-71557.jar
 /lib/updates/hf801-76563.jar
 /CFIDE/administrator/images/aboutbackground_CF8.jpg

@@ -26,7 +26,7 @@
 			defaultImageResource="/resources/images/background-bar.png"
 			minJavaVersion="1.5"
 			finishButtonText="Apply Updates"
-			version="2011.11.03">
+			version="2011.12.13">
 
 	<page type="text" name="Intro" displayText="Welcome to Unofficial Updater 2" htmlResource="/README.htm" textResource="/README" />
 

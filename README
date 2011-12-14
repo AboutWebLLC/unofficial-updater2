@@ -31,7 +31,7 @@ wrapped with AntInstaller to create a GUI and text based interface which
 only require Java 1.5+ to be installed.  
 
 ** ColdFusion 8.0.1 **
-All hot fixes and security bulletins published as of November 3, 2011 for 
+All hot fixes and security bulletins published as of December 13, 2011 for 
 ColdFusion 8.0.1 are applied except if they were superseded by a newer 
 patch and the following:
  * kb404026 - Patch for Performance Monitor with ColdFusion 8.0.1
@@ -50,7 +50,7 @@ and breaks other things, see
 http://www.mischefamily.com/nathan/index.cfm/2009/10/1/hf80171643-Breaks-Application-Specific-Custom-Tag-Paths
 
 ** ColdFusion 9.0.1 **
-All hot fixes and security bulletins published as of November 3, 2011 for 
+All hot fixes and security bulletins published as of December 13, 2011 for 
 ColdFusion 9.0.1 are applied except if they were superseded by a newer 
 patch.
 

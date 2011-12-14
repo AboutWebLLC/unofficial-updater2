@@ -323,6 +323,7 @@ Added:
 /CFIDE/administrator/cfadmin.wzrd
 /CFIDE/administrator/securityerror.cfm
 /WEB-INF/cfusion/lib/updates/chf9010002.jar
+/WEB-INF/cfusion/lib/updates/hf901-00003.jar
 /WEB-INF/cfusion/lib/commons-fileupload-1.2.jar
 /WEB-INF/cfusion/lib/esapi-2.0_rc10.jar
 /WEB-INF/cfusion/lib/ESAPI.properties

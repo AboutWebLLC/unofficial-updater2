@@ -41,7 +41,9 @@
 <!--	<property name="cpsid_90784.CF801.zip.SHA-512" value="8911930b7f9b3d7fe5837810356b1cf37cc00dd383e4dcd03b2b3449b41a819fae2f0f45a0f03a79d22f2e688a611b9d4b23757d6ec4cc74d3ecd21f24cb1e83" /> -->
 	<property name="cpsid_90784.CF801.zip.SHA-512" value="c4853aaf0844e031e969763f816bb5485cacfc855d4f77352eee8964d739efb72081242522205fe6a64b565a50825d31e685179ac350da8bb9cf1396a1adf3da" />
 	<property name="cpsid_90784.CFIDE-801.zip.SHA-512" value="50f96562ef75f390d879e1980654c0feeb45a7a5d7c84ca1f31917d45c7bad3bdeedfefe54adb68f9f2b87313a044dc20b33ac3216ca8349c99d7939c42fbf3c" />
-
+	
+	<property name="cpsid_92512.CF801jar.zip.SHA-512" value="fa872cdd7d6848bfb229675be659845533a09f36ff5961df8a6ad462fab1f3ae8eb64aa31fab24a42dfd041aaa5bf892575582581d557fadc05fe51449d023f7" />
+	
 	<property name="APSB09-12.jmc-app2.zip.SHA-512" value="3dc5276893dd5eb218d7031d041a41a26af3c961b45238339a27afedce4f3236b4bd8f99b013eb152ce7c98385dcf14a10b6245d6930fe228af2dac1ceaabc3a" />
 
 <!-- ColdFusion 9.0.1 Update Hashes -->	
@@ -56,10 +58,12 @@
 	<property name="cpsid_91836.CF901.zip.SHA-512" value="064ee66916decf7bbdad991f572c97496fdec7ac747f0c728ec4fcf249a3f01e85e11cf70026fc5d6f106aecddf1ad156043e1c838dc447439d7b838e2e2e499" />
 	<property name="cpsid_91836.CFIDE-901.zip.SHA-512" value="70848c608769d7bcdc672ee3a0fa6fac395a43b55f0f11519e1bdc28d05640658b8c1d3276aee31ebab619aa115a52259c0c323250facd865d75d42b85cf0102" />
 	
+	<property name="cpsid_92512.CF901jar.zip.SHA-512" value="314d4cc4dda6ca10782b444ddce2d2fca0c18d393ee9e6f53aa27fddef0ca48989afbe175ea4280f36f99f41605cbdf5ac7182b43de1b59e6f6e6ccab7ccd321" />
+	
 	<property name="errorMsg.FileVerification" value="File Verification Failure: SHA-512 signatures do not match" />
 	
 	<!-- if running as standalone Ant script, add depends="get_install_info" to the target below -->
-    <target name="preUpdate" description="Preliminary work for update">
+    <target name="preUpdate" description="Preliminary work for update" depends="get_install_info">
 
 		<if>
 			<equals arg1="${applyUpdate}" arg2="n" />
@@ -136,12 +140,14 @@
 <!--		<mkdir dir="downloads/cf801/cpsid_82241" /> -->
 <!--		<mkdir dir="downloads/cf801/cpsid_89094" /> -->
 		<mkdir dir="downloads/cf801/cpsid_90784" />
+		<mkdir dir="downloads/cf801/cpsid_92512" />
 		<mkdir dir="downloads/cf801/APSB09-12" />
 		
 		<mkdir dir="downloads/cf901" />
 <!--		<mkdir dir="downloads/cf901/cpsid_86263" /> -->
 <!--		<mkdir dir="downloads/cf901/cpsid_90784" /> -->
 		<mkdir dir="downloads/cf901/cpsid_91836" />
+		<mkdir dir="downloads/cf901/cpsid_92512" />
 		
 		<echo message="Clearing all existing Hot Fixes from ${hotfixDir}" />
 		<delete>
@@ -278,6 +284,7 @@ Using the following directories:
 <!--		<antcall target="cpsid_82241" /> -->
 <!--		<antcall target="cpsid_89094" /> -->
 		<antcall target="cpsid_90784_cf801" />
+		<antcall target="cpsid_92512_cf801" />
 		
 		<!-- only for jrun installs -->
 		<if>
@@ -582,6 +589,34 @@ Using the following directories:
     	
     </target>
 
+    <target name="cpsid_92512_cf801" description="Security update: Hotfix available for ColdFusion (APSB11-29)">
+    	
+		<echo message="Downloading Security update: Hotfix available for ColdFusion (APSB11-29)" />
+    	<get src="http://kb2.adobe.com/cps/925/cpsid_92512/attachments/CF801jar.zip" dest="downloads/cf801/cpsid_92512/CF801jar.zip" verbose="true" usetimestamp="true" />
+
+    	<checksum algorithm="SHA-512" file="downloads/cf801/cpsid_92512/CF801jar.zip" property="${cpsid_92512.CF801jar.zip.SHA-512}" verifyproperty="cpsid_92512_isOK" />
+
+		<if>
+			<equals arg1="${cpsid_92512_isOK}" arg2="true" />
+			<then>
+
+				<!-- hf801-00003.jar should be removed in-favor of hf801-00004.jar in cpsid_92512 -->
+				<delete file="${cfusionLibDir}/updates/hf801-00003.jar"/>
+				
+				<unzip src="downloads/cf801/cpsid_92512/CF801jar.zip" dest="downloads/cf801/cpsid_92512/" />
+
+				<echo message="Applying files to ${cfusionLibDir}" />
+				<copy todir="${cfusionLibDir}/updates" verbose="true" overwrite="true" preservelastmodified="true">
+					<fileset dir="downloads/cf801/cpsid_92512/CF801jar"/>
+				</copy>
+
+			</then>
+			<else>
+				<fail message="${errorMsg.FileVerification}" />
+			</else>
+		</if>
+    	
+    </target>
 	
     <target name="APSB09-12" description="Security Update: Hotfixes available for ColdFusion and JRun (APSB09-12)">
     	
@@ -619,6 +654,7 @@ Using the following directories:
 <!--		<antcall target="cpsid_86263" /> -->
 <!--		<antcall target="cpsid_90784_cf901" /> -->
 		<antcall target="cpsid_91836" />
+		<antcall target="cpsid_92512_cf901" />
 		<antcall target="cleanup" />
 				
 	</target>
@@ -728,6 +764,30 @@ Using the following directories:
 			</else>
 		</if>
 
+    </target>
+
+    <target name="cpsid_92512_cf901" description="Security update: Hotfix available for ColdFusion (APSB11-29)">
+    	
+		<echo message="Downloading Security update: Hotfix available for ColdFusion (APSB11-29)" />
+    	<get src="http://kb2.adobe.com/cps/925/cpsid_92512/attachments/CF901jar.zip" dest="downloads/cf901/cpsid_92512/CF901jar.zip" verbose="true" usetimestamp="true" />
+
+    	<checksum algorithm="SHA-512" file="downloads/cf901/cpsid_92512/CF901jar.zip" property="${cpsid_92512.CF901jar.zip.SHA-512}" verifyproperty="cpsid_92512_isOK" />
+
+		<if>
+			<equals arg1="${cpsid_92512_isOK}" arg2="true" />
+			<then>
+				<unzip src="downloads/cf901/cpsid_92512/CF901jar.zip" dest="downloads/cf901/cpsid_92512/" />
+
+				<echo message="Applying files to ${cfusionLibDir}" />
+				<copy todir="${cfusionLibDir}/updates" verbose="true" overwrite="true" preservelastmodified="true">
+					<fileset dir="downloads/cf901/cpsid_92512/CF901jar"/>
+				</copy>
+			</then>
+			<else>
+				<fail message="${errorMsg.FileVerification}" />
+			</else>
+		</if>
+    	
     </target>
 	
 </project>
