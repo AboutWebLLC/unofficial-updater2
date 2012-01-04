@@ -27,10 +27,12 @@ How to use
 -----------------------------------------------------------------------
 1) Download the already setup jar at https://github.com/downloads/dcepler/unofficial-updater2/Unofficial-Updater2.jar
 2) Stop the server you are going to update
-3) Open the jar
+3) Run the command "java -jar Unofficial-Updater2.jar"
 4) Walk through the screens putting the appropriate information
   4.1) **Be sure to fill CFIDE directory location** else you will get a weird error message on "Next"
 5) Finish updater by pressing "Apply Updates"
+
+Wiki is here for screenshots and walkthrough https://github.com/dcepler/unofficial-updater2/wiki/Using-Unofficial-Updater-2
 
 Details
 -----------------------------------------------------------------------
