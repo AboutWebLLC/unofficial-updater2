@@ -2,25 +2,25 @@
 
 ## Introduction
 Unofficial Updater 2 (UU2) is an outgrowth of the frustration that came from 
-trying to manually patch ColdFusion 8.0.1 with the numerous hot fixes 
+trying to manually patch Adobe ColdFusion 8.0.1 with the numerous hot fixes 
 and security bulletins that have been published. It is a tool to provide 
 an easy way of consistently applying applicable hot fixes and security 
-bulletins to ColdFusion 8.0.1 or 9.0.1.
+bulletins to Adobe ColdFusion 8.0.1 or 9.0.1.
 
 ### Disclaimers
-1. Unofficial Updater 2 can only be run against **Adobe ColdFusion 8.0.1** or **9.0.1**
+1. Unofficial Updater 2 can **only be run against** Adobe ColdFusion **8.0.1** or **9.0.1**
  - If you are running **8.0.0** or **9.0.0** you need to apply Update 1 from Adobe first
      - [Adobe ColdFusion 8 Update 1](http://kb2.adobe.com/cps/403/kb403277.html)
      - [Adobe ColdFusion 9 Update 1](http://kb2.adobe.com/cps/849/cpsid_84973.html)
-2. Unofficial Updater 2 is **NOT** endorsed by or have any ties to Adobe
+2. Unofficial Updater 2 is **not endorsed by or have any ties** to Adobe
 3. Use of Unofficial Updater 2 is **at your own risk**
 
 ## What it does
-First it asks specific questions about how ColdFusion is installed. It 
+Unofficial Updater 2 asks specific questions about how Adobe ColdFusion is installed. It 
 will then produce backups of any directories it will modify. Finally, it 
 will download the applicable hot fixes and security bulletins from Adobe 
 and apply them according to the published instructions. It only updates 
-files, it will NOT modify any settings (jvm.config, registry, etc).
+files, it will **not modify** any settings (*jvm.config*, *registry*, etc).
 
 ## How to use
 1. [Download](https://github.com/downloads/dcepler/unofficial-updater2/Unofficial-Updater2.jar) the packaged JAR installer
@@ -37,9 +37,9 @@ files, it will NOT modify any settings (jvm.config, registry, etc).
 Please see the [Wiki](https://github.com/dcepler/unofficial-updater2/wiki/Using-Unofficial-Updater-2) for screenshots and walkthrough.
 
 ## Details
-At the core, Unofficial Updater 2 is just an Ant script. Ant was chosen 
+At the core, Unofficial Updater 2 is just an [Apache Ant](http://ant.apache.org/) script. Ant was chosen 
 since it could provide cross platform support. The ant script was 
-wrapped with AntInstaller to create a GUI and text based interface which
+wrapped with [Ant Installer](http://antinstaller.sourceforge.net/) to create a GUI and text based interface which
 only require Java 1.5+ to be installed.  
 
 ### ColdFusion 8.0.1
@@ -51,11 +51,11 @@ patch and the following:
  * [CVE-2009-1876 - wsconfig.jar update for Apache](http://www.adobe.com/support/security/bulletins/apsb09-12.html)
  * [kb403750 - Using the flexgateway to instantiate multiple instances of CFCs causes objects to be populated as nulls (hf801-71643)](http://kb2.adobe.com/cps/403/kb403750.html)
 
-Both kb404026 and CVE-2009-1876 require modifications to be done to the 
-system configuration. kb404026 requires ability to modify the Windows 
-registry and CVE-2009-1876 will modify the connector configuration. 
-kb403750 is not installed since it does not seem to resolve all the issues
-and [breaks other things](http://www.mischefamily.com/nathan/index.cfm/2009/10/1/hf80171643-Breaks-Application-Specific-Custom-Tag-Paths)
+Both **kb404026** and **CVE-2009-1876** require modifications to be done to the 
+system configuration. **kb404026** requires ability to modify the Windows 
+registry and **CVE-2009-1876** will modify the connector configuration. 
+**kb403750** is not installed since it does not seem to resolve all the issues
+and [breaks other things](http://www.mischefamily.com/nathan/index.cfm/2009/10/1/hf80171643-Breaks-Application-Specific-Custom-Tag-Paths).
 
 ### ColdFusion 9.0.1
 All hot fixes and security bulletins published as of December 13, 2011 for 
