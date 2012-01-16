@@ -35,7 +35,7 @@ that Unofficial Updater 2 updates as compared to a clean install of Adobe ColdFu
  - [File Changes: ColdFusion 9.0.1 Multi-Server JRun4](https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf901-jrun-filechanges.txt) 
  - [File Changes: ColdFusion 9.0.1 J2EE](https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf901-j2ee-filechanges.txt) 
  
-If you have modified files in **WEB-INF** and/or **CFIDE/administrator** they could be changed due to files contained in the updates from Adobe.
+If you have modified files in **CFIDE** and/or **WEB-INF** they could be changed due to files contained in the updates from Adobe.
 
 ## How to use
 1. [Download](https://github.com/downloads/dcepler/unofficial-updater2/Unofficial-Updater2.jar) the packaged JAR installer
