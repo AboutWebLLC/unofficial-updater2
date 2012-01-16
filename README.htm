@@ -29,12 +29,17 @@ bulletins to Adobe ColdFusion 8.0.1 or 9.0.1.</p>
 <h3>Disclaimers</h3>
 
 <ol>
+<li>Use of Unofficial Updater 2 is <strong>at your own risk</strong></li>
 <li>Unofficial Updater 2 can <strong>only be run against</strong> Adobe ColdFusion <strong>8.0.1</strong> or <strong>9.0.1</strong>
 <ul><li>If you are running <strong>8.0.0</strong> or <strong>9.0.0</strong> you need to apply Update 1 from Adobe first
 <ul><li><a href="http://kb2.adobe.com/cps/403/kb403277.html">Adobe ColdFusion 8 Update 1</a></li>
 <li><a href="http://kb2.adobe.com/cps/849/cpsid_84973.html">Adobe ColdFusion 9 Update 1</a></li></ul></li></ul></li>
 <li>Unofficial Updater 2 is <strong>not endorsed by or have any ties</strong> to Adobe</li>
-<li>Use of Unofficial Updater 2 is <strong>at your own risk</strong></li>
+<li>Unofficial Updater 2 is <strong>updated</strong> whenever Adobe releases a new (or changes) a hot fix or security bulletin
+<ul><li>Matrix of published hot fixes and security bulletins
+<ul><li><a href="https://github.com/dcepler/unofficial-updater2/blob/master/cf801-hotfix-matrix.pdf?raw=true">Hot Fix Matrix: ColdFusion 8.0.1</a></li>
+<li><a href="https://github.com/dcepler/unofficial-updater2/blob/master/cf901-hotfix-matrix.pdf?raw=true">Hot Fix Matrix: ColdFusion 9.0.1</a></li></ul></li></ul></li>
+<li>Unofficial Updater 2 will <strong>need to be run again</strong> when it is updated to apply all new (or changed) hot fix or security bulletin from Adobe</li>
 </ol>
 
 <h2>What it does</h2>
@@ -43,7 +48,19 @@ bulletins to Adobe ColdFusion 8.0.1 or 9.0.1.</p>
 will then produce backups of any directories it will modify. Finally, it 
 will download the applicable hot fixes and security bulletins from Adobe 
 and apply them according to the published instructions. It only updates 
-files, it will <strong>not modify</strong> any settings (<em>jvm.config</em>, <em>registry</em>, etc).</p>
+files, it will <strong>not modify</strong> any settings such as <em>jvm.config</em>, <em>registry</em>, etc. A list of files
+that Unofficial Updater 2 updates as compared to a clean install of Adobe ColdFusion 8.0.1 or 9.0.1 are listed below:</p>
+
+<ul>
+<li><a href="https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf801-standalone-filechanges.txt">File Changes: ColdFusion 8.0.1 Standalone</a></li>
+<li><a href="https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf801-jrun-filechanges.txt">File Changes: ColdFusion 8.0.1 Multi-Server JRun4</a></li>
+<li><a href="https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf801-j2ee-filechanges.txt">File Changes: ColdFusion 8.0.1 J2EE</a></li>
+<li><a href="https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf901-standalone-filechanges.txt">File Changes: ColdFusion 9.0.1 Standalone</a></li>
+<li><a href="https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf901-jrun-filechanges.txt">File Changes: ColdFusion 9.0.1 Multi-Server JRun4</a></li>
+<li><a href="https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf901-j2ee-filechanges.txt">File Changes: ColdFusion 9.0.1 J2EE</a></li>
+</ul>
+
+<p>If you have modified files in <strong>WEB-INF</strong> and/or <strong>CFIDE/administrator</strong> they could be changed due to files contained in the updates from Adobe.</p>
 
 <h2>How to use</h2>
 
@@ -107,7 +124,7 @@ Unofficial Updater 2 does not modify jvm.config.</p>
 
 <ul>
 <li><a href="http://shilpikm.blogspot.com/2011/03/update-on-security-hot-fix-feb-2011.html">Update on Security Hot-Fix Feb 2011</a></li>
-<li><a href="http://cfsimplicity.com/4/coldfusion-security-hotfix-changes-session-behaviour">ColdFusion Security Hotfix changes session behaviour</a>   </li>
+<li><a href="http://cfsimplicity.com/4/coldfusion-security-hotfix-changes-session-behaviour">ColdFusion Security Hotfix changes session behaviour</a></li>
 </ul>
 
 <h3>Backups</h3>
