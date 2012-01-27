@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE installer PUBLIC "-//tp23 //DTD Ant Installer Config//EN" "http://antinstaller.sf.net/dtd/antinstall-config-0.8.dtd">
 <!--
-	Copyright (c) 2011, David C. Epler
+	Copyright (c) 2011-2012, David C. Epler
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
@@ -26,9 +26,9 @@
 			defaultImageResource="/resources/images/background-bar.png"
 			minJavaVersion="1.5"
 			finishButtonText="Apply Updates"
-			version="2011.12.13">
+			version="2012.01.27">
 
-	<page type="text" name="Intro" displayText="Welcome to Unofficial Updater 2" htmlResource="/README.htm" textResource="/README.md" />
+	<page type="text" name="Intro" displayText="README! Important Information" htmlResource="/README.htm" textResource="/README.md" />
 
 	<!-- need some basic info how ColdFusion is installed, probably a way to probe for this -->
 	<page
@@ -51,17 +51,6 @@
 			<option text="No" value="n"/>
 			<option text="Yes" value="y"/>
 		</select>
-		<!-- 
-		<select
-				property="webserver"
-				defaultValue="none"
-				displayText="Web Server Connector">
-			<option text="Apache" value="apache"/>
-			<option text="iPlanet" value="iplanet"/>
-			<option text="IIS" value="iis"/>
-			<option text="None" value="none"/>
-		</select>
-		-->
 	</page>
 
 	<!-- get proxy information -->
@@ -85,11 +74,7 @@
 			ifProperty="${installType}==standalone">
 			
 		<hidden property="install_unix" value="/opt/coldfusion8" />
-		<hidden property="webinf_unix" value="${install_unix}/wwwroot/WEB-INF" />
-		<hidden property="cfide_unix" value="${install_unix}/wwwroot/CFIDE" />
 		<hidden property="install_win" value="C:\ColdFusion8" />
-		<hidden property="webinf_win" value="${install_win}\wwwroot\WEB-INF" />
-		<hidden property="cfide_win" value="${install_win}\wwwroot\CFIDE" />
 		<hidden property="jrunInstallDir" value="" />
 			
 		<app-root
@@ -100,14 +85,14 @@
 				checkFile1="lib/cfusion.jar"/>
 		<app-root
 				property="webinfDir"
-				defaultValue="${webinf_unix}"
-				defaultValueWin="${webinf_win}"
+				defaultValue="${install_unix}/wwwroot/WEB-INF"
+				defaultValueWin="${install_win}\wwwroot\WEB-INF"
 				displayText="WEB-INF directory"
 				checkFile1="lib/cfmx_bootstrap.jar"/>
 		<app-root
 				property="cfideDir"
-				defaultValue="${cfide_unix}"
-				defaultValueWin="${cfide_win}"
+				defaultValue="${install_unix}/wwwroot/CFIDE"
+				defaultValueWin="${install_win}\wwwroot\CFIDE"
 				displayText="CFIDE directory"
 				checkFile1="administrator/Application.cfm"/>
 	</page>
@@ -121,9 +106,7 @@
 			
 		<hidden property="cfInstallDir" value="" />
 		<hidden property="install_unix" value="/opt/jrun4" />
-		<hidden property="webinf_unix" value="${install_unix}/servers/cfusion/cfusion-ear/cfusion-war/WEB-INF" />
 		<hidden property="install_win" value="C:\JRun4" />
-		<hidden property="webinf_win" value="${install_win}\servers\cfusion\cfusion-ear\cfusion-war\WEB-INF" />
 		
 		<app-root
 				property="jrunInstallDir"
@@ -133,13 +116,14 @@
 				checkFile1="servers/admin/jmc-app.ear"/>
 		<app-root
 				property="webinfDir"
-				defaultValue="${webinf_unix}"
-				defaultValueWin="${webinf_win}"
+				defaultValue="${install_unix}/servers/cfusion/cfusion-ear/cfusion-war/WEB-INF"
+				defaultValueWin="${install_win}\servers\cfusion\cfusion-ear\cfusion-war\WEB-INF"
 				displayText="WEB-INF directory"
 				checkFile1="lib/cfmx_bootstrap.jar"/>
 		<app-root
 				property="cfideDir"
-				defaultValue=""
+				defaultValue="${install_unix}/servers/cfusion/cfusion-ear/cfusion-war/CFIDE"
+				defaultValueWin="${install_win}\servers\cfusion\cfusion-ear\cfusion-war\CFIDE"
 				displayText="CFIDE directory"
 				checkFile1="administrator/Application.cfm"/>
 	</page>
@@ -157,41 +141,17 @@
 		<!-- no idea what the values could be given possible setups (JBoss, Tomcat, etc.) -->
 		<app-root
 				property="webinfDir"
-				defaultValue=""
+				defaultValue="/"
+				defaultValueWin="C:\"
 				displayText="WEB-INF directory"
 				checkFile1="lib/cfmx_bootstrap.jar"/>
 		<app-root
 				property="cfideDir"
-				defaultValue=""
+				defaultValue="/"
+				defaultValueWin="C:\"
 				displayText="CFIDE directory"
 				checkFile1="administrator/Application.cfm"/>
 	</page>
-
-<!--
-	<page
-			type="input"
-			name="apache_connector"
-			displayText="Update Apache Connector"
-			ifProperty="${webserver}==apache">
-		<target
-			displayText="Apply CVE-2009-1876"
-			target="cve-2009-1876"
-			defaultValue="true"
-			/>			
-		<select
-				property="connectorType"
-				defaultValue="32bit"
-				displayText="Connector Type">
-			<option text="32-bit" value="32bit"/>
-			<option text="64-bit" value="64bit"/>
-		</select>
-		<directory
-				property="apacheConfDir"
-				defaultValue="/opt/apache/conf"
-				defaultValueWin="C:\Program Files\Apache Software Foundation\Apache2.2\conf"
-				displayText="Apache Configuration Directory"/>
-	</page>	
--->	
 
 	<page
 			type="input"
@@ -229,7 +189,7 @@
 	<page
 			type="progress"
 			name="progress"
-			displayText="Installation progress"
+			displayText="Update progress"
 			showTargets="false">
 	</page>
 </installer>
