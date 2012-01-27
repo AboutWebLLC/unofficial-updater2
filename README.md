@@ -9,16 +9,17 @@ bulletins to Adobe ColdFusion 8.0.1 or 9.0.1.
 
 ### Disclaimers
 1. Use of Unofficial Updater 2 is **at your own risk**
-2. Unofficial Updater 2 can **only be run against** Adobe ColdFusion **8.0.1** or **9.0.1**
+2. ColdFusion Server/process **should not be running** when you use Unofficial Updater 2
+3. Unofficial Updater 2 can **only be run against** Adobe ColdFusion **8.0.1** or **9.0.1**
  - If you are running **8.0.0** or **9.0.0** you need to apply Update 1 from Adobe first
      - [Adobe ColdFusion 8 Update 1](http://kb2.adobe.com/cps/403/kb403277.html)
      - [Adobe ColdFusion 9 Update 1](http://kb2.adobe.com/cps/849/cpsid_84973.html)
-3. Unofficial Updater 2 is **not endorsed by or have any ties** to Adobe
-4. Unofficial Updater 2 is **updated** whenever Adobe releases a new (or changes) a hot fix or security bulletin
+4. Unofficial Updater 2 is **not endorsed by or have any ties** to Adobe
+5. Unofficial Updater 2 is **updated** whenever Adobe releases a new (or changes) a hot fix or security bulletin
  - Matrix of published hot fixes and security bulletins
      - [Hot Fix Matrix: ColdFusion 8.0.1](https://github.com/dcepler/unofficial-updater2/blob/master/cf801-hotfix-matrix.pdf?raw=true)
      - [Hot Fix Matrix: ColdFusion 9.0.1](https://github.com/dcepler/unofficial-updater2/blob/master/cf901-hotfix-matrix.pdf?raw=true)    
-5. Unofficial Updater 2 will **need to be run again** when it is updated to apply all new (or changed) hot fix or security bulletin from Adobe
+6. Unofficial Updater 2 will **need to be downloaded and run again** when it is updated to apply all new (or changed) hot fix or security bulletin from Adobe
 
 ## What it does
 Unofficial Updater 2 asks specific questions about how Adobe ColdFusion is installed. It 
