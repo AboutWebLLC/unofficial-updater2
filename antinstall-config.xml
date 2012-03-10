@@ -26,7 +26,8 @@
 			defaultImageResource="/resources/images/background-bar.png"
 			minJavaVersion="1.5"
 			finishButtonText="Apply Updates"
-			version="2012.01.27">
+			wide="600:250"
+			version="2012.03.10">
 
 	<page type="text" name="Intro" displayText="README! Important Information" htmlResource="/README.htm" textResource="/README.md" />
 
@@ -35,6 +36,8 @@
 			type="input"
 			name="cf_install"
 			displayText="How is ColdFusion Installed?">
+		<hidden property="firstRun" value="true" />
+
 		<select
 				property="installType"
 				defaultValue="standalone"
@@ -43,6 +46,19 @@
 			<option text="Multi-Server JRun 4" value="jrun"/>
 			<option text="J2EE EAR/WAR" value="j2ee"/>
 		</select>
+	</page>
+
+	<!-- first run -->
+	<page
+			type="input"
+			name="first_run"
+			displayText="First Run of Unofficial Updater 2"
+			ifProperty="${firstRun}==true">
+		
+		<comment displayText="Since this is the first time this version of Unofficial Updater 2 has been run," />
+		<comment displayText="it will download ALL updates from Adobe then pack them into a new" />
+		<comment displayText="Unofficial-Updater2-with-downloads.jar that can be run again without" />
+		<comment displayText="connecting to the Internet" />
 		<comment displayText="" />
 		<select
 				property="needProxy"
@@ -76,6 +92,9 @@
 		<hidden property="install_unix" value="/opt/coldfusion8" />
 		<hidden property="install_win" value="C:\ColdFusion8" />
 		<hidden property="jrunInstallDir" value="" />
+
+		<comment displayText="UU2 validates that the directories exist and are correct" />
+		<comment displayText="" />
 			
 		<app-root
 				property="cfInstallDir"
@@ -108,6 +127,9 @@
 		<hidden property="install_unix" value="/opt/jrun4" />
 		<hidden property="install_win" value="C:\JRun4" />
 		
+		<comment displayText="UU2 validates that the directories exist and are correct" />
+		<comment displayText="" />
+
 		<app-root
 				property="jrunInstallDir"
 				defaultValue="${install_unix}"
@@ -135,8 +157,11 @@
 			displayText="Where is ColdFusion Installed?"
 			ifProperty="${installType}==j2ee">
 
-			<hidden property="cfInstallDir" value="" />
-			<hidden property="jrunInstallDir" value="" />
+		<hidden property="cfInstallDir" value="" />
+		<hidden property="jrunInstallDir" value="" />
+
+		<comment displayText="UU2 validates that the directories exist and are correct" />
+		<comment displayText="" />
 			
 		<!-- no idea what the values could be given possible setups (JBoss, Tomcat, etc.) -->
 		<app-root
@@ -153,11 +178,30 @@
 				checkFile1="administrator/Application.cfm"/>
 	</page>
 
+	<!-- get backup directory -->
+	<page
+			type="input"
+			name="backup"
+			displayText="Where should UU2 create backups?">
+
+		<comment displayText="UU2 creates backups of all directories it modifies as .zip" />
+		<comment displayText="" />
+		<directory
+				property="backupDir"
+				displayText="Backup Directory"
+				defaultValue="/"
+				defaultValueWin="C:\"
+				create="true"
+				checkExists="true" />
+
+	</page>
+
 	<page
 			type="input"
 			name="confirm"
 			displayText="Confirm Settings"
-			target="preUpdate">
+			target="preUpdate"
+			overflow="true">
 		<!-- set additional paths -->
 		<conditional ifProperty="${installType}==standalone">
 			<hidden property="cfusionLibDir" value="${cfInstallDir}/lib" />
@@ -169,6 +213,7 @@
 
 		<comment displayText="Install Type:" bold="true" />
 		<comment displayText="${installType}"/>
+		<comment displayText="" />
 		<comment displayText="WEB-INF Directory:" bold="true" />
 		<comment displayText="${webinfDir}"/>
 		<comment displayText="CFIDE Directory:" bold="true" />
@@ -176,6 +221,10 @@
 		<comment displayText="CFusion Lib Directory:" bold="true" />
 		<comment displayText="${cfusionLibDir}"/>
 		<comment displayText="" />
+		<comment displayText="Backup Directory:" bold="true" />
+		<comment displayText="${backupDir}"/>
+		<comment displayText="" />
+
 		<select
 				property="applyUpdate"
 				defaultValue="y"

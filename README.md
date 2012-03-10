@@ -22,12 +22,17 @@ bulletins to Adobe ColdFusion 8.0.1 or 9.0.1.
 6. Unofficial Updater 2 will **need to be downloaded and run again** when it is updated to apply all new (or changed) hot fix or security bulletin from Adobe
 
 ## What it does
-Unofficial Updater 2 asks specific questions about how Adobe ColdFusion is installed. It 
-will then produce backups of any directories it will modify. Finally, it 
-will download the applicable hot fixes and security bulletins from Adobe 
-and apply them according to the published instructions. It only updates 
-files, it will **not modify** any settings such as *jvm.config*, *registry*, etc. A list of files
-that Unofficial Updater 2 updates as compared to a clean install of Adobe ColdFusion 8.0.1 or 9.0.1 are listed below:
+Unofficial Updater 2 asks specific questions about how Adobe ColdFusion is 
+installed. The first time you run UU2, it will download **ALL** hotfixes and
+security bulletins from Adobe for both ColdFusion 8.0.1 and 9.0.1. UU2 will 
+create **Unofficial-Updater2-with-downloads.jar**. This is done since UU2 
+can not directly package the updates and will make it easier to patch 
+additional servers without the need of an Internet connection. It will then 
+produce backups of any directories it will modify. Finally, it will apply 
+the hotfixes and security bulletins according to the published instructions. 
+It only updates files, it will **not modify** any settings such as *jvm.config*, *registry*, etc.
+A list of files that Unofficial Updater 2 updates as compared to a clean 
+install of Adobe ColdFusion 8.0.1 or 9.0.1 are listed below:
 
  - [File Changes: ColdFusion 8.0.1 Standalone](https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf801-standalone-filechanges.txt) 
  - [File Changes: ColdFusion 8.0.1 Multi-Server JRun4](https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf801-jrun-filechanges.txt) 
@@ -46,11 +51,13 @@ If you have modified files in **CFIDE** and/or **WEB-INF** they could be changed
       - java -jar Unofficial-Updater2.jar
  - **Text Installer**
       - java -jar Unofficial-Updater2.jar text
+ - Once *Unofficial-Updater2-with-downloads.jar* is created, you can use that instead of *Unofficial-Updater2.jar*
 4. Walk through the screens putting the appropriate information
  - **Be sure to fill the directory locations correctly**, Unofficial Updater 2 will try to validate they are correct before letting you proceed to the next step
 5. Finish updater by pressing **Apply Updates**
+6. On OS X/Linux/Solaris verify (and possibly correct) ownership and permission of the files updated
 
-Please see the [Wiki](https://github.com/dcepler/unofficial-updater2/wiki/Using-Unofficial-Updater-2) for screenshots and walkthrough.
+Please see the [Wiki: Using Updater 2](https://github.com/dcepler/unofficial-updater2/wiki/Using-Unofficial-Updater-2) for screenshots and walkthrough.
 
 ## Details
 At the core, Unofficial Updater 2 is just an [Apache Ant](http://ant.apache.org/) script. Ant was chosen 
@@ -91,5 +98,7 @@ Additional information on ColdFusion Session Fixation:
  * [ColdFusion Security Hotfix changes session behaviour](http://cfsimplicity.com/4/coldfusion-security-hotfix-changes-session-behaviour)   
 
 ### Backups           
-Backups are made one level up of the directory that is modified and are 
-in the form **{directory-name}-uu2-{datetime-stamp}.zip**
+Backups are made of the directories that are modified. The backups are stored in the directory specified when running UU2 
+and are named **{directory-name}-uu2-{datetime-stamp}.zip**
+
+Please see [Wiki: Restore ACF from UU2 backups](https://github.com/dcepler/unofficial-updater2/wiki/Restore-ACF-from-UU2-backups) for details.
