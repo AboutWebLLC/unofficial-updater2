@@ -354,7 +354,6 @@ Added:
 /CFIDE/administrator/images/backgroundwizard_CF8.jpg
 /CFIDE/administrator/images/cf_9_boxshot.jpg
 /CFIDE/administrator/mail/download.cfm
-/CFIDE/administrator/mail/undeliveredmail.cfc
 /CFIDE/administrator/mail/undeliveredmail.cfm
 /CFIDE/administrator/monitor/AC_RunActiveContent.js
 /CFIDE/administrator/monitor/AIRInstallBadge.swf
@@ -386,9 +385,10 @@ Added:
 /WEB-INF/cfusion/lib/preso/blank.swf
 /WEB-INF/cfusion/lib/preso/dummy.swf
 /WEB-INF/cfusion/lib/updates/chf8010004.jar
-/WEB-INF/cfusion/lib/updates/hf801-00004.jar
+/WEB-INF/cfusion/lib/updates/hf801-00005.jar
 /WEB-INF/cfusion/lib/updates/hf801-71557.jar
 /WEB-INF/cfusion/lib/updates/hf801-76563.jar
+/WEB-INF/cfusion/lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
 /WEB-INF/exception/udf.cfm
 
 Removed:
@@ -397,4 +397,5 @@ Removed:
 /WEB-INF/cfclasses/*.class
 /WEB-INF/cfusion/lib/metadata-extractor-2.2.2.jar
 /WEB-INF/cfusion/lib/updates/*.jar (UU2 removes all hotfixes before update)
+/WEB-INF/cfusion/lib/updates/empty.txt
 

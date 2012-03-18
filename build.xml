@@ -28,6 +28,7 @@
 	
 	<tstamp>
 		<format property="ts.filename" pattern="yyyyMMdd-HHmmss"/>
+		<format property="ts.full" pattern="EEEE, MMMM dd, yyyy 'at' HH:mm:ss z" />
 	</tstamp>
 	
 	<!-- if running as standalone Ant script, add depends="get_install_info" to the target below -->
@@ -170,6 +171,8 @@
 		<delete>
 			<fileset dir="${hotfixDir}" includes="*.jar"/>
 		</delete>
+
+		<delete file="${hotfixDir}/empty.txt" failonerror="false" />
 		
 		<echo message="Clearing all compiled code from ${webinfDir}/cfclasses" />
 		<delete>
@@ -178,6 +181,15 @@
 		
 	</target>
 
+	
+	<target name="uu2.text" description="Drop text file into lib/updates for uu2">
+	
+		<echo file="${hotfixDir}/unofficial-updater2.txt" append="false">
+Unofficial Updater 2 was run on ${ts.full}
+Using files downloaded on ${download.date}
+		</echo>		
+		
+	</target>
 	
 	<target name="get_install_info" description="Get information about ColdFusion installation">
 		
@@ -306,7 +318,6 @@ Using the following directories:
 <!-- *********************************************** -->
 	<target name="update_801" description="everything to update 8.0.1">
 
-		<!-- -->
 		<antcall target="backup" />
 		<antcall target="directoryPrep" />
 
@@ -317,8 +328,9 @@ Using the following directories:
 		<antcall target="cpsid_84585" />
 		<antcall target="cpsid_86589" />
 		<antcall target="apsb09-09" />
-		<antcall target="cpsid_90784_cf801" />
-		<antcall target="cpsid_92512_cf801" />
+<!--		<antcall target="cpsid_90784_cf801" /> -->
+<!--		<antcall target="cpsid_92512_cf801" /> -->
+		<antcall target="cpsid_93043_cf801" />
 		
 		<!-- only for jrun installs -->
 		<if>
@@ -327,12 +339,14 @@ Using the following directories:
 				<antcall target="apsb09-12" />
 			</then>
 		</if>
-				
+
+		<antcall target="uu2.text" />
+		
 	</target>
 	
     <target name="cpsid_52915" description="Cumulative Hot Fix 4 for ColdFusion 8.0.1">
     	
-		<!-- update of cfmx_bootstrap.jar now from APSB11-14 -->
+		<!-- update of cfmx_bootstrap.jar now from APSB12-06 -->
 		<!--
 			<echo message="Applying cfmx_bootstrap.jar to ${webinfDir}/lib/" />
 			<unzip src="downloads/cpsid_52915/chf8010004.zip" dest="${webinfDir}/lib/">
@@ -441,8 +455,8 @@ Using the following directories:
     <target name="apsb09-09" description="Hotfix available for potential ColdFusion 8 input sanitization issue">
 
 		<!--
-		hf801-77218.jar rolled into CHF4, explicitly listed to be removed in CHF4 and APSB11-04
-		Other files are in APSB11-04
+		hf801-77218.jar rolled into CHF4, explicitly listed to be removed in CHF4 and APSB12-06
+		Other files are in APSB12-06
 		
 		to complete APSB09-09 still need to remove cf5_upload.cfm and cf5_connector.cfm
 		from CFIDE/scripts/ajax/FCKeditor/editor/filemanager/connectors/cfm
@@ -454,7 +468,8 @@ Using the following directories:
     	
     </target>
 	
-	
+<!-- Superseded by APSB12-06 -->
+<!--	
     <target name="cpsid_90784_cf801" description="Security update: Hotfix available for ColdFusion (APSB11-14)">
     	
 		<echo message="Unpacking CF801.zip" />
@@ -476,7 +491,7 @@ Using the following directories:
 	
     <target name="cpsid_92512_cf801" description="Security update: Hotfix available for ColdFusion (APSB11-29)">
     	
-		<!-- hf801-00003.jar should be removed in-favor of hf801-00004.jar in cpsid_92512 -->
+		hf801-00003.jar should be removed in-favor of hf801-00004.jar in cpsid_92512
 		<delete file="${cfusionLibDir}/updates/hf801-00003.jar"/>
 				
 		<unzip src="downloads/cpsid_92512/CF801jar.zip" dest="downloads/cpsid_92512/" />
@@ -485,6 +500,25 @@ Using the following directories:
 		<copy todir="${cfusionLibDir}/updates" verbose="true" overwrite="true" preservelastmodified="true">
 			<fileset dir="downloads/cpsid_92512/CF801jar"/>
 		</copy>
+    	
+    </target>
+-->
+	
+    <target name="cpsid_93043_cf801" description="Security update: Hotfix available for ColdFusion 8.0.1 (APSB12-06)">
+    	
+		<echo message="Unpacking CF801.zip" />
+		<unzip src="downloads/cpsid_93043/CF801.zip" dest="downloads/cpsid_93043/" />
+				
+		<echo message="Applying files to ${cfusionLibDir}" />
+		<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
+			<fileset dir="downloads/cpsid_93043/CF801/lib"/>
+		</copy>
+				
+		<echo message="Applying files to ${cfideDir}" />
+		<unzip src="downloads/cpsid_93043/CFIDE-801.zip" dest="${cfideDir}/.." />
+
+		<echo message="Applying files to ${webinfDir}" />
+		<unzip src="downloads/cpsid_93043/CF801/WEB-INF.zip" dest="${webinfDir}/.." />
     	
     </target>
 
@@ -506,12 +540,15 @@ Using the following directories:
 <!-- *********************************************** -->
 	<target name="update_901" description="everything to update 9.0.1">
 
-		<!-- -->
 		<antcall target="backup" />
 		<antcall target="directoryPrep" />
+		
 		<antcall target="cpsid_91836" />
-		<antcall target="cpsid_92512_cf901" />
+<!--		<antcall target="cpsid_92512_cf901" /> -->
+		<antcall target="cpsid_93043_cf901" />
 				
+		<antcall target="uu2.text" />
+		
 	</target>
 
 	
@@ -533,7 +570,8 @@ Using the following directories:
 
     </target>
 
-	
+<!-- Superseded by APSB12-06 -->
+<!--	
     <target name="cpsid_92512_cf901" description="Security update: Hotfix available for ColdFusion (APSB11-29)">
     	
 		<unzip src="downloads/cpsid_92512/CF901jar.zip" dest="downloads/cpsid_92512/" />
@@ -544,5 +582,25 @@ Using the following directories:
 		</copy>
     	
     </target>
+-->
+	
+    <target name="cpsid_93043_cf901" description="Security update: Hotfix available for ColdFusion 9.0.1 (APSB12-06)">
+    	
+		<echo message="Unpacking CF901.zip" />
+		<unzip src="downloads/cpsid_93043/CF901.zip" dest="downloads/cpsid_93043/" />
+				
+		<echo message="Applying files to ${cfusionLibDir}" />
+		<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
+			<fileset dir="downloads/cpsid_93043/CF901/lib"/>
+		</copy>
+				
+		<echo message="Applying files to ${cfideDir}" />
+		<unzip src="downloads/cpsid_93043/CFIDE-901.zip" dest="${cfideDir}/.." />
+
+		<echo message="Applying files to ${webinfDir}" />
+		<unzip src="downloads/cpsid_93043/CF901/WEB-INF.zip" dest="${webinfDir}/.." />
+    	
+    </target>
+	
 	
 </project>

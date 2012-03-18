@@ -320,7 +320,8 @@ Modified:
 
 Added:
 /lib/updates/chf9010002.jar
-/lib/updates/hf901-00003.jar
+/lib/updates/hf901-00004.jar
+/lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
 /lib/commons-fileupload-1.2.jar
 /lib/esapi-2.0_rc10.jar
 /lib/ESAPI.properties
@@ -332,4 +333,5 @@ Added:
 
 Removed:
 /lib/updates/*.jar (UU2 removes all hotfixes before update)
+/lib/updates/empty.txt
 /WEB-INF/cfclasses/*.class 

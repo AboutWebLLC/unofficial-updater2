@@ -27,7 +27,7 @@
 			minJavaVersion="1.5"
 			finishButtonText="Apply Updates"
 			wide="600:250"
-			version="2012.03.15">
+			version="2012.03.18">
 
 	<page type="text" name="Intro" displayText="README! Important Information" htmlResource="/README.htm" textResource="/README.md" />
 

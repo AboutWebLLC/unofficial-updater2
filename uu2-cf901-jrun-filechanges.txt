@@ -323,7 +323,8 @@ Added:
 /CFIDE/administrator/cfadmin.wzrd
 /CFIDE/administrator/securityerror.cfm
 /WEB-INF/cfusion/lib/updates/chf9010002.jar
-/WEB-INF/cfusion/lib/updates/hf901-00003.jar
+/WEB-INF/cfusion/lib/updates/hf901-00004.jar
+/WEB-INF/cfusion/lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
 /WEB-INF/cfusion/lib/commons-fileupload-1.2.jar
 /WEB-INF/cfusion/lib/esapi-2.0_rc10.jar
 /WEB-INF/cfusion/lib/ESAPI.properties
@@ -333,3 +334,4 @@ Added:
 Removed:
 /WEB-INF/cfclasses/*.class
 /WEB-INF/cfusion/lib/updates/*.jar (UU2 removes all hotfixes before update)
+/WEB-INF/cfusion/lib/updates/empty.txt

@@ -9,12 +9,12 @@ bulletins to Adobe ColdFusion 8.0.1 or 9.0.1.
 
 ### Disclaimers
 1. Use of Unofficial Updater 2 is **at your own risk**
-2. ColdFusion Server/process **should not be running** when you use Unofficial Updater 2
-3. Unofficial Updater 2 can **only be run against** Adobe ColdFusion **8.0.1** or **9.0.1**
+2. Unofficial Updater 2 is **not endorsed by or have any ties** to Adobe
+3. ColdFusion Server/process **should not be running** when you use Unofficial Updater 2
+4. Unofficial Updater 2 can **only be run against** Adobe ColdFusion **8.0.1** or **9.0.1**
  - If you are running **8.0.0** or **9.0.0** you need to apply Update 1 from Adobe first
      - [Adobe ColdFusion 8 Update 1](http://kb2.adobe.com/cps/403/kb403277.html)
      - [Adobe ColdFusion 9 Update 1](http://kb2.adobe.com/cps/849/cpsid_84973.html)
-4. Unofficial Updater 2 is **not endorsed by or have any ties** to Adobe
 5. Unofficial Updater 2 is **updated** whenever Adobe releases a new (or changes) a hot fix or security bulletin
  - Matrix of published hot fixes and security bulletins
      - [Hot Fix Matrix: ColdFusion 8.0.1](https://github.com/dcepler/unofficial-updater2/blob/master/cf801-hotfix-matrix.pdf?raw=true)
@@ -25,7 +25,8 @@ bulletins to Adobe ColdFusion 8.0.1 or 9.0.1.
 Unofficial Updater 2 asks specific questions about how Adobe ColdFusion is 
 installed. The first time you run UU2, it will download **ALL** hotfixes and
 security bulletins from Adobe for both ColdFusion 8.0.1 and 9.0.1. UU2 will 
-create **Unofficial-Updater2-with-downloads.jar**. This is done since UU2 
+create **Unofficial-Updater2-with-downloads.jar** which contains the 
+downloaded hotfixes and security bulletins. This is done since UU2 
 can not directly package the updates and will make it easier to patch 
 additional servers without the need of an Internet connection. It will then 
 produce backups of any directories it will modify. Finally, it will apply 
@@ -59,6 +60,12 @@ If you have modified files in **CFIDE** and/or **WEB-INF** they could be changed
 
 Please see the [Wiki: Using Updater 2](https://github.com/dcepler/unofficial-updater2/wiki/Using-Unofficial-Updater-2) for screenshots and walkthrough.
 
+## Backups           
+Backups are made of the directories that are modified. The backups are stored in the directory specified when running UU2 
+and are named **{directory-name}-uu2-{datetime-stamp}.zip**
+
+Please see [Wiki: Restore ACF from UU2 backups](https://github.com/dcepler/unofficial-updater2/wiki/Restore-ACF-from-UU2-backups) for details.
+
 ## Details
 At the core, Unofficial Updater 2 is just an [Apache Ant](http://ant.apache.org/) script. Ant was chosen 
 since it could provide cross platform support. The ant script was 
@@ -66,7 +73,7 @@ wrapped with [Ant Installer](http://antinstaller.sourceforge.net/) to create a G
 only require Java 1.5+ to be installed.  
 
 ### ColdFusion 8.0.1
-All hot fixes and security bulletins published as of December 13, 2011 for 
+All hot fixes and security bulletins published as of March 13, 2012 for 
 ColdFusion 8.0.1 are applied except if they were superseded by a newer 
 patch and the following:
 
@@ -81,24 +88,20 @@ registry and **CVE-2009-1876** will modify the connector configuration.
 and [breaks other things](http://www.mischefamily.com/nathan/index.cfm/2009/10/1/hf80171643-Breaks-Application-Specific-Custom-Tag-Paths).
 
 ### ColdFusion 9.0.1
-All hot fixes and security bulletins published as of December 13, 2011 for 
+All hot fixes and security bulletins published as of March 13, 2012 for 
 ColdFusion 9.0.1 are applied except if they were superseded by a newer 
 patch.
 
-### Session Fixation (APSB11-04)
-Please refer to the technote about the Session Fixation issue since 
-Unofficial Updater 2 does not modify jvm.config.
+### Additional Notes
+Please refer to the various technotes about changes to configuration options
+since Unofficial Updater 2 does not modify *jvm.config* or change any
+settings within ColdFusion.
 
  * [APSB11-04 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb11-04.html)
- * [cpsid_89094 - Security Hotfix | ColdFusion 8, 8.0.1, 9, 9.0.1](http://kb2.adobe.com/cps/890/cpsid_89094.html)
+ * [APSB11-14 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb11-14.html)
+ * [APSB12-06 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb12-06.html)
 
-Additional information on ColdFusion Session Fixation:
+Also it is highly recommended to update the underlying JVM that ColdFusion 
+uses to 1.6.0 Update 24
 
- * [Update on Security Hot-Fix Feb 2011](http://shilpikm.blogspot.com/2011/03/update-on-security-hot-fix-feb-2011.html)
- * [ColdFusion Security Hotfix changes session behaviour](http://cfsimplicity.com/4/coldfusion-security-hotfix-changes-session-behaviour)   
-
-### Backups           
-Backups are made of the directories that are modified. The backups are stored in the directory specified when running UU2 
-and are named **{directory-name}-uu2-{datetime-stamp}.zip**
-
-Please see [Wiki: Restore ACF from UU2 backups](https://github.com/dcepler/unofficial-updater2/wiki/Restore-ACF-from-UU2-backups) for details.
+ * [Oracle Security Alert CVE-2010-4476 | ColdFusion](http://kb2.adobe.com/cps/894/cpsid_89440.html)
