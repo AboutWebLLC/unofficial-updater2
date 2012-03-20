@@ -65,7 +65,7 @@
     	<java classpath="${cfusionLibDir}/cfusion.jar" classname="coldfusion.tools.CfinfoMain" outputproperty="reportedVersion" fork="true">
             <arg value="-version"/>
     	</java>
-    	
+
     	<echo message="Found ColdFusion version ${reportedVersion}" />
     	
 		<switch value="${reportedVersion}">
@@ -172,12 +172,17 @@
 			<fileset dir="${hotfixDir}" includes="*.jar"/>
 		</delete>
 
-		<delete file="${hotfixDir}/empty.txt" failonerror="false" />
+		<delete file="${hotfixDir}/empty.txt" />
 		
-		<echo message="Clearing all compiled code from ${webinfDir}/cfclasses" />
-		<delete>
-			<fileset dir="${webinfDir}/cfclasses" includes="*.class"/>
-		</delete>
+		<if>
+			<available file="${webinfDir}/cfclasses" type="dir" />
+			<then>
+				<echo message="Clearing all compiled code from ${webinfDir}/cfclasses" />
+				<delete>
+					<fileset dir="${webinfDir}/cfclasses" includes="*.class"/>
+				</delete>
+			</then>
+		</if>
 		
 	</target>
 
