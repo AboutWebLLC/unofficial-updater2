@@ -62,7 +62,7 @@ this ant build file can be re-run with the following command if Ant is installer
 
 			<fileset dir=".">
 				<include name="README*" />
-				<include name="cf_hotfixes.properties" />
+				<include name="uu2.properties" />
 			</fileset>
 			
 		</installer>

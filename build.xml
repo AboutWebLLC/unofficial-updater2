@@ -21,7 +21,7 @@
 	<typedef resource="net/sf/antcontrib/antlib.xml" />	
 
 	<!-- -->
-	<property file="cf_hotfixes.properties"/>	
+	<property file="uu2.properties"/>	
 	
 	<available file="downloads/download.properties" property="hasDownloads" />
 	<available file="ant.install.properties" property="isAntInstaller" />
@@ -32,7 +32,7 @@
 	</tstamp>
 	
 	<!-- if running as standalone Ant script, add depends="get_install_info" to the target below -->
-    <target name="preUpdate" description="Preliminary work for update">
+    <target name="preUpdate" description="Preliminary work for update" depends="get_install_info">
 
 		<if>
 			<equals arg1="${applyUpdate}" arg2="n" />
@@ -62,9 +62,34 @@
 		<property file="downloads/download.properties"/>
 
     	<!-- check ColdFusion version -->
-    	<java classpath="${cfusionLibDir}/cfusion.jar" classname="coldfusion.tools.CfinfoMain" outputproperty="reportedVersion" fork="true">
-            <arg value="-version"/>
-    	</java>
+    	<trycatch property="versionException">
+    	
+    		<try>
+    	    	<java classpath="${cfusionLibDir}/cfusion.jar" classname="coldfusion.tools.CfinfoMain" outputproperty="reportedVersion" fork="true" failonerror="true">
+    	            <arg value="-version"/>
+    	    	</java>
+    		</try>
+
+    		<catch>
+    			<echo>Unable to determine ColdFusion version via Java, fallback to hashes</echo>
+    			
+				<checksum algorithm="SHA-512" file="${cfusionLibDir}/cfusion.jar" property="cfusion.jar.sha-512" />
+    			
+    			<switch value="${cfusion.jar.sha-512}">
+    				<case value="${cf801.cfusion.jar.sha-512}">
+    					<property name="reportedVersion" value="8,0,1,195765" />
+    				</case>
+    				<case value="${cf901.cfusion.jar.sha-512}">
+    					<property name="reportedVersion" value="9,0,1,274733" />
+    				</case>
+    				<default>
+    					<property name="reportedVersion" value="UNKNOWN" />
+    				</default>
+    			</switch>		
+    		
+    		</catch>
+    	
+    	</trycatch>
 
     	<echo message="Found ColdFusion version ${reportedVersion}" />
     	
