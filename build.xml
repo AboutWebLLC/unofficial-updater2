@@ -32,7 +32,7 @@
 	</tstamp>
 	
 	<!-- if running as standalone Ant script, add depends="get_install_info" to the target below -->
-    <target name="preUpdate" description="Preliminary work for update" depends="get_install_info">
+    <target name="preUpdate" description="Preliminary work for update">
 
 		<if>
 			<equals arg1="${applyUpdate}" arg2="n" />
