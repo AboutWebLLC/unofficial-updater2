@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-	Copyright (c) 2011, David C. Epler
+	Copyright (c) 2011-2012, David C. Epler
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 -->
-<project name="Unofficial Updater 2" default="preUpdate">
+<project name="Unofficial Updater 2" default="runType">
 	<description>Ant script that will fetch then apply hotfixes and security updates for ColdFusion 8.0.1 or 9.0.1</description>
 	
 	<!-- Ant-Contrib makes writting Ant tasks so much easier -->
@@ -32,21 +32,36 @@
 	</tstamp>
 	
 	<!-- if running as standalone Ant script, add depends="get_install_info" to the target below -->
+	<target name="runType" description="Just download or download and apply">
+
+		<if>
+			<istrue value="${downloadOnly}" />
+			<then>
+				<if>
+					<isfalse value="${isAntInstaller}" />
+					<then>
+						<antcall target="proxyInfo" />
+					</then>
+				</if>
+				<antcall target="download_hotfixes" />
+				<antcall target="repack_uu2" />
+			</then>
+			<else>
+				<antcall target="preUpdate" />
+			</else>
+		</if>
+		
+	</target>
+	
     <target name="preUpdate" description="Preliminary work for update">
 
 		<if>
-			<equals arg1="${applyUpdate}" arg2="n" />
+			<isfalse value="${applyUpdate}" />
 			<then>
 				<fail message="Need to re-run the script and enter correct values, sorry." />
 			</then>
 		</if>
 		
-		<if>
-			<equals arg1="${needProxy}" arg2="y" />
-			<then>
-				<setproxy proxyhost="${proxyHost}" proxyport="${proxyPort}" proxyuser="${proxyUser}" proxypassword="${proxyPassword}" />
-			</then>
-		</if>
 
 		<!-- Download hotfixes if they aren't local -->
 		<if>
@@ -110,6 +125,13 @@
 	
 	<!-- Download Hotfixes -->
 	<target name="download_hotfixes" description="Download hotfixes from Adobe" >
+
+		<if>
+			<istrue value="${needProxy}" />
+			<then>
+				<setproxy proxyhost="${proxyHost}" proxyport="${proxyPort}" proxyuser="${proxyUser}" proxypassword="${proxyPassword}" />
+			</then>
+		</if>
 		
 		<mkdir dir="downloads" />
 		
@@ -126,9 +148,7 @@
 						<checksum algorithm="SHA-512" file="downloads/@{hotfix}/@{filename}" property="${@{hotfix}.@{filename}.sha-512}" verifyproperty="@{filename}_isOK" />
 						
 						<if>
-							<not>
-								<equals arg1="${@{filename}_isOK}" arg2="true" />
-							</not>
+							<isfalse value="${@{filename}_isOK}" />
 							<then>
 								<fail message="Checksum for @{hotfix} file @{filename} is not correct! Either download is corrupt or Adobe updated the file." />
 							</then>
@@ -151,6 +171,7 @@
 	
 		<!-- modify Ant Installer script to skip first run screen -->
 		<replace file="antinstall-config.xml" token='property="firstRun" value="true"' value='property="firstRun" value="false"' />
+		<replace file="antinstall-config.xml" token='  GO!  ' value='Apply Updates' />
 		
 		<echo message="Repacking UU2 with downloaded updates from Adobe" />
 		<!-- pack everything up except current ant.install.properties -->
@@ -182,7 +203,16 @@
 		</switch>
 
 		<echo message="Creating backup of ${webinfDir}" />
-		<zip destfile="${backupDir}/WEB-INF-uu2-${ts.filename}.zip" basedir="${webinfDir}" />
+		<if>
+			<istrue value="${excludeCFClasses}" />
+			<then>
+				<echo message="Excluding files from WEB-INF/cfclasses" />
+				<zip destfile="${backupDir}/WEB-INF-uu2-${ts.filename}.zip" basedir="${webinfDir}" excludes="cfclasses/**" />
+			</then>
+			<else>
+				<zip destfile="${backupDir}/WEB-INF-uu2-${ts.filename}.zip" basedir="${webinfDir}" />
+			</else>
+		</if>
 
 		<echo message="Creating backup of ${cfideDir}" />
 		<zip destfile="${backupDir}/CFIDE-uu2-${ts.filename}.zip" basedir="${cfideDir}" />
@@ -213,37 +243,22 @@
 
 	
 	<target name="uu2.text" description="Drop text file into lib/updates for uu2">
-	
+
+		<echo message="Noting when UU2 was run in ${hotfixDir}" />
 		<echo file="${hotfixDir}/unofficial-updater2.txt" append="false">
 Unofficial Updater 2 was run on ${ts.full}
 Using files downloaded on ${download.date}
 		</echo>		
 		
 	</target>
-	
-	<target name="get_install_info" description="Get information about ColdFusion installation">
-		
-		<input message="How is ColdFusion Installed" validargs="standalone,jrun,j2ee" addproperty="installType" defaultvalue="standalone" />
 
-		<!-- first time running if downloads aren't present -->
-		<if>
-			<not>
-				<isset property="hasDownloads" />
-			</not>
-			<then>
-				<echo>Since this is the first time this version of Unofficial Updater 2 has been run, it will download ALL updates from Adobe then pack them into a new Unofficial-Updater2-with-downloads.jar that can be run again without connecting to the Internet</echo>
-			
-				<input message="Do you need to use a proxy?" validargs="y,n" addproperty="needProxy" defaultvalue="n" />
-			</then>
-			<else>
-				<property name="needProxy" value="n"/>
-			</else>
-		</if>
-		
+	<target name="proxyInfo" description="get proxy information">
+
+		<input message="Do you need to use a proxy?" validargs="yes,no" addproperty="needProxy" defaultvalue="no" />
 		
 		<!-- get proxy settings if needed -->
 		<if>
-			<equals arg1="${needProxy}" arg2="y" />
+			<istrue value="${needProxy}" />
 			<then>
 				<input message="Proxy Host:" addproperty="proxyHost" />
 				<input message="Proxy Port:" addproperty="proxyPort" defaultvalue="80" />
@@ -253,6 +268,27 @@ Using files downloaded on ${download.date}
 				</input>				
 			</then>
 		</if>
+		
+	</target>
+	
+	<target name="get_install_info" description="Get information about ColdFusion installation">
+		
+		<!-- first time running if downloads aren't present -->
+		<if>
+			<not>
+				<isset property="hasDownloads" />
+			</not>
+			<then>
+				<echo>Since this is the first time this version of Unofficial Updater 2 has been run, it will download ALL updates from Adobe then pack them into a new Unofficial-Updater2-with-downloads.jar that can be run again without connecting to the Internet</echo>
+			
+				<antcall target="proxyInfo" />
+			</then>
+			<else>
+				<property name="needProxy" value="no"/>
+			</else>
+		</if>
+
+		<input message="How is ColdFusion Installed" validargs="standalone,jrun,j2ee" addproperty="installType" defaultvalue="standalone" />
 		
 		<switch value="${installType}">
 			<case value="standalone">
@@ -314,6 +350,7 @@ Using files downloaded on ${download.date}
 		<input message="CFIDE directory" addproperty="cfideDir" defaultvalue="${default_cfideDir}" />
 		
 		<input message="Backup Directory" addproperty="backupDir" defaultvalue="${user.dir}" />
+		<input message="Exclude WEB-INF/cfclasses?" validargs="yes,no" addproperty="excludeCFClasses" defaultvalue="no" />
 
 		<!-- figure out additional paths -->
 		<if>
@@ -329,17 +366,18 @@ Using files downloaded on ${download.date}
 		<property name="hotfixDir" value="${cfusionLibDir}/updates" />
 
 		<echo>
-Install Type ...: ${installType}
+Install Type .........: ${installType}
 
 Using the following directories:
- * WEB-INF .....: ${webinfDir}
- * CFIDE .......: ${cfideDir}
- * CFusion Lib .: ${cfusionLibDir} 
+ * WEB-INF ...........: ${webinfDir}
+ * CFIDE .............: ${cfideDir}
+ * CFusion Lib .......: ${cfusionLibDir} 
 			
- * Backups .....: ${backupDir} 
+ * Backups ...........: ${backupDir} 
+ * Exclude cfclasses .: ${excludeCFClasses} 
  		</echo>
 
-		<input message="Apply Update to the above?" validargs="y,n" addproperty="applyUpdate" defaultvalue="y" />
+		<input message="Apply Update to the above?" validargs="yes,no" addproperty="applyUpdate" defaultvalue="yes" />
 		
 	</target>
 	

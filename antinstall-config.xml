@@ -25,28 +25,26 @@
 			windowIcon="/resources/images/Uu2-icon.png"
 			defaultImageResource="/resources/images/background-bar.png"
 			minJavaVersion="1.5"
-			finishButtonText="Apply Updates"
+			finishButtonText="  GO!  "
 			wide="600:250"
-			version="2012.03.20">
+			version="2012.03.24">
+
+	<page type="input" name="welcome" displayText="Welcome to Unofficial Updater 2">
+		<hidden property="firstRun" value="true" />
+		<hidden property="downloadOnly" value="false" />
+
+		<comment displayText="" />
+		<comment displayText="Please read the next screen completely before using" title="true" />
+		<comment displayText="" />
+		<comment displayText="Unofficial Updater 2 Release" bold="true" />
+		<comment displayText="2011.03.24"/>
+		<comment displayText="" />
+		<comment displayText="Latest Security Patch Applied" bold="true" />
+		<comment displayText="APSB12-06 - March 13, 2012"/>
+
+	</page>
 
 	<page type="text" name="Intro" displayText="README! Important Information" htmlResource="/README.htm" textResource="/README.md" />
-
-	<!-- need some basic info how ColdFusion is installed, probably a way to probe for this -->
-	<page
-			type="input"
-			name="cf_install"
-			displayText="How is ColdFusion Installed?">
-		<hidden property="firstRun" value="true" />
-
-		<select
-				property="installType"
-				defaultValue="standalone"
-				displayText="Installation Type">
-			<option text="Standalone" value="standalone"/>
-			<option text="Multi-Server JRun 4" value="jrun"/>
-			<option text="J2EE EAR/WAR" value="j2ee"/>
-		</select>
-	</page>
 
 	<!-- first run -->
 	<page
@@ -62,19 +60,45 @@
 		<comment displayText="" />
 		<select
 				property="needProxy"
-				defaultValue="n"
+				defaultValue="no"
 				displayText="Need to use a proxy?">
-			<option text="No" value="n"/>
-			<option text="Yes" value="y"/>
+			<option text="No" value="no"/>
+			<option text="Yes" value="yes"/>
+		</select>
+		<comment displayText="" />
+		<select
+				property="downloadOnly"
+				defaultValue="false"
+				displayText="What should UU2 do?">
+			<option text="Download Only" value="true"/>
+			<option text="Download and Apply" value="false"/>
 		</select>
 	</page>
+
+	<!-- need some basic info how ColdFusion is installed, probably a way to probe for this -->
+	<page
+			type="input"
+			name="cf_install"
+			displayText="How is ColdFusion Installed?"
+			ifProperty="${downloadOnly}==false">
+
+		<select
+				property="installType"
+				defaultValue="standalone"
+				displayText="Installation Type">
+			<option text="Standalone" value="standalone"/>
+			<option text="Multi-Server JRun 4" value="jrun"/>
+			<option text="J2EE EAR/WAR" value="j2ee"/>
+		</select>
+	</page>
+
 
 	<!-- get proxy information -->
 	<page
 			type="input"
 			name="proxy"
 			displayText="Proxy Configuration"
-			ifProperty="${needProxy}==y">
+			ifProperty="${needProxy}==yes">
 		
 		<text displayText="Proxy Host" property="proxyHost" defaultValue="" />
 		<text displayText="Proxy Port" property="proxyPort" defaultValue="80" />
@@ -86,8 +110,8 @@
 	<page
 			type="input"
 			name="cf_install_standalone"
-			displayText="Where is ColdFusion Installed?"
-			ifProperty="${installType}==standalone">
+			displayText="Where is ColdFusion Installed? (Standalone)"
+			ifProperty="(${installType}==standalone) AND (${downloadOnly}==false)">
 			
 		<hidden property="install_unix" value="/opt/coldfusion8" />
 		<hidden property="install_win" value="C:\ColdFusion8" />
@@ -120,8 +144,8 @@
 	<page
 			type="input"
 			name="cf_install_jrun"
-			displayText="Where is ColdFusion Installed?"
-			ifProperty="${installType}==jrun">
+			displayText="Where is ColdFusion Installed? (Multi-Server JRun 4)"
+			ifProperty="(${installType}==jrun) AND (${downloadOnly}==false)">
 			
 		<hidden property="cfInstallDir" value="" />
 		<hidden property="install_unix" value="/opt/jrun4" />
@@ -154,8 +178,8 @@
 	<page
 			type="input"
 			name="cf_install_j2ee"
-			displayText="Where is ColdFusion Installed?"
-			ifProperty="${installType}==j2ee">
+			displayText="Where is ColdFusion Installed? (J2EE EAR/WAR)"
+			ifProperty="(${installType}==j2ee) AND (${downloadOnly}==false)">
 
 		<hidden property="cfInstallDir" value="" />
 		<hidden property="jrunInstallDir" value="" />
@@ -182,7 +206,8 @@
 	<page
 			type="input"
 			name="backup"
-			displayText="Where should UU2 create backups?">
+			displayText="Where should UU2 create backups?"
+			ifProperty="${downloadOnly}==false">
 
 		<comment displayText="UU2 creates backups of all directories it modifies as .zip" />
 		<comment displayText="" />
@@ -193,7 +218,14 @@
 				defaultValueWin="C:\"
 				create="true"
 				checkExists="true" />
-
+		<comment displayText="" />
+		<select
+				property="excludeCFClasses"
+				defaultValue="no"
+				displayText="Exclude WEB-INF/cfclasses">
+			<option text="No" value="no"/>
+			<option text="Yes" value="yes"/>
+		</select>
 	</page>
 
 	<page
@@ -201,7 +233,8 @@
 			name="confirm"
 			displayText="Confirm Settings"
 			target="preUpdate"
-			overflow="true">
+			overflow="true"
+			ifProperty="${downloadOnly}==false">
 		<!-- set additional paths -->
 		<conditional ifProperty="${installType}==standalone">
 			<hidden property="cfusionLibDir" value="${cfInstallDir}/lib" />
@@ -223,14 +256,16 @@
 		<comment displayText="" />
 		<comment displayText="Backup Directory:" bold="true" />
 		<comment displayText="${backupDir}"/>
+		<comment displayText="Exclude WEB-INF/cfclasses:" bold="true" />
+		<comment displayText="${excludeCFClasses}"/>
 		<comment displayText="" />
 
 		<select
 				property="applyUpdate"
-				defaultValue="y"
+				defaultValue="yes"
 				displayText="Apply Update to the above?">
-			<option text="Yes" value="y"/>
-			<option text="No" value="n"/>
+			<option text="Yes" value="yes"/>
+			<option text="No" value="no"/>
 		</select>
 		
 	</page>
@@ -238,7 +273,7 @@
 	<page
 			type="progress"
 			name="progress"
-			displayText="Update progress"
+			displayText="Progress"
 			showTargets="false">
 	</page>
 </installer>
