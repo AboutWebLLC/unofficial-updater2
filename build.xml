@@ -153,7 +153,7 @@
 								<fail message="Checksum for @{hotfix} file @{filename} is not correct! Either download is corrupt or Adobe updated the file." />
 							</then>
 						</if>						
-						
+
 					</sequential>
 				</for>
 			</sequential>
@@ -163,7 +163,7 @@
 			<entry key="download.date" type="date" value="now" pattern="EEEE, MMMM dd, yyyy 'at' HH:mm:ss z" />
 			<entry key="download.result" value="success" />
 		</propertyfile>
-
+		
 	</target>
 		
 
@@ -575,18 +575,18 @@ Using the following directories:
     <target name="cpsid_93043_cf801" description="Security update: Hotfix available for ColdFusion 8.0.1 (APSB12-06)">
     	
 		<echo message="Unpacking CF801.zip" />
-		<unzip src="downloads/cpsid_93043/CF801.zip" dest="downloads/cpsid_93043/" />
+		<unzip src="downloads/cpsid_93043_fix1/CF801.zip" dest="downloads/cpsid_93043_fix1/" />
 				
 		<echo message="Applying files to ${cfusionLibDir}" />
 		<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
-			<fileset dir="downloads/cpsid_93043/CF801/lib"/>
+			<fileset dir="downloads/cpsid_93043_fix1/CF801/lib"/>
 		</copy>
 				
 		<echo message="Applying files to ${cfideDir}" />
 		<unzip src="downloads/cpsid_93043/CFIDE-801.zip" dest="${cfideDir}/.." />
 
 		<echo message="Applying files to ${webinfDir}" />
-		<unzip src="downloads/cpsid_93043/CF801/WEB-INF.zip" dest="${webinfDir}/.." />
+		<unzip src="downloads/cpsid_93043_fix1/CF801/WEB-INF.zip" dest="${webinfDir}/.." />
     	
     </target>
 

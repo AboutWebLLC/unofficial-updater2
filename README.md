@@ -22,16 +22,18 @@ bulletins to Adobe ColdFusion 8.0.1 or 9.0.1.
 6. Unofficial Updater 2 will **need to be downloaded and run again** when it is updated to apply all new (or changed) hot fix or security bulletin from Adobe
 
 ## What it does
-Unofficial Updater 2 asks specific questions about how Adobe ColdFusion is 
-installed. The first time you run UU2, it will download **ALL** hotfixes and
+First time you run Unofficial Updater 2, it will download **ALL** hotfixes and
 security bulletins from Adobe for both ColdFusion 8.0.1 and 9.0.1. UU2 will 
 create **Unofficial-Updater2-with-downloads.jar** which contains the 
 downloaded hotfixes and security bulletins. This is done since UU2 
 can not directly package the updates and will make it easier to patch 
-additional servers without the need of an Internet connection. It will then 
-produce backups of any directories it will modify. Finally, it will apply 
-the hotfixes and security bulletins according to the published instructions. 
-It only updates files, it will **not modify** any settings such as *jvm.config*, *registry*, etc.
+additional servers without the need of an Internet connection.
+
+Once the downloading is complete, UU2 will asks specific questions about how 
+Adobe ColdFusion is installed. It will then produce backups of any directories
+it will modify. Finally, it will apply the hotfixes and security bulletins 
+according to the published instructions. UU2 only updates files, 
+it will **not modify** any settings such as *jvm.config*, *registry*, etc.
 A list of files that Unofficial Updater 2 updates as compared to a clean 
 install of Adobe ColdFusion 8.0.1 or 9.0.1 are listed below:
 
@@ -73,7 +75,7 @@ wrapped with [Ant Installer](http://antinstaller.sourceforge.net/) to create a G
 only require Java 1.5+ to be installed.  
 
 ### ColdFusion 8.0.1
-All hot fixes and security bulletins published as of March 13, 2012 for 
+All hot fixes and security bulletins published as of March 29, 2012 for 
 ColdFusion 8.0.1 are applied except if they were superseded by a newer 
 patch and the following:
 
@@ -88,7 +90,7 @@ registry and **CVE-2009-1876** will modify the connector configuration.
 and [breaks other things](http://www.mischefamily.com/nathan/index.cfm/2009/10/1/hf80171643-Breaks-Application-Specific-Custom-Tag-Paths).
 
 ### ColdFusion 9.0.1
-All hot fixes and security bulletins published as of March 13, 2012 for 
+All hot fixes and security bulletins published as of March 29, 2012 for 
 ColdFusion 9.0.1 are applied except if they were superseded by a newer 
 patch.
 
@@ -99,6 +101,7 @@ settings within ColdFusion.
 
  * [APSB11-04 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb11-04.html)
  * [APSB11-14 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb11-14.html)
+ * [APSB11-29 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb11-29.html)
  * [APSB12-06 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb12-06.html)
 
 Also it is highly recommended to update the underlying JVM that ColdFusion 
