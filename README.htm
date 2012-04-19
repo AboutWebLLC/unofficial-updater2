@@ -16,6 +16,7 @@ h1{font-size:138.5%;}h2{font-size:123.1%;}h3{font-size:108%;}h1,h2,h3{margin:1em
 </head>
 
 <body>
+
 <h1>Unofficial Updater 2</h1>
 
 <h2>Introduction</h2>
@@ -39,13 +40,13 @@ bulletins to Adobe ColdFusion 8.0.1 or 9.0.1.</p>
 <li>Unofficial Updater 2 is <strong>updated</strong> whenever Adobe releases a new (or changes) a hot fix or security bulletin
 <ul><li>Matrix of published hot fixes and security bulletins
 <ul><li><a href="https://github.com/dcepler/unofficial-updater2/blob/master/cf801-hotfix-matrix.pdf?raw=true">Hot Fix Matrix: ColdFusion 8.0.1</a></li>
-<li><a href="https://github.com/dcepler/unofficial-updater2/blob/master/cf901-hotfix-matrix.pdf?raw=true">Hot Fix Matrix: ColdFusion 9.0.1</a></li></ul></li></ul></li>
+<li><a href="https://github.com/dcepler/unofficial-updater2/blob/master/cf901-hotfix-matrix.pdf?raw=true">Hot Fix Matrix: ColdFusion 9.0.1</a> <br /></li></ul></li></ul></li>
 <li>Unofficial Updater 2 will <strong>need to be downloaded and run again</strong> when it is updated to apply all new (or changed) hot fix or security bulletin from Adobe</li>
 </ol>
 
 <h2>What it does</h2>
 
-<p>First time you run Unofficial Updater 2, it will download <strong>ALL</strong> hotfixes and 
+<p>First time you run Unofficial Updater 2, it will download <strong>ALL</strong> hotfixes and
 security bulletins from Adobe for both ColdFusion 8.0.1 and 9.0.1. UU2 will 
 create <strong>Unofficial-Updater2-with-downloads.jar</strong> which contains the 
 downloaded hotfixes and security bulletins. This is done since UU2 
@@ -53,11 +54,14 @@ can not directly package the updates and will make it easier to patch
 additional servers without the need of an Internet connection.</p>
 
 <p>Once the downloading is complete, UU2 will asks specific questions about how 
-Adobe ColdFusion is installed. It will then produce backups of any directories 
+Adobe ColdFusion is installed. It will then produce backups of any directories
 it will modify. Finally, it will apply the hotfixes and security bulletins 
-according to the published instructions. UU2 only updates files, 
-it will <strong>not modify</strong> any settings such as <em>jvm.config</em>, <em>registry</em>, etc. 
-A list of files that Unofficial Updater 2 updates as compared to a clean 
+according to the published instructions.</p>
+
+<p>UU2 only updates files, it <strong>does not modify</strong> any settings in ColdFusion 
+such as <em>neo-</em><em>*.xml</em> or <em>jvm.config</em>.</p>
+
+<p>A list of files that Unofficial Updater 2 updates as compared to a clean 
 install of Adobe ColdFusion 8.0.1 or 9.0.1 are listed below:</p>
 
 <ul>
@@ -76,16 +80,20 @@ install of Adobe ColdFusion 8.0.1 or 9.0.1 are listed below:</p>
 <ol>
 <li><a href="https://github.com/downloads/dcepler/unofficial-updater2/Unofficial-Updater2.jar">Download</a> the packaged JAR installer</li>
 <li>Stop the ColdFusion Server/process you are going to update</li>
-<li>Depending upon your system you might be able to double-click <strong>Unofficial-Updater2.jar</strong> to run it, otherwise it will need to be run from command line
+<li><p>Depending upon your system you might be able to double-click <strong>Unofficial-Updater2.jar</strong> to run it, otherwise it will need to be run from command line</p>
+
 <ul><li><strong>GUI Installer</strong>
-<ul><li>java -jar Unofficial-Updater2.jar</li></ul></li>
+<ul><li><code>java -jar Unofficial-Updater2.jar</code></li></ul></li>
 <li><strong>Text Installer</strong>
-<ul><li>java -jar Unofficial-Updater2.jar text</li></ul></li>
-<li>Once <em>Unofficial-Updater2-with-downloads.jar</em> is created, you can use that instead of <em>Unofficial-Updater2.jar</em></li></ul></li>
+<ul><li><code>java -jar Unofficial-Updater2.jar text</code></li></ul></li>
+<li><p><strong>Text Installer run as cfusion user on Linux/UNIX</strong></p>
+
+<ul><li><code>su -s /bin/sh "cfusion" -c "java -jar Unofficial-Updater2.jar text"</code></li></ul></li>
+<li><p>Once <em>Unofficial-Updater2-with-downloads.jar</em> is created, you can use that instead of <em>Unofficial-Updater2.jar</em></p></li></ul></li>
 <li>Walk through the screens putting the appropriate information
 <ul><li><strong>Be sure to fill the directory locations correctly</strong>, Unofficial Updater 2 will try to validate they are correct before letting you proceed to the next step</li></ul></li>
 <li>Finish updater by pressing <strong>Apply Updates</strong></li>
-<li>On OS X/Linux/Solaris verify (and possibly correct) ownership and permission of the files updated</li>
+<li>On OS X/Linux/UNIX verify (and possibly correct) ownership and permission of the files updated</li>
 </ol>
 
 <p>Please see the <a href="https://github.com/dcepler/unofficial-updater2/wiki/Using-Unofficial-Updater-2">Wiki: Using Updater 2</a> for screenshots and walkthrough.</p>
@@ -101,7 +109,7 @@ and are named <strong>{directory-name}-uu2-{datetime-stamp}.zip</strong></p>
 
 <p>At the core, Unofficial Updater 2 is just an <a href="http://ant.apache.org/">Apache Ant</a> script. Ant was chosen 
 since it could provide cross platform support. The ant script was 
-wrapped with <a href="http://antinstaller.sourceforge.net/">Ant Installer</a> to create a GUI and text based interface which 
+wrapped with <a href="http://antinstaller.sourceforge.net/">Ant Installer</a> to create a GUI and text based interface which
 only require Java 1.5+ to be installed.  </p>
 
 <h3>ColdFusion 8.0.1</h3>
@@ -119,7 +127,7 @@ patch and the following:</p>
 <p>Both <strong>kb404026</strong> and <strong>CVE-2009-1876</strong> require modifications to be done to the 
 system configuration. <strong>kb404026</strong> requires ability to modify the Windows 
 registry and <strong>CVE-2009-1876</strong> will modify the connector configuration. 
-<strong>kb403750</strong> is not installed since it does not seem to resolve all the issues 
+<strong>kb403750</strong> is not installed since it does not seem to resolve all the issues
 and <a href="http://www.mischefamily.com/nathan/index.cfm/2009/10/1/hf80171643-Breaks-Application-Specific-Custom-Tag-Paths">breaks other things</a>.</p>
 
 <h3>ColdFusion 9.0.1</h3>
@@ -131,14 +139,16 @@ patch.</p>
 <h3>Additional Notes</h3>
 
 <p>Please refer to the various technotes about changes to configuration options 
-since Unofficial Updater 2 does not modify <em>jvm.config</em> or change any 
-settings within ColdFusion.</p>
+since Unofficial Updater 2 only updates files, it <strong>does not modify</strong> any 
+settings in ColdFusion such as <em>neo-</em><em>*.xml</em> or <em>jvm.config</em>.</p>
 
 <ul>
 <li><a href="http://www.adobe.com/support/security/bulletins/apsb11-04.html">APSB11-04 - Security update: Hotfix available for ColdFusion</a></li>
 <li><a href="http://www.adobe.com/support/security/bulletins/apsb11-14.html">APSB11-14 - Security update: Hotfix available for ColdFusion</a></li>
 <li><a href="http://www.adobe.com/support/security/bulletins/apsb11-29.html">APSB11-29 - Security update: Hotfix available for ColdFusion</a></li>
 <li><a href="http://www.adobe.com/support/security/bulletins/apsb12-06.html">APSB12-06 - Security update: Hotfix available for ColdFusion</a></li>
+<li>Additional Information
+<ul><li><a href="http://www.cutterscrossing.com/index.cfm/2012/3/27/ColdFusion-Security-Hotfix-and-Big-Forms">ColdFusion Security Hotfix APSB12-06 and Big Forms</a></li></ul></li>
 </ul>
 
 <p>Also it is highly recommended to update the underlying JVM that ColdFusion 
@@ -146,6 +156,10 @@ uses to 1.6.0 Update 24</p>
 
 <ul>
 <li><a href="http://kb2.adobe.com/cps/894/cpsid_89440.html">Oracle Security Alert CVE-2010-4476 | ColdFusion</a></li>
+<li>Additional Information
+<ul><li><a href="http://www.carehart.org/blog/client/index.cfm/2011/10/28/CF911-Have-you-updated-your-ColdFusion-JVM-to-24-yet-Important-security-fix-for-CF-89">CF911: Have you updated your #ColdFusion JVM to _24 yet? Important security fix for CF 8/9</a></li>
+<li><a href="http://blog.kdecherf.com/2012/04/12/oracle-i-download-your-jdk-by-eating-magic-cookies/">Oracle, I download your JDK by eating magic cookies</a></li></ul></li>
 </ul>
+
 </body>
 </html>

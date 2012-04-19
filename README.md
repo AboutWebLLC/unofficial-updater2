@@ -32,8 +32,11 @@ additional servers without the need of an Internet connection.
 Once the downloading is complete, UU2 will asks specific questions about how 
 Adobe ColdFusion is installed. It will then produce backups of any directories
 it will modify. Finally, it will apply the hotfixes and security bulletins 
-according to the published instructions. UU2 only updates files, 
-it will **not modify** any settings such as *jvm.config*, *registry*, etc.
+according to the published instructions.
+
+UU2 only updates files, it **does not modify** any settings in ColdFusion 
+such as *neo-***.xml* or *jvm.config*.
+
 A list of files that Unofficial Updater 2 updates as compared to a clean 
 install of Adobe ColdFusion 8.0.1 or 9.0.1 are listed below:
 
@@ -51,14 +54,17 @@ If you have modified files in **CFIDE** and/or **WEB-INF** they could be changed
 2. Stop the ColdFusion Server/process you are going to update
 3. Depending upon your system you might be able to double-click **Unofficial-Updater2.jar** to run it, otherwise it will need to be run from command line
  - **GUI Installer**
-      - java -jar Unofficial-Updater2.jar
+      - `java -jar Unofficial-Updater2.jar`
  - **Text Installer**
-      - java -jar Unofficial-Updater2.jar text
+      - `java -jar Unofficial-Updater2.jar text`
+ - **Text Installer run as cfusion user on Linux/UNIX**
+      - `su -s /bin/sh "cfusion" -c "java -jar Unofficial-Updater2.jar text"`
+      
  - Once *Unofficial-Updater2-with-downloads.jar* is created, you can use that instead of *Unofficial-Updater2.jar*
 4. Walk through the screens putting the appropriate information
  - **Be sure to fill the directory locations correctly**, Unofficial Updater 2 will try to validate they are correct before letting you proceed to the next step
 5. Finish updater by pressing **Apply Updates**
-6. On OS X/Linux/Solaris verify (and possibly correct) ownership and permission of the files updated
+6. On OS X/Linux/UNIX verify (and possibly correct) ownership and permission of the files updated
 
 Please see the [Wiki: Using Updater 2](https://github.com/dcepler/unofficial-updater2/wiki/Using-Unofficial-Updater-2) for screenshots and walkthrough.
 
@@ -95,16 +101,21 @@ ColdFusion 9.0.1 are applied except if they were superseded by a newer
 patch.
 
 ### Additional Notes
-Please refer to the various technotes about changes to configuration options
-since Unofficial Updater 2 does not modify *jvm.config* or change any
-settings within ColdFusion.
+Please refer to the various technotes about changes to configuration options 
+since Unofficial Updater 2 only updates files, it **does not modify** any 
+settings in ColdFusion such as *neo-***.xml* or *jvm.config*.
 
  * [APSB11-04 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb11-04.html)
  * [APSB11-14 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb11-14.html)
  * [APSB11-29 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb11-29.html)
  * [APSB12-06 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb12-06.html)
+ * Additional Information
+   * [ColdFusion Security Hotfix APSB12-06 and Big Forms](http://www.cutterscrossing.com/index.cfm/2012/3/27/ColdFusion-Security-Hotfix-and-Big-Forms)
 
 Also it is highly recommended to update the underlying JVM that ColdFusion 
 uses to 1.6.0 Update 24
 
  * [Oracle Security Alert CVE-2010-4476 | ColdFusion](http://kb2.adobe.com/cps/894/cpsid_89440.html)
+ * Additional Information
+   * [CF911: Have you updated your #ColdFusion JVM to _24 yet? Important security fix for CF 8/9](http://www.carehart.org/blog/client/index.cfm/2011/10/28/CF911-Have-you-updated-your-ColdFusion-JVM-to-24-yet-Important-security-fix-for-CF-89)
+   * [Oracle, I download your JDK by eating magic cookies](http://blog.kdecherf.com/2012/04/12/oracle-i-download-your-jdk-by-eating-magic-cookies/)
