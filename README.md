@@ -59,7 +59,6 @@ If you have modified files in **CFIDE** and/or **WEB-INF** they could be changed
       - `java -jar Unofficial-Updater2.jar text`
  - **Text Installer run as cfusion user on Linux/UNIX**
       - `su -s /bin/sh "cfusion" -c "java -jar Unofficial-Updater2.jar text"`
-      
  - Once *Unofficial-Updater2-with-downloads.jar* is created, you can use that instead of *Unofficial-Updater2.jar*
 4. Walk through the screens putting the appropriate information
  - **Be sure to fill the directory locations correctly**, Unofficial Updater 2 will try to validate they are correct before letting you proceed to the next step
