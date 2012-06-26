@@ -19,6 +19,7 @@
 			ui="swing,text"
 			verbose="true"
 			debug="false"
+			loadDefaults="false"
 			lookAndFeel="native"
 			antialiased="true"
 			name="Unofficial Updater 2"
@@ -27,20 +28,21 @@
 			minJavaVersion="1.5"
 			finishButtonText="  GO!  "
 			wide="600:250"
-			version="2012.04.06">
+			version="2012.06.26">
 
 	<page type="input" name="welcome" displayText="Welcome to Unofficial Updater 2">
 		<hidden property="firstRun" value="true" />
+		<hidden property="enableAuto" value="false" />
 		<hidden property="downloadOnly" value="false" />
 
 		<comment displayText="" />
 		<comment displayText="Please read the next screen completely before using" title="true" />
 		<comment displayText="" />
 		<comment displayText="Unofficial Updater 2 Release" bold="true" />
-		<comment displayText="2012.04.06"/>
+		<comment displayText="2012.06.26"/>
 		<comment displayText="" />
 		<comment displayText="Latest Security Patch Applied" bold="true" />
-		<comment displayText="APSB12-06 - March 29, 2012"/>
+		<comment displayText="APSB12-15 - June 12, 2012"/>
 
 	</page>
 
@@ -50,13 +52,14 @@
 	<page
 			type="input"
 			name="first_run"
+			overflow="true"
 			displayText="First Run of Unofficial Updater 2"
 			ifProperty="${firstRun}==true">
 		
-		<comment displayText="Since this is the first time this version of Unofficial Updater 2 has been run," />
-		<comment displayText="it will download ALL updates from Adobe then pack them into a new" />
-		<comment displayText="Unofficial-Updater2-with-downloads.jar that can be run again without" />
-		<comment displayText="connecting to the Internet" />
+		<comment displayText="Since this is the first time this version of Unofficial Updater 2" />
+		<comment displayText="has been run, it will download ALL updates from Adobe then pack" />
+		<comment displayText="them into a new Unofficial-Updater2-with-downloads.jar that can" />
+		<comment displayText="be run again without connecting to the Internet" />
 		<comment displayText="" />
 		<select
 				property="needProxy"
@@ -65,10 +68,18 @@
 			<option text="No" value="no"/>
 			<option text="Yes" value="yes"/>
 		</select>
-		<comment displayText="" />
+		<comment displayText="" /> 
+		<select
+				property="enableAuto"
+				defaultValue="no"
+				displayText="Enable cmdline automation?">
+			<option text="No" value="no"/>
+			<option text="Yes" value="yes"/>
+		</select>
+		<comment displayText="" /> 
 		<select
 				property="downloadOnly"
-				defaultValue="false"
+				defaultValue="true"
 				displayText="What should UU2 do?">
 			<option text="Download Only" value="true"/>
 			<option text="Download and Apply" value="false"/>
@@ -232,7 +243,6 @@
 			type="input"
 			name="confirm"
 			displayText="Confirm Settings"
-			target="preUpdate"
 			overflow="true"
 			ifProperty="${downloadOnly}==false">
 		<!-- set additional paths -->

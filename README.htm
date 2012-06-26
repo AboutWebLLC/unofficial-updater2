@@ -30,7 +30,8 @@ bulletins to Adobe ColdFusion 8.0.1 or 9.0.1.</p>
 <h3>Disclaimers</h3>
 
 <ol>
-<li>Use of Unofficial Updater 2 is <strong>at your own risk</strong></li>
+<li>Use of Unofficial Updater 2 is <strong>at your own risk</strong>
+<ul><li><strong>Do not</strong> run Unofficial Updater 2 for the first time on a production system</li></ul></li>
 <li>Unofficial Updater 2 is <strong>not endorsed by or have any ties</strong> to Adobe</li>
 <li>ColdFusion Server/process <strong>should not be running</strong> when you use Unofficial Updater 2</li>
 <li>Unofficial Updater 2 can <strong>only be run against</strong> Adobe ColdFusion <strong>8.0.1</strong> or <strong>9.0.1</strong>
@@ -40,7 +41,7 @@ bulletins to Adobe ColdFusion 8.0.1 or 9.0.1.</p>
 <li>Unofficial Updater 2 is <strong>updated</strong> whenever Adobe releases a new (or changes) a hot fix or security bulletin
 <ul><li>Matrix of published hot fixes and security bulletins
 <ul><li><a href="https://github.com/dcepler/unofficial-updater2/blob/master/cf801-hotfix-matrix.pdf?raw=true">Hot Fix Matrix: ColdFusion 8.0.1</a></li>
-<li><a href="https://github.com/dcepler/unofficial-updater2/blob/master/cf901-hotfix-matrix.pdf?raw=true">Hot Fix Matrix: ColdFusion 9.0.1</a> <br /></li></ul></li></ul></li>
+<li><a href="https://github.com/dcepler/unofficial-updater2/blob/master/cf901-hotfix-matrix.pdf?raw=true">Hot Fix Matrix: ColdFusion 9.0.1</a> </li></ul></li></ul></li>
 <li>Unofficial Updater 2 will <strong>need to be downloaded and run again</strong> when it is updated to apply all new (or changed) hot fix or security bulletin from Adobe</li>
 </ol>
 
@@ -80,16 +81,18 @@ install of Adobe ColdFusion 8.0.1 or 9.0.1 are listed below:</p>
 <ol>
 <li><a href="https://github.com/downloads/dcepler/unofficial-updater2/Unofficial-Updater2.jar">Download</a> the packaged JAR installer</li>
 <li>Stop the ColdFusion Server/process you are going to update</li>
-<li><p>Depending upon your system you might be able to double-click <strong>Unofficial-Updater2.jar</strong> to run it, otherwise it will need to be run from command line</p>
-
-<ul><li><strong>GUI Installer</strong>
+<li>Depending upon your system you might be able to double-click <strong>Unofficial-Updater2.jar</strong> to run it, otherwise it will need to be run from command line
+<ul><li><strong>Installer</strong> (auto-detect GUI or text)
 <ul><li><code>java -jar Unofficial-Updater2.jar</code></li></ul></li>
-<li><strong>Text Installer</strong>
+<li><strong>Force GUI Installer</strong> 
+<ul><li><code>java -jar Unofficial-Updater2.jar swing</code></li></ul></li>
+<li><strong>Force Text Installer</strong> 
 <ul><li><code>java -jar Unofficial-Updater2.jar text</code></li></ul></li>
-<li><p><strong>Text Installer run as cfusion user on Linux/UNIX</strong></p>
-
+<li><strong>Text Installer run as cfusion user on Linux/UNIX</strong>
 <ul><li><code>su -s /bin/sh "cfusion" -c "java -jar Unofficial-Updater2.jar text"</code></li></ul></li>
-<li><p>Once <em>Unofficial-Updater2-with-downloads.jar</em> is created, you can use that instead of <em>Unofficial-Updater2.jar</em></p></li></ul></li>
+<li><strong>Text Installer run as root on Linux/UNIX</strong>
+<ul><li><code>sudo java -jar Unofficial-Updater2.jar text</code></li></ul></li>
+<li>Once <em>Unofficial-Updater2-with-downloads.jar</em> is created, you can use that instead of <em>Unofficial-Updater2.jar</em></li></ul></li>
 <li>Walk through the screens putting the appropriate information
 <ul><li><strong>Be sure to fill the directory locations correctly</strong>, Unofficial Updater 2 will try to validate they are correct before letting you proceed to the next step</li></ul></li>
 <li>Finish updater by pressing <strong>Apply Updates</strong></li>
@@ -114,7 +117,7 @@ only require Java 1.5+ to be installed.  </p>
 
 <h3>ColdFusion 8.0.1</h3>
 
-<p>All hot fixes and security bulletins published as of March 29, 2012 for 
+<p>All hot fixes and security bulletins published as of June 12, 2012 for 
 ColdFusion 8.0.1 are applied except if they were superseded by a newer 
 patch and the following:</p>
 
@@ -132,7 +135,7 @@ and <a href="http://www.mischefamily.com/nathan/index.cfm/2009/10/1/hf80171643-B
 
 <h3>ColdFusion 9.0.1</h3>
 
-<p>All hot fixes and security bulletins published as of March 29, 2012 for 
+<p>All hot fixes and security bulletins published as of June 12, 2012 for 
 ColdFusion 9.0.1 are applied except if they were superseded by a newer 
 patch.</p>
 
@@ -147,6 +150,7 @@ settings in ColdFusion such as <em>neo-</em><em>*.xml</em> or <em>jvm.config</em
 <li><a href="http://www.adobe.com/support/security/bulletins/apsb11-14.html">APSB11-14 - Security update: Hotfix available for ColdFusion</a></li>
 <li><a href="http://www.adobe.com/support/security/bulletins/apsb11-29.html">APSB11-29 - Security update: Hotfix available for ColdFusion</a></li>
 <li><a href="http://www.adobe.com/support/security/bulletins/apsb12-06.html">APSB12-06 - Security update: Hotfix available for ColdFusion</a></li>
+<li><a href="http://www.adobe.com/support/security/bulletins/apsb12-15.html">APSB12-15 - Security update: Hotfix available for ColdFusion 9.0.1 and earlier</a></li>
 <li>Additional Information
 <ul><li><a href="http://www.cutterscrossing.com/index.cfm/2012/3/27/ColdFusion-Security-Hotfix-and-Big-Forms">ColdFusion Security Hotfix APSB12-06 and Big Forms</a></li></ul></li>
 </ul>

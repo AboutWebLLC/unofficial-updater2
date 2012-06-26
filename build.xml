@@ -20,11 +20,19 @@
 	<!-- Ant-Contrib makes writting Ant tasks so much easier -->
 	<typedef resource="net/sf/antcontrib/antlib.xml" />	
 
-	<!-- -->
+	<!-- load properties and determine some items regarding the environment running in -->
 	<property file="uu2.properties"/>	
 	
 	<available file="downloads/download.properties" property="hasDownloads" />
 	<available file="ant.install.properties" property="isAntInstaller" />
+	
+	<condition property="isRoot" else="false">
+		<equals arg1="root" arg2="${user.name}" />
+	</condition>
+
+	<condition property="isUnix" else="false">
+		<os family="unix"/>
+	</condition>
 	
 	<tstamp>
 		<format property="ts.filename" pattern="yyyyMMdd-HHmmss"/>
@@ -34,6 +42,8 @@
 	<!-- if running as standalone Ant script, add depends="get_install_info" to the target below -->
 	<target name="runType" description="Just download or download and apply">
 
+		<record name="uu2-${ts.filename}.log" action="start" loglevel="info" />
+		<echo message="Starting UU2 on ${ts.full}" />
 		<if>
 			<istrue value="${downloadOnly}" />
 			<then>
@@ -50,6 +60,7 @@
 				<antcall target="preUpdate" />
 			</else>
 		</if>
+		<record name="uu2-${ts.filename}.log" action="stop" />
 		
 	</target>
 	
@@ -76,6 +87,58 @@
    	
 		<property file="downloads/download.properties"/>
 
+    	<echo message="UU2 running as user: ${user.name}" />
+       	<echo message="UU2 running on OS: ${os.name} ${os.version}" />
+
+		<if>
+			<istrue value="${isUnix}"/>
+		<then>
+			
+			<!-- determine existing owner for specific directories -->
+			<!-- need to inspect files that aren't touched by Update 1 -->
+			<exec executable="ls" outputproperty="ls.CFIDE" osfamily="unix" failonerror="true">
+				<arg value="-al"/>
+				<arg value="${cfideDir}/Application.cfm" />
+			</exec>
+			<propertyregex property="owner.CFIDE" input="${ls.CFIDE}" regexp="(\S+)(\s+)(\S+)(\s+)(\S+)" select="\5" />
+			
+			<exec executable="ls" outputproperty="ls.WEBINF" osfamily="unix" failonerror="true">
+				<arg value="-al"/>
+				<arg value="${webinfDir}/lib/cfx.jar" />
+			</exec>
+			<propertyregex property="owner.WEBINF" input="${ls.WEBINF}" regexp="(\S+)(\s+)(\S+)(\s+)(\S+)" select="\5" />
+			
+			<if>
+				<equals arg1="${installType}" arg2="standalone" />
+			<then>
+
+				<exec executable="ls" outputproperty="ls.CFUSIONLIB" osfamily="unix" failonerror="true">
+					<arg value="-al"/>
+					<arg value="${cfusionLibDir}/cfusion-req.jar" />
+				</exec>
+				<propertyregex property="owner.CFUSIONLIB" input="${ls.CFUSIONLIB}" regexp="(\S+)(\s+)(\S+)(\s+)(\S+)" select="\5" />
+				
+			</then>
+			</if>
+			
+			<!-- warning notice if not running as root -->
+			<if>
+				<isfalse value="${isRoot}"/>
+			<then>
+				<echo>
+
+***[ WARNING ]*****************************************************
+**
+** Unofficial Updater 2 is running as a non-root user, it might
+** fail applying updates if ownership is not correct
+**
+*******************************************************************
+				</echo>
+			</then>
+			</if>
+		</then>
+		</if>  
+    	
     	<!-- check ColdFusion version -->
     	<trycatch property="versionException">
     	
@@ -91,10 +154,15 @@
 				<checksum algorithm="SHA-512" file="${cfusionLibDir}/cfusion.jar" property="cfusion.jar.sha-512" />
     			
     			<switch value="${cfusion.jar.sha-512}">
-    				<case value="${cf801.cfusion.jar.sha-512}">
+    				<!-- "Official" 8.0.1 build version as published by Adobe -->
+    				<case value="${cf801.195765.cfusion.jar.sha-512}">
     					<property name="reportedVersion" value="8,0,1,195765" />
     				</case>
-    				<case value="${cf901.cfusion.jar.sha-512}">
+    				<!-- build reported by CF 8 Linux with Update 1 applied (8.0.0 -> 8.0.1) -->
+    				<case value="${cf801.196946.cfusion.jar.sha-512}">
+    					<property name="reportedVersion" value="8,0,1,196946" />
+    				</case>
+    				<case value="${cf901.274733.cfusion.jar.sha-512}">
     					<property name="reportedVersion" value="9,0,1,274733" />
     				</case>
     				<default>
@@ -105,11 +173,14 @@
     		</catch>
     	
     	</trycatch>
-
-    	<echo message="Found ColdFusion version ${reportedVersion}" />
     	
+    	<echo message="Found ColdFusion version ${reportedVersion}" />
+        	
 		<switch value="${reportedVersion}">
 			<case value="8,0,1,195765">
+				<antcall target="update_801" />
+			</case>
+			<case value="8,0,1,196946">
 				<antcall target="update_801" />
 			</case>
 			<case value="9,0,1,274733">
@@ -173,6 +244,14 @@
 		<replace file="antinstall-config.xml" token='property="firstRun" value="true"' value='property="firstRun" value="false"' />
 		<replace file="antinstall-config.xml" token='  GO!  ' value='Apply Updates' />
 		
+		<if>
+			<istrue value="${enableAuto}" />
+			<then>
+				<replace file="antinstall-config.xml" token='swing,text' value='swing,text,text-auto' />
+				<replace file="antinstall-config.xml" token='loadDefaults="false"' value='loadDefaults="true"' />
+			</then>
+		</if>
+		
 		<echo message="Repacking UU2 with downloaded updates from Adobe" />
 		<!-- pack everything up except current ant.install.properties -->
 		<jar destfile="${user.dir}/Unofficial-Updater2-with-downloads.jar" basedir=".">
@@ -228,6 +307,7 @@
 		</delete>
 
 		<delete file="${hotfixDir}/empty.txt" />
+		<delete file="${hotfixDir}/unofficial-updater2.txt" />
 		
 		<if>
 			<available file="${webinfDir}/cfclasses" type="dir" />
@@ -250,6 +330,41 @@ Unofficial Updater 2 was run on ${ts.full}
 Using files downloaded on ${download.date}
 		</echo>		
 		
+	</target>
+
+	<target name="cleanup" description="Cleanup after UU2 is done">
+		<if>
+			<and>
+				<istrue value="${isUnix}"/>
+				<istrue value="${isRoot}"/>
+			</and>
+		<then>
+			
+			<echo message="Settings owner of files in ${cfideDir} to ${owner.CFIDE}" />
+			<chown owner="${owner.CFIDE}" type="both" maxparallel="100" verbose="true">
+				<fileset dir="${cfideDir}" includes="**/*" />
+			</chown>
+				
+			<echo message="Settings owner of files in ${webinfDir} to ${owner.WEBINF}" />
+			<chown owner="${owner.WEBINF}" type="both" maxparallel="100" verbose="true">
+				<fileset dir="${webinfDir}" includes="**/*" />
+			</chown>				
+
+			<if>
+				<equals arg1="${installType}" arg2="standalone" />
+			<then>
+
+				<echo message="Settings owner of files in ${cfusionLibDir} to ${owner.CFUSIONLIB}" />
+				<chown owner="${owner.CFUSIONLIB}" type="both" maxparallel="100" verbose="true">
+					<fileset dir="${cfusionLibDir}" includes="**/*" />
+				</chown>				
+					
+			</then>
+			</if>
+				
+		</then>
+		</if>  
+  
 	</target>
 
 	<target name="proxyInfo" description="get proxy information">
@@ -378,7 +493,7 @@ Using the following directories:
  		</echo>
 
 		<input message="Apply Update to the above?" validargs="yes,no" addproperty="applyUpdate" defaultvalue="yes" />
-		
+
 	</target>
 	
 <!-- *********************************************** -->
@@ -396,9 +511,8 @@ Using the following directories:
 		<antcall target="cpsid_84585" />
 		<antcall target="cpsid_86589" />
 		<antcall target="apsb09-09" />
-<!--		<antcall target="cpsid_90784_cf801" /> -->
-<!--		<antcall target="cpsid_92512_cf801" /> -->
-		<antcall target="cpsid_93043_cf801" />
+<!--		<antcall target="cpsid_93043_cf801" /> -->
+		<antcall target="apsb12-15_cf801" />
 		
 		<!-- only for jrun installs -->
 		<if>
@@ -409,6 +523,7 @@ Using the following directories:
 		</if>
 
 		<antcall target="uu2.text" />
+		<antcall target="cleanup" />
 		
 	</target>
 	
@@ -530,49 +645,19 @@ Using the following directories:
 		from CFIDE/scripts/ajax/FCKeditor/editor/filemanager/connectors/cfm
 		 -->
 		<echo message="Removing cf5_*.cfm from ${cfideDir}/scripts/ajax/FCKeditor/editor/filemanager/connectors/cfm" />
-		<delete>
-			<fileset dir="${cfideDir}/scripts/ajax/FCKeditor/editor/filemanager/connectors/cfm" includes="cf5_*.cfm"/>
-		</delete>
+		<if>
+			<available file="${cfideDir}/scripts/ajax/FCKeditor/editor/filemanager/connectors/cfm" type="dir" />
+			<then>
+		    	<delete>
+					<fileset dir="${cfideDir}/scripts/ajax/FCKeditor/editor/filemanager/connectors/cfm" includes="cf5_*.cfm"/>
+				</delete>
+			</then>
+		</if>
     	
     </target>
 	
-<!-- Superseded by APSB12-06 -->
-<!--	
-    <target name="cpsid_90784_cf801" description="Security update: Hotfix available for ColdFusion (APSB11-14)">
-    	
-		<echo message="Unpacking CF801.zip" />
-		<unzip src="downloads/cpsid_90784/CF801.zip" dest="downloads/cpsid_90784/" />
-				
-		<echo message="Applying files to ${cfusionLibDir}" />
-		<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
-			<fileset dir="downloads/cpsid_90784/CF801/lib"/>
-		</copy>
-				
-		<echo message="Applying files to ${cfideDir}" />
-		<unzip src="downloads/cpsid_90784/CFIDE-801.zip" dest="${cfideDir}/.." />
-
-		<echo message="Applying files to ${webinfDir}" />
-		<unzip src="downloads/cpsid_90784/CF801/WEB-INF.zip" dest="${webinfDir}/.." />
-    	
-    </target>
-
-	
-    <target name="cpsid_92512_cf801" description="Security update: Hotfix available for ColdFusion (APSB11-29)">
-    	
-		hf801-00003.jar should be removed in-favor of hf801-00004.jar in cpsid_92512
-		<delete file="${cfusionLibDir}/updates/hf801-00003.jar"/>
-				
-		<unzip src="downloads/cpsid_92512/CF801jar.zip" dest="downloads/cpsid_92512/" />
-
-		<echo message="Applying files to ${cfusionLibDir}" />
-		<copy todir="${cfusionLibDir}/updates" verbose="true" overwrite="true" preservelastmodified="true">
-			<fileset dir="downloads/cpsid_92512/CF801jar"/>
-		</copy>
-    	
-    </target>
--->
-	
-    <target name="cpsid_93043_cf801" description="Security update: Hotfix available for ColdFusion 8.0.1 (APSB12-06)">
+<!--
+	<target name="cpsid_93043_cf801" description="Security update: Hotfix available for ColdFusion 8.0.1 (APSB12-06)">
     	
 		<echo message="Unpacking CF801.zip" />
 		<unzip src="downloads/cpsid_93043_fix1/CF801.zip" dest="downloads/cpsid_93043_fix1/" />
@@ -589,7 +674,25 @@ Using the following directories:
 		<unzip src="downloads/cpsid_93043_fix1/CF801/WEB-INF.zip" dest="${webinfDir}/.." />
     	
     </target>
+-->
 
+	<target name="apsb12-15_cf801" description="Security update: Hotfix available for ColdFusion 8.0.1 (APSB12-15)">
+    	
+		<echo message="Unpacking CF801.zip" />
+		<unzip src="downloads/apsb12-15/CF801.zip" dest="downloads/apsb12-15/" />
+				
+		<echo message="Applying files to ${cfusionLibDir}" />
+		<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
+			<fileset dir="downloads/apsb12-15/CF801/lib"/>
+		</copy>
+				
+		<echo message="Applying files to ${cfideDir}" />
+		<unzip src="downloads/apsb12-15/CFIDE-801.zip" dest="${cfideDir}/.." />
+
+		<echo message="Applying files to ${webinfDir}" />
+		<unzip src="downloads/apsb12-15/CF801/WEB-INF.zip" dest="${webinfDir}/.." />
+    	
+    </target>
 	
     <target name="apsb09-12" description="Security Update: Hotfixes available for ColdFusion and JRun (APSB09-12)">
     	
@@ -612,10 +715,11 @@ Using the following directories:
 		<antcall target="directoryPrep" />
 		
 		<antcall target="cpsid_91836" />
-<!--		<antcall target="cpsid_92512_cf901" /> -->
-		<antcall target="cpsid_93043_cf901" />
+<!--		<antcall target="cpsid_93043_cf901" /> -->
+		<antcall target="apsb12-15_cf901" />
 				
 		<antcall target="uu2.text" />
+		<antcall target="cleanup" />
 		
 	</target>
 
@@ -638,21 +742,8 @@ Using the following directories:
 
     </target>
 
-<!-- Superseded by APSB12-06 -->
-<!--	
-    <target name="cpsid_92512_cf901" description="Security update: Hotfix available for ColdFusion (APSB11-29)">
-    	
-		<unzip src="downloads/cpsid_92512/CF901jar.zip" dest="downloads/cpsid_92512/" />
-
-		<echo message="Applying files to ${cfusionLibDir}" />
-		<copy todir="${cfusionLibDir}/updates" verbose="true" overwrite="true" preservelastmodified="true">
-			<fileset dir="downloads/cpsid_92512/CF901jar"/>
-		</copy>
-    	
-    </target>
--->
-	
-    <target name="cpsid_93043_cf901" description="Security update: Hotfix available for ColdFusion 9.0.1 (APSB12-06)">
+<!--
+	<target name="cpsid_93043_cf901" description="Security update: Hotfix available for ColdFusion 9.0.1 (APSB12-06)">
     	
 		<echo message="Unpacking CF901.zip" />
 		<unzip src="downloads/cpsid_93043/CF901.zip" dest="downloads/cpsid_93043/" />
@@ -669,6 +760,24 @@ Using the following directories:
 		<unzip src="downloads/cpsid_93043/CF901/WEB-INF.zip" dest="${webinfDir}/.." />
     	
     </target>
+-->
 	
+	<target name="apsb12-15_cf901" description="Security update: Hotfix available for ColdFusion 9.0.1 (APSB12-15)">
+    	
+		<echo message="Unpacking CF901.zip" />
+		<unzip src="downloads/apsb12-15/CF901.zip" dest="downloads/apsb12-15/" />
+				
+		<echo message="Applying files to ${cfusionLibDir}" />
+		<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
+			<fileset dir="downloads/apsb12-15/CF901/lib"/>
+		</copy>
+				
+		<echo message="Applying files to ${cfideDir}" />
+		<unzip src="downloads/apsb12-15/CFIDE-901.zip" dest="${cfideDir}/.." />
+
+		<echo message="Applying files to ${webinfDir}" />
+		<unzip src="downloads/apsb12-15/CF901/WEB-INF.zip" dest="${webinfDir}/.." />
+    	
+    </target>
 	
 </project>

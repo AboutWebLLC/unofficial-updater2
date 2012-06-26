@@ -9,6 +9,7 @@ bulletins to Adobe ColdFusion 8.0.1 or 9.0.1.
 
 ### Disclaimers
 1. Use of Unofficial Updater 2 is **at your own risk**
+ - **Do not** run Unofficial Updater 2 for the first time on a production system
 2. Unofficial Updater 2 is **not endorsed by or have any ties** to Adobe
 3. ColdFusion Server/process **should not be running** when you use Unofficial Updater 2
 4. Unofficial Updater 2 can **only be run against** Adobe ColdFusion **8.0.1** or **9.0.1**
@@ -53,12 +54,16 @@ If you have modified files in **CFIDE** and/or **WEB-INF** they could be changed
 1. [Download](https://github.com/downloads/dcepler/unofficial-updater2/Unofficial-Updater2.jar) the packaged JAR installer
 2. Stop the ColdFusion Server/process you are going to update
 3. Depending upon your system you might be able to double-click **Unofficial-Updater2.jar** to run it, otherwise it will need to be run from command line
- - **GUI Installer**
+ - **Installer** (auto-detect GUI or text)
       - `java -jar Unofficial-Updater2.jar`
- - **Text Installer**
+ - **Force GUI Installer** 
+      - `java -jar Unofficial-Updater2.jar swing`
+ - **Force Text Installer** 
       - `java -jar Unofficial-Updater2.jar text`
  - **Text Installer run as cfusion user on Linux/UNIX**
       - `su -s /bin/sh "cfusion" -c "java -jar Unofficial-Updater2.jar text"`
+ - **Text Installer run as root on Linux/UNIX**
+      - `sudo java -jar Unofficial-Updater2.jar text`
  - Once *Unofficial-Updater2-with-downloads.jar* is created, you can use that instead of *Unofficial-Updater2.jar*
 4. Walk through the screens putting the appropriate information
  - **Be sure to fill the directory locations correctly**, Unofficial Updater 2 will try to validate they are correct before letting you proceed to the next step
@@ -80,7 +85,7 @@ wrapped with [Ant Installer](http://antinstaller.sourceforge.net/) to create a G
 only require Java 1.5+ to be installed.  
 
 ### ColdFusion 8.0.1
-All hot fixes and security bulletins published as of March 29, 2012 for 
+All hot fixes and security bulletins published as of June 12, 2012 for 
 ColdFusion 8.0.1 are applied except if they were superseded by a newer 
 patch and the following:
 
@@ -95,7 +100,7 @@ registry and **CVE-2009-1876** will modify the connector configuration.
 and [breaks other things](http://www.mischefamily.com/nathan/index.cfm/2009/10/1/hf80171643-Breaks-Application-Specific-Custom-Tag-Paths).
 
 ### ColdFusion 9.0.1
-All hot fixes and security bulletins published as of March 29, 2012 for 
+All hot fixes and security bulletins published as of June 12, 2012 for 
 ColdFusion 9.0.1 are applied except if they were superseded by a newer 
 patch.
 
@@ -108,6 +113,7 @@ settings in ColdFusion such as *neo-***.xml* or *jvm.config*.
  * [APSB11-14 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb11-14.html)
  * [APSB11-29 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb11-29.html)
  * [APSB12-06 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb12-06.html)
+ * [APSB12-15 - Security update: Hotfix available for ColdFusion 9.0.1 and earlier](http://www.adobe.com/support/security/bulletins/apsb12-15.html)
  * Additional Information
    * [ColdFusion Security Hotfix APSB12-06 and Big Forms](http://www.cutterscrossing.com/index.cfm/2012/3/27/ColdFusion-Security-Hotfix-and-Big-Forms)
 

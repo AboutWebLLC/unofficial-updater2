@@ -358,7 +358,7 @@ Added:
 /lib/preso/blank.swf
 /lib/preso/dummy.swf
 /lib/updates/chf8010004.jar
-/lib/updates/hf801-00005.jar
+/lib/updates/hf801-00006.jar
 /lib/updates/hf801-71557.jar
 /lib/updates/hf801-76563.jar
 /lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
