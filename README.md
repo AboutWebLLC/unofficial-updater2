@@ -54,6 +54,7 @@ If you have modified files in **CFIDE** and/or **WEB-INF** they could be changed
 1. [Download](https://github.com/downloads/dcepler/unofficial-updater2/Unofficial-Updater2.jar) the packaged JAR installer
 2. Stop the ColdFusion Server/process you are going to update
 3. Depending upon your system you might be able to double-click **Unofficial-Updater2.jar** to run it, otherwise it will need to be run from command line
+ - On Windows might need to **Run as Administrator** for GUI or opening command prompt
  - **Installer** (auto-detect GUI or text)
       - `java -jar Unofficial-Updater2.jar`
  - **Force GUI Installer** 
