@@ -1,5 +1,6 @@
 Modified:
 /CFIDE/adminapi/administrator.cfc
+/CFIDE/adminapi/security.cfc
 /CFIDE/administrator/analyzer/featureview.cfm
 /CFIDE/administrator/analyzer/featureviewloader.cfm
 /CFIDE/administrator/analyzer/featureviewtop.cfm
@@ -385,7 +386,7 @@ Added:
 /WEB-INF/cfusion/lib/preso/blank.swf
 /WEB-INF/cfusion/lib/preso/dummy.swf
 /WEB-INF/cfusion/lib/updates/chf8010004.jar
-/WEB-INF/cfusion/lib/updates/hf801-00006.jar
+/WEB-INF/cfusion/lib/updates/hf801-00007.jar
 /WEB-INF/cfusion/lib/updates/hf801-71557.jar
 /WEB-INF/cfusion/lib/updates/hf801-76563.jar
 /WEB-INF/cfusion/lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)

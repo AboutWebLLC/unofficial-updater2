@@ -28,7 +28,7 @@
 			minJavaVersion="1.5"
 			finishButtonText="  GO!  "
 			wide="600:250"
-			version="2012.06.26">
+			version="2012.09.19">
 
 	<page type="input" name="welcome" displayText="Welcome to Unofficial Updater 2">
 		<hidden property="firstRun" value="true" />
@@ -39,10 +39,10 @@
 		<comment displayText="Please read the next screen completely before using" title="true" />
 		<comment displayText="" />
 		<comment displayText="Unofficial Updater 2 Release" bold="true" />
-		<comment displayText="2012.06.26"/>
+		<comment displayText="2012.09.19"/>
 		<comment displayText="" />
 		<comment displayText="Latest Security Patch Applied" bold="true" />
-		<comment displayText="APSB12-15 - June 12, 2012"/>
+		<comment displayText="APSB12-21 - September 11, 2012"/>
 
 	</page>
 

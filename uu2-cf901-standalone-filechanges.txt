@@ -3,6 +3,7 @@ Modified:
 /lib/flex-messaging-core.jar
 /lib/jpedal.jar
 /lib/log4j.properties
+/CFIDE/adminapi/security.cfc
 /CFIDE/administrator/analyzer/featureview.cfm
 /CFIDE/administrator/analyzer/featureviewloader.cfm
 /CFIDE/administrator/analyzer/featureviewtop.cfm
@@ -320,7 +321,7 @@ Modified:
 
 Added:
 /lib/updates/chf9010002.jar
-/lib/updates/hf901-00005.jar
+/lib/updates/hf901-00006.jar
 /lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
 /lib/commons-fileupload-1.2.jar
 /lib/esapi-2.0_rc10.jar

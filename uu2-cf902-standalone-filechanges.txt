@@ -1,0 +1,12 @@
+Modified:
+/CFIDE/adminapi/security.cfc
+/CFIDE/administrator/security/_cffunctionsoptions.cfm
+
+Added:
+/lib/updates/hf902-00001.jar
+/lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
+
+Removed:
+/lib/updates/*.jar (UU2 removes all hotfixes before update)
+/lib/updates/empty.txt
+/WEB-INF/cfclasses/*.class 

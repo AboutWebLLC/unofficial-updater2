@@ -1,4 +1,5 @@
 Modified:
+/CFIDE/adminapi/security.cfc
 /CFIDE/administrator/analyzer/featureview.cfm
 /CFIDE/administrator/analyzer/featureviewloader.cfm
 /CFIDE/administrator/analyzer/featureviewtop.cfm
@@ -323,7 +324,7 @@ Added:
 /CFIDE/administrator/cfadmin.wzrd
 /CFIDE/administrator/securityerror.cfm
 /WEB-INF/cfusion/lib/updates/chf9010002.jar
-/WEB-INF/cfusion/lib/updates/hf901-00005.jar
+/WEB-INF/cfusion/lib/updates/hf901-00006.jar
 /WEB-INF/cfusion/lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
 /WEB-INF/cfusion/lib/commons-fileupload-1.2.jar
 /WEB-INF/cfusion/lib/esapi-2.0_rc10.jar
