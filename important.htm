@@ -24,7 +24,7 @@ h1{font-size:138.5%;}h2{font-size:123.1%;}h3{font-size:108%;}h1,h2,h3{margin:1em
 trying to manually patch Adobe ColdFusion 8.0.1 with the numerous hot fixes 
 and security bulletins that have been published. It is a tool to provide 
 an easy way of consistently applying applicable hot fixes and security 
-bulletins to Adobe ColdFusion 8.0.1, 9.0.1, or 9.0.2.</p>
+bulletins to Adobe ColdFusion 8.0.1 and 9.0.x.</p>
 
 <h3>Disclaimers</h3>
 
@@ -33,13 +33,13 @@ bulletins to Adobe ColdFusion 8.0.1, 9.0.1, or 9.0.2.</p>
 <ul><li><strong>Do not</strong> run Unofficial Updater 2 for the first time on a production system</li></ul></li>
 <li>Unofficial Updater 2 is <strong>not endorsed by or have any ties</strong> to Adobe</li>
 <li>ColdFusion Server/process <strong>should not be running</strong> when you use Unofficial Updater 2</li>
-<li>Unofficial Updater 2 can <strong>only be run against</strong> Adobe ColdFusion <strong>8.0.1</strong>, <strong>9.0.1</strong>, or <strong>9.0.2</strong>
-<ul><li>If you are running <strong>8.0.0</strong> or <strong>9.0.0</strong> you need to apply Update 1 from Adobe first
-<ul><li><a href="http://kb2.adobe.com/cps/403/kb403277.html">Adobe ColdFusion 8 Update 1</a></li>
-<li><a href="http://kb2.adobe.com/cps/849/cpsid_84973.html">Adobe ColdFusion 9 Update 1</a></li></ul></li></ul></li>
+<li>Unofficial Updater 2 can <strong>only be run against</strong> Adobe ColdFusion <strong>8.0.1</strong>, <strong>9.0.0</strong>, <strong>9.0.1</strong>, or <strong>9.0.2</strong>
+<ul><li>If you are running <strong>8.0.0</strong> you need to apply Update 1 from Adobe first
+<ul><li><a href="http://kb2.adobe.com/cps/403/kb403277.html">Adobe ColdFusion 8 Update 1</a></li></ul></li></ul></li>
 <li>Unofficial Updater 2 is <strong>updated</strong> whenever Adobe releases a new (or changes) a hot fix or security bulletin
 <ul><li>Matrix of published hot fixes and security bulletins
 <ul><li><a href="https://github.com/dcepler/unofficial-updater2/blob/master/cf801-hotfix-matrix.pdf?raw=true">Hot Fix Matrix: ColdFusion 8.0.1</a></li>
+<li><a href="https://github.com/dcepler/unofficial-updater2/blob/master/cf900-hotfix-matrix.pdf?raw=true">Hot Fix Matrix: ColdFusion 9.0.0</a></li>
 <li><a href="https://github.com/dcepler/unofficial-updater2/blob/master/cf901-hotfix-matrix.pdf?raw=true">Hot Fix Matrix: ColdFusion 9.0.1</a></li>
 <li><a href="https://github.com/dcepler/unofficial-updater2/blob/master/cf902-hotfix-matrix.pdf?raw=true">Hot Fix Matrix: ColdFusion 9.0.2</a></li></ul></li></ul></li>
 <li>Unofficial Updater 2 will <strong>need to be downloaded and run again</strong> when it is updated to apply all new (or changed) hot fix or security bulletin from Adobe</li>
@@ -50,7 +50,7 @@ bulletins to Adobe ColdFusion 8.0.1, 9.0.1, or 9.0.2.</p>
 <h2>What it does</h2>
 
 <p>First time you run Unofficial Updater 2, it will download <strong>ALL</strong> hotfixes and
-security bulletins from Adobe for both ColdFusion 8.0.1, 9.0.1, and 9.0.2. UU2 will 
+security bulletins from Adobe for both ColdFusion 8.0.1 and 9.0.x. UU2 will 
 create <strong>Unofficial-Updater2-with-downloads.jar</strong> which contains the 
 downloaded hotfixes and security bulletins. This is done since UU2 
 can not directly package the updates and will make it easier to patch 
@@ -65,12 +65,15 @@ according to the published instructions.</p>
 such as <em>neo-</em><em>*.xml</em> or <em>jvm.config</em>.</p>
 
 <p>A list of files that Unofficial Updater 2 updates as compared to a clean 
-install of Adobe ColdFusion 8.0.1, 9.0.1, and 9.0.2 are listed below:</p>
+install of Adobe ColdFusion 8.0.1, 9.0.0, 9.0.1, and 9.0.2 are listed below:</p>
 
 <ul>
 <li><a href="https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf801-standalone-filechanges.txt">File Changes: ColdFusion 8.0.1 Standalone</a></li>
 <li><a href="https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf801-jrun-filechanges.txt">File Changes: ColdFusion 8.0.1 Multi-Server JRun4</a></li>
 <li><a href="https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf801-j2ee-filechanges.txt">File Changes: ColdFusion 8.0.1 J2EE</a></li>
+<li><a href="https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf900-standalone-filechanges.txt">File Changes: ColdFusion 9.0.0 Standalone</a></li>
+<li><a href="https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf900-jrun-filechanges.txt">File Changes: ColdFusion 9.0.0 Multi-Server JRun4</a></li>
+<li><a href="https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf900-j2ee-filechanges.txt">File Changes: ColdFusion 9.0.0 J2EE</a></li>
 <li><a href="https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf901-standalone-filechanges.txt">File Changes: ColdFusion 9.0.1 Standalone</a></li>
 <li><a href="https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf901-jrun-filechanges.txt">File Changes: ColdFusion 9.0.1 Multi-Server JRun4</a></li>
 <li><a href="https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf901-j2ee-filechanges.txt">File Changes: ColdFusion 9.0.1 J2EE</a></li>
@@ -84,7 +87,7 @@ install of Adobe ColdFusion 8.0.1, 9.0.1, and 9.0.2 are listed below:</p>
 <h2>How to use</h2>
 
 <ol>
-<li><a href="https://github.com/downloads/dcepler/unofficial-updater2/Unofficial-Updater2.jar">Download</a> the packaged JAR installer</li>
+<li>Download the packaged JAR installer</li>
 <li>Stop the ColdFusion Server/process you are going to update</li>
 <li>Depending upon your system you might be able to double-click <strong>Unofficial-Updater2.jar</strong> to run it, otherwise it will need to be run from command line
 <ul><li>On Windows might need to <strong>Run as Administrator</strong> for GUI or opening command prompt</li>
@@ -107,12 +110,6 @@ install of Adobe ColdFusion 8.0.1, 9.0.1, and 9.0.2 are listed below:</p>
 
 <p>Please see the <a href="https://github.com/dcepler/unofficial-updater2/wiki/Using-Unofficial-Updater-2">Wiki: Using Updater 2</a> for screenshots and walkthrough.</p>
 
-<h2>Backups</h2>
-
-<p>Unofficial Updater 2 creates backups of the directories that are modified, but it is <strong>HIGHLY</strong> recommended that you
-create your own backups of your ColdFusion installation to restore from in case of a problem. The backups created by UU2
-are stored in the directory specified when running UU2 and are named <strong>{directory-name}-uu2-{datetime-stamp}.zip</strong></p>
-
 <h2>Details</h2>
 
 <p>At the core, Unofficial Updater 2 is just an <a href="http://ant.apache.org/">Apache Ant</a> script. Ant was chosen 
@@ -120,9 +117,17 @@ since it could provide cross platform support. The ant script was
 wrapped with <a href="http://antinstaller.sourceforge.net/">Ant Installer</a> to create a GUI and text based interface which
 only require Java 1.5+ to be installed.  </p>
 
+<h3>Backups</h3>
+
+<p>Unofficial Updater 2 creates backups of the directories that are modified, but it is <strong>HIGHLY</strong> recommended that you
+create your own backups of your ColdFusion installation to restore from in case of a problem. The backups created by UU2
+are stored in the directory specified when running UU2 and are named <strong>{directory-name}-uu2-{datetime-stamp}.zip</strong></p>
+
 <h3>ColdFusion 8.0.1</h3>
 
-<p>All hot fixes and security bulletins published as of September 19, 2012 for 
+<p><strong><em>APSB12-21 was the LAST security hotfix Adobe released for ColdFusion 8.0.1</em></strong></p>
+
+<p>All hot fixes and security bulletins published as of September 11, 2012 for 
 ColdFusion 8.0.1 are applied except if they were superseded by a newer 
 patch and the following:</p>
 
@@ -138,15 +143,27 @@ registry and <strong>CVE-2009-1876</strong> will modify the connector configurat
 <strong>kb403750</strong> is not installed since it does not seem to resolve all the issues
 and <a href="http://www.mischefamily.com/nathan/index.cfm/2009/10/1/hf80171643-Breaks-Application-Specific-Custom-Tag-Paths">breaks other things</a>.</p>
 
+<h3>ColdFusion 9.0.0</h3>
+
+<p>All hot fixes and security bulletins published as of January 15, 2013 for 
+ColdFusion 9.0.0 are applied except if they were superseded by a newer 
+patch and the following:</p>
+
+<ul>
+<li><a href="http://kb2.adobe.com/cps/807/cpsid_80719.html">cpsid_80719 - ColdFusion 9: Limit access to the Solr collections</a></li>
+</ul>
+
+<p><strong>cpsid_80719</strong> requires modifying jetty.xml which is a system configuration change.</p>
+
 <h3>ColdFusion 9.0.1</h3>
 
-<p>All hot fixes and security bulletins published as of September 19, 2012 for 
+<p>All hot fixes and security bulletins published as of January 15, 2013 for 
 ColdFusion 9.0.1 are applied except if they were superseded by a newer 
 patch.</p>
 
 <h3>ColdFusion 9.0.2</h3>
 
-<p>All hot fixes and security bulletins published as of September 19, 2012 for 
+<p>All hot fixes and security bulletins published as of January 15, 2013 for 
 ColdFusion 9.0.2 are applied except if they were superseded by a newer 
 patch.</p>
 
@@ -163,15 +180,17 @@ settings in ColdFusion such as <em>neo-</em><em>*.xml</em> or <em>jvm.config</em
 <li><a href="http://www.adobe.com/support/security/bulletins/apsb12-06.html">APSB12-06 - Security update: Hotfix available for ColdFusion</a></li>
 <li><a href="http://www.adobe.com/support/security/bulletins/apsb12-15.html">APSB12-15 - Security update: Hotfix available for ColdFusion 9.0.1 and earlier</a></li>
 <li><a href="http://www.adobe.com/support/security/bulletins/apsb12-21.html">APSB12-21 - Security update: Hotfix available for ColdFusion 10 and earlier</a></li>
+<li><a href="http://www.adobe.com/support/security/bulletins/apsb12-26.html">APSB12-26 - Security update: Hotfix available for ColdFusion 10 and earlier</a></li>
+<li><a href="http://www.adobe.com/support/security/bulletins/apsb13-03.html">APSB13-03 - Security update: Hotfix available for ColdFusion</a></li>
 <li>Additional Information
 <ul><li><a href="http://www.cutterscrossing.com/index.cfm/2012/3/27/ColdFusion-Security-Hotfix-and-Big-Forms">ColdFusion Security Hotfix APSB12-06 and Big Forms</a></li></ul></li>
 </ul>
 
 <p>Also it is highly recommended to update the underlying JVM that ColdFusion 
-uses to 1.6.0 Update 24 for ColdFusion 8.0.1 and 9.0.1</p>
+uses to the latest available Java 6 (1.6.0) version that is available.</p>
 
 <ul>
-<li><a href="http://kb2.adobe.com/cps/894/cpsid_89440.html">Oracle Security Alert CVE-2010-4476 | ColdFusion</a></li>
+<li><a href="http://helpx.adobe.com/coldfusion/kb/upgrading-java-coldfusion.html">Upgrade Java for ColdFusion</a></li>
 <li>Additional Information
 <ul><li><a href="http://www.carehart.org/blog/client/index.cfm/2011/10/28/CF911-Have-you-updated-your-ColdFusion-JVM-to-24-yet-Important-security-fix-for-CF-89">CF911: Have you updated your #ColdFusion JVM to _24 yet? Important security fix for CF 8/9</a></li>
 <li><a href="http://blog.kdecherf.com/2012/04/12/oracle-i-download-your-jdk-by-eating-magic-cookies/">Oracle, I download your JDK by eating magic cookies</a></li></ul></li>

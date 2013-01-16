@@ -1,9 +1,15 @@
 Modified:
+/CFIDE/adminapi/administrator.cfc
 /CFIDE/adminapi/security.cfc
+/CFIDE/administrator/Application.cfm
+/CFIDE/administrator/scheduler/scheduleedit.cfm
 /CFIDE/administrator/security/_cffunctionsoptions.cfm
+/CFIDE/administrator/security/cfrdspassword.cfm
+/CFIDE/componentutils/Application.cfm
+/CFIDE/componentutils/cfcexplorer.cfc
 
 Added:
-/WEB-INF/cfusion/lib/updates/hf902-00001.jar
+/WEB-INF/cfusion/lib/updates/hf902-00003.jar
 /WEB-INF/cfusion/lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
 
 Removed:

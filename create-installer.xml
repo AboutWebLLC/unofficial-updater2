@@ -61,7 +61,7 @@ this ant build file can be re-run with the following command if Ant is installer
 			<zipfileset dir="resources" prefix="resources" />
 
 			<fileset dir=".">
-				<include name="README*" />
+				<include name="important*" />
 				<include name="Splash*" />
 				<include name="uu2.properties" />
 			</fileset>

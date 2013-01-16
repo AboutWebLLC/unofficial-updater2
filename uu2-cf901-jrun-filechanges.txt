@@ -1,4 +1,5 @@
 Modified:
+/CFIDE/adminapi/administrator.cfc
 /CFIDE/adminapi/security.cfc
 /CFIDE/administrator/analyzer/featureview.cfm
 /CFIDE/administrator/analyzer/featureviewloader.cfm
@@ -78,8 +79,6 @@ Modified:
 /CFIDE/administrator/cftags/toggledebug.cfm
 /CFIDE/administrator/cftags/war.cfm
 /CFIDE/administrator/cftags/wizard.cfm
-/CFIDE/administrator/cftags/resources/logviewer_en.xml
-/CFIDE/administrator/cftags/resources/scan_en.xml
 /CFIDE/administrator/components/migration/base.cfc
 /CFIDE/administrator/components/migration/cf7settings.cfc
 /CFIDE/administrator/components/migration/cf8settings.cfc
@@ -142,8 +141,6 @@ Modified:
 /CFIDE/administrator/extensions/webservices.cfm
 /CFIDE/administrator/filedialog/archivefilebrowser.cfm
 /CFIDE/administrator/filedialog/index.cfm
-/CFIDE/administrator/help/change_coldfusion_user_account.htm
-/CFIDE/administrator/help/whskin_info.htm
 /CFIDE/administrator/include/buttonbar.cfm
 /CFIDE/administrator/include/errormessage.cfm
 /CFIDE/administrator/include/errors.cfm
@@ -301,8 +298,13 @@ Modified:
 /CFIDE/administrator/resources.cfm
 /CFIDE/administrator/styles.cfm
 /CFIDE/administrator/topnav.cfm
-/CFIDE/componentutils/Application.cfm
 /CFIDE/componentutils/login.cfm
+/CFIDE/administrator/cftags/resources/logviewer_en.xml
+/CFIDE/administrator/cftags/resources/scan_en.xml
+/CFIDE/administrator/help/change_coldfusion_user_account.htm
+/CFIDE/administrator/help/whskin_info.htm
+/CFIDE/componentutils/Application.cfm
+/CFIDE/componentutils/cfcexplorer.cfc
 /CFIDE/scripts/ajax/FCKeditor/editor/dialog/fck_spellerpages/spellerpages/server-scripts/spellchecker.cfm
 /CFIDE/scripts/ajax/package/cfwindow.js
 /CFIDE/wizards/common/_logintowizard.cfm
@@ -324,7 +326,7 @@ Added:
 /CFIDE/administrator/cfadmin.wzrd
 /CFIDE/administrator/securityerror.cfm
 /WEB-INF/cfusion/lib/updates/chf9010002.jar
-/WEB-INF/cfusion/lib/updates/hf901-00006.jar
+/WEB-INF/cfusion/lib/updates/hf901-00008.jar
 /WEB-INF/cfusion/lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
 /WEB-INF/cfusion/lib/commons-fileupload-1.2.jar
 /WEB-INF/cfusion/lib/esapi-2.0_rc10.jar

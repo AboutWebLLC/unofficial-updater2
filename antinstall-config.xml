@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE installer PUBLIC "-//tp23 //DTD Ant Installer Config//EN" "http://antinstaller.sf.net/dtd/antinstall-config-0.8.dtd">
 <!--
-	Copyright (c) 2011-2012, David C. Epler
+	Copyright (c) 2011-2013, David C. Epler
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@
 			minJavaVersion="1.5"
 			finishButtonText="  GO!  "
 			wide="600:250"
-			version="2012.09.19">
+			version="2013.01.16">
 
 	<page type="input" name="welcome" displayText="Welcome to Unofficial Updater 2">
 		<hidden property="firstRun" value="true" />
@@ -39,14 +39,14 @@
 		<comment displayText="Please read the next screen completely before using" title="true" />
 		<comment displayText="" />
 		<comment displayText="Unofficial Updater 2 Release" bold="true" />
-		<comment displayText="2012.09.19"/>
+		<comment displayText="2013.01.16"/>
 		<comment displayText="" />
 		<comment displayText="Latest Security Patch Applied" bold="true" />
-		<comment displayText="APSB12-21 - September 11, 2012"/>
+		<comment displayText="APSB13-03 - January 15, 2013"/>
 
 	</page>
 
-	<page type="text" name="Intro" displayText="README! Important Information" htmlResource="/README.htm" textResource="/README.md" />
+	<page type="text" name="Intro" displayText="Important Information" htmlResource="/important.htm" textResource="/important.md" />
 
 	<!-- first run -->
 	<page

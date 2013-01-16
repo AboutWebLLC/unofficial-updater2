@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-	Copyright (c) 2011-2012, David C. Epler
+	Copyright (c) 2011-2013, David C. Epler
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 	limitations under the License.
 -->
 <project name="Unofficial Updater 2" default="runType">
-	<description>Ant script that will fetch then apply hotfixes and security updates for ColdFusion 8.0.1, 9.0.1, or 9.0.2</description>
+	<description>Ant script that will fetch then apply hotfixes and security updates for ColdFusion 8.0.1 or 9.0.x</description>
 	
 	<!-- Ant-Contrib makes writting Ant tasks so much easier -->
 	<typedef resource="net/sf/antcontrib/antlib.xml" />	
@@ -167,6 +167,9 @@
     				<case value="${cf801.196946.cfusion.jar.sha-512}">
     					<property name="reportedVersion" value="8,0,1,196946" />
     				</case>
+    				<case value="${cf900.251028.cfusion.jar.sha-512}">
+    					<property name="reportedVersion" value="9,0,0,251028" />
+    				</case>
     				<case value="${cf901.274733.cfusion.jar.sha-512}">
     					<property name="reportedVersion" value="9,0,1,274733" />
     				</case>
@@ -191,6 +194,9 @@
 			<case value="8,0,1,196946">
 				<antcall target="update_801" />
 			</case>
+			<case value="9,0,0,251028">
+				<antcall target="update_900" />
+			</case>
 			<case value="9,0,1,274733">
 				<antcall target="update_901" />
 			</case>
@@ -198,7 +204,7 @@
 				<antcall target="update_902" />
 			</case>
 			<default>
-    			<fail message="Unofficial Updater 2 only runs against ColdFusion 8.0.1, 9.0.1, 9.0.2" />
+    			<fail message="Unofficial Updater 2 only runs against ColdFusion 8.0.1 or 9.0.x" />
 			</default>
 		</switch>		
     	
@@ -227,13 +233,15 @@
 					<sequential>
 				    	<get src="${@{hotfix}.url}@{filename}" dest="downloads/@{hotfix}/@{filename}" verbose="true" usetimestamp="true" />
 
+<!--						<checksum algorithm="SHA-512" file="downloads/@{hotfix}/@{filename}" /> -->
 						<checksum algorithm="SHA-512" file="downloads/@{hotfix}/@{filename}" property="${@{hotfix}.@{filename}.sha-512}" verifyproperty="@{filename}_isOK" />
 						<if>
 							<isfalse value="${@{filename}_isOK}" />
 							<then>
 								<fail message="Checksum for @{hotfix} file @{filename} is not correct! Either download is corrupt or Adobe updated the file." />
 							</then>
-						</if>						
+						</if>	
+						
 					</sequential>
 				</for>
 			</sequential>
@@ -243,7 +251,6 @@
 			<entry key="download.date" type="date" value="now" pattern="EEEE, MMMM dd, yyyy 'at' HH:mm:ss z" />
 			<entry key="download.result" value="success" />
 		</propertyfile>
-
 	</target>
 		
 
@@ -694,26 +701,6 @@ Using the following directories:
     	
     </target>
 	
-<!--
-	<target name="apsb12-15_cf801" description="Security update: Hotfix available for ColdFusion 8.0.1 (APSB12-15)">
-    	
-		<echo message="Unpacking CF801.zip" />
-		<unzip src="downloads/apsb12-15/CF801.zip" dest="downloads/apsb12-15/" />
-				
-		<echo message="Applying files to ${cfusionLibDir}" />
-		<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
-			<fileset dir="downloads/apsb12-15/CF801/lib"/>
-		</copy>
-				
-		<echo message="Applying files to ${cfideDir}" />
-		<unzip src="downloads/apsb12-15/CFIDE-801.zip" dest="${cfideDir}/.." />
-
-		<echo message="Applying files to ${webinfDir}" />
-		<unzip src="downloads/apsb12-15/CF801/WEB-INF.zip" dest="${webinfDir}/.." />
-    	
-    </target>
--->
-
 	<target name="apsb12-21_cf801" description="Security update: Hotfix available for ColdFusion 8.0.1 (APSB12-21)">
     	
 		<echo message="Unpacking CF801.zip" />
@@ -743,7 +730,66 @@ Using the following directories:
     	
     </target>
 
+	
+	<!-- *********************************************** -->
+	<!-- ColdFusion 9.0.0 Hot Fixes and Security Updates -->
+	<!-- *********************************************** -->
+		<target name="update_900" description="everything to update 9.0.0">
 
+			<antcall target="backup" />
+			<antcall target="directoryPrep" />
+			
+			<antcall target="cpsid_82536" />
+			<antcall target="cpsid_82547" />
+			<antcall target="cpsid_84585" />
+			<antcall target="apsb13-03_cf900" />
+					
+			<antcall target="uu2.text" />
+			<antcall target="cleanup" />
+			
+		</target>
+
+    <target name="cpsid_82536" description="Cumulative Hot Fix 1 (CHF1) for ColdFusion 9.0.0">
+    	
+		<echo message="Applying chf9000001.jar to ${hotfixDir}" />
+		<unzip src="downloads/cpsid_82536/chf9000001.zip" dest="${hotfixDir}">
+			<patternset>
+				<include name="chf9000001.jar"/>
+			</patternset>
+		</unzip>
+    	
+    </target>
+
+    <target name="cpsid_82547" description="ColdFusion 9: Struct keys, cfswitch cases, and variable names are associated with incorrect values (hf900-81860)">
+    	
+		<echo message="Applying hf900-81860.jar to ${hotfixDir}" />
+		<unzip src="downloads/cpsid_82547/hf900-81860.zip" dest="${hotfixDir}">
+			<patternset>
+				<include name="hf900-81860.jar"/>
+			</patternset>
+		</unzip>
+    	
+    </target>
+	
+	<target name="apsb13-03_cf900" description="Security update: Hotfix available for ColdFusion (APSB13-03)">
+    	
+		<echo message="Unpacking CF9.zip" />
+		<unzip src="downloads/apsb13-03/CF9.zip" dest="downloads/apsb13-03/" />
+				
+		<echo message="Applying files to ${cfusionLibDir}" />
+		<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
+			<fileset dir="downloads/apsb13-03/CF9/lib"/>
+		</copy>
+				
+		<echo message="Applying files to ${cfideDir}" />
+		<unzip src="downloads/apsb13-03/CFIDE-9.zip" dest="${cfideDir}/.." />
+
+		<echo message="Applying files to ${webinfDir}" />
+		<unzip src="downloads/apsb13-03/CF9/WEB-INF.zip" dest="${webinfDir}/.." />
+    	
+    </target>
+
+	
 <!-- *********************************************** -->
 <!-- ColdFusion 9.0.1 Hot Fixes and Security Updates -->
 <!-- *********************************************** -->
@@ -753,8 +799,7 @@ Using the following directories:
 		<antcall target="directoryPrep" />
 		
 		<antcall target="cpsid_91836" />
-<!--		<antcall target="apsb12-15_cf901" /> -->
-		<antcall target="apsb12-21_cf901" />
+		<antcall target="apsb13-03_cf901" />
 				
 		<antcall target="uu2.text" />
 		<antcall target="cleanup" />
@@ -779,42 +824,22 @@ Using the following directories:
 		<unzip src="downloads/cpsid_91836/CF901/WEB-INF.zip" dest="${webinfDir}/.." />
 
     </target>
-
-<!--	
-	<target name="apsb12-15_cf901" description="Security update: Hotfix available for ColdFusion 9.0.1 (APSB12-15)">
-    	
-		<echo message="Unpacking CF901.zip" />
-		<unzip src="downloads/apsb12-15/CF901.zip" dest="downloads/apsb12-15/" />
-				
-		<echo message="Applying files to ${cfusionLibDir}" />
-		<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
-			<fileset dir="downloads/apsb12-15/CF901/lib"/>
-		</copy>
-				
-		<echo message="Applying files to ${cfideDir}" />
-		<unzip src="downloads/apsb12-15/CFIDE-901.zip" dest="${cfideDir}/.." />
-
-		<echo message="Applying files to ${webinfDir}" />
-		<unzip src="downloads/apsb12-15/CF901/WEB-INF.zip" dest="${webinfDir}/.." />
-    	
-    </target>
--->
 	
-	<target name="apsb12-21_cf901" description="Security update: Hotfix available for ColdFusion 9.0.1 (APSB12-21)">
+	<target name="apsb13-03_cf901" description="Security update: Hotfix available for ColdFusion (APSB13-03)">
     	
 		<echo message="Unpacking CF901.zip" />
-		<unzip src="downloads/apsb12-21/CF901.zip" dest="downloads/apsb12-21/" />
+		<unzip src="downloads/apsb13-03/CF901.zip" dest="downloads/apsb13-03/" />
 				
 		<echo message="Applying files to ${cfusionLibDir}" />
 		<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
-			<fileset dir="downloads/apsb12-21/CF901/lib"/>
+			<fileset dir="downloads/apsb13-03/CF901/lib"/>
 		</copy>
 				
 		<echo message="Applying files to ${cfideDir}" />
-		<unzip src="downloads/apsb12-21/CFIDE-901.zip" dest="${cfideDir}/.." />
+		<unzip src="downloads/apsb13-03/CFIDE-901.zip" dest="${cfideDir}/.." />
 
 		<echo message="Applying files to ${webinfDir}" />
-		<unzip src="downloads/apsb12-21/CF901/WEB-INF.zip" dest="${webinfDir}/.." />
+		<unzip src="downloads/apsb13-03/CF901/WEB-INF.zip" dest="${webinfDir}/.." />
     	
     </target>
 
@@ -827,26 +852,26 @@ Using the following directories:
 		<antcall target="backup" />
 		<antcall target="directoryPrep" />
 			
-		<antcall target="apsb12-21_cf902" />
+		<antcall target="apsb13-03_cf902" />
 					
 		<antcall target="uu2.text" />
 		<antcall target="cleanup" />
 			
 	</target>
 
-	<target name="apsb12-21_cf902" description="Security update: Hotfix available for ColdFusion 9.0.2 (APSB12-21)">
-	    	
+	<target name="apsb13-03_cf902" description="Security update: Hotfix available for ColdFusion (APSB13-03)">
+    	
 		<echo message="Unpacking CF902.zip" />
-		<unzip src="downloads/apsb12-21/CF902.zip" dest="downloads/apsb12-21/" />
-					
+		<unzip src="downloads/apsb13-03/CF902.zip" dest="downloads/apsb13-03/" />
+				
 		<echo message="Applying files to ${cfusionLibDir}" />
 		<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
-			<fileset dir="downloads/apsb12-21/CF902/lib"/>
+			<fileset dir="downloads/apsb13-03/CF902/lib"/>
 		</copy>
-					
+				
 		<echo message="Applying files to ${cfideDir}" />
-		<unzip src="downloads/apsb12-21/CFIDE-902.zip" dest="${cfideDir}/.." />
+		<unzip src="downloads/apsb13-03/CFIDE-902.zip" dest="${cfideDir}/.." />
 
-	</target>
+    </target>
 	
 </project>

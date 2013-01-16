@@ -3,6 +3,7 @@ Modified:
 /lib/flex-messaging-core.jar
 /lib/jpedal.jar
 /lib/log4j.properties
+/CFIDE/adminapi/administrator.cfc
 /CFIDE/adminapi/security.cfc
 /CFIDE/administrator/analyzer/featureview.cfm
 /CFIDE/administrator/analyzer/featureviewloader.cfm
@@ -82,8 +83,6 @@ Modified:
 /CFIDE/administrator/cftags/toggledebug.cfm
 /CFIDE/administrator/cftags/war.cfm
 /CFIDE/administrator/cftags/wizard.cfm
-/CFIDE/administrator/cftags/resources/logviewer_en.xml
-/CFIDE/administrator/cftags/resources/scan_en.xml
 /CFIDE/administrator/components/migration/base.cfc
 /CFIDE/administrator/components/migration/cf7settings.cfc
 /CFIDE/administrator/components/migration/cf8settings.cfc
@@ -146,8 +145,6 @@ Modified:
 /CFIDE/administrator/extensions/webservices.cfm
 /CFIDE/administrator/filedialog/archivefilebrowser.cfm
 /CFIDE/administrator/filedialog/index.cfm
-/CFIDE/administrator/help/change_coldfusion_user_account.htm
-/CFIDE/administrator/help/whskin_info.htm
 /CFIDE/administrator/include/buttonbar.cfm
 /CFIDE/administrator/include/errormessage.cfm
 /CFIDE/administrator/include/errors.cfm
@@ -305,8 +302,13 @@ Modified:
 /CFIDE/administrator/resources.cfm
 /CFIDE/administrator/styles.cfm
 /CFIDE/administrator/topnav.cfm
-/CFIDE/componentutils/Application.cfm
 /CFIDE/componentutils/login.cfm
+/CFIDE/administrator/cftags/resources/logviewer_en.xml
+/CFIDE/administrator/cftags/resources/scan_en.xml
+/CFIDE/administrator/help/change_coldfusion_user_account.htm
+/CFIDE/administrator/help/whskin_info.htm
+/CFIDE/componentutils/Application.cfm
+/CFIDE/componentutils/cfcexplorer.cfc
 /CFIDE/scripts/ajax/FCKeditor/editor/dialog/fck_spellerpages/spellerpages/server-scripts/spellchecker.cfm
 /CFIDE/scripts/ajax/package/cfwindow.js
 /CFIDE/wizards/common/_logintowizard.cfm
@@ -321,15 +323,15 @@ Modified:
 
 Added:
 /lib/updates/chf9010002.jar
-/lib/updates/hf901-00006.jar
+/lib/updates/hf901-00008.jar
 /lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
 /lib/commons-fileupload-1.2.jar
 /lib/esapi-2.0_rc10.jar
 /lib/ESAPI.properties
 /lib/validation.properties
+/CFIDE/administrator/WEB-INF/build.xml
 /CFIDE/administrator/cfadmin.wzrd
 /CFIDE/administrator/securityerror.cfm
-/CFIDE/administrator/WEB-INF/build.xml
 /WEB-INF/exception/udf.cfm
 
 Removed:
