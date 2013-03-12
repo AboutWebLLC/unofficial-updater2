@@ -28,7 +28,7 @@
 			minJavaVersion="1.5"
 			finishButtonText="  GO!  "
 			wide="600:250"
-			version="2013.01.16">
+			version="2013.03.11">
 
 	<page type="input" name="welcome" displayText="Welcome to Unofficial Updater 2">
 		<hidden property="firstRun" value="true" />
@@ -39,10 +39,10 @@
 		<comment displayText="Please read the next screen completely before using" title="true" />
 		<comment displayText="" />
 		<comment displayText="Unofficial Updater 2 Release" bold="true" />
-		<comment displayText="2013.01.16"/>
+		<comment displayText="2013.03.11"/>
 		<comment displayText="" />
-		<comment displayText="Latest Security Patch Applied" bold="true" />
-		<comment displayText="APSB13-03 - January 15, 2013"/>
+		<comment displayText="Latest Patch Applied" bold="true" />
+		<comment displayText="CHFs (3,4,1) - March 8, 11, 1, 2013"/>
 
 	</page>
 
@@ -225,8 +225,8 @@
 		<directory
 				property="backupDir"
 				displayText="Backup Directory"
-				defaultValue="/"
-				defaultValueWin="C:\"
+				defaultValue="/tmp"
+				defaultValueWin="${user.dir}"
 				create="true"
 				checkExists="true" />
 		<comment displayText="" />

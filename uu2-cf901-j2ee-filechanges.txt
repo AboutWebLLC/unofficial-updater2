@@ -306,11 +306,17 @@ Modified:
 /CFIDE/componentutils/Application.cfm
 /CFIDE/componentutils/cfcexplorer.cfc
 /CFIDE/scripts/ajax/FCKeditor/editor/dialog/fck_spellerpages/spellerpages/server-scripts/spellchecker.cfm
+/CFIDE/scripts/ajax/package/cflayout.js
+/CFIDE/scripts/ajax/package/cfmap.js
 /CFIDE/scripts/ajax/package/cfwindow.js
 /CFIDE/wizards/common/_logintowizard.cfm
 /WEB-INF/cftags/dump.cfm
 /WEB-INF/cfusion/lib/flex-messaging-common.jar
 /WEB-INF/cfusion/lib/flex-messaging-core.jar
+/WEB-INF/cfusion/lib/ib6core.jar
+/WEB-INF/cfusion/lib/ib6http.jar
+/WEB-INF/cfusion/lib/ib6swing.jar
+/WEB-INF/cfusion/lib/ib6util.jar
 /WEB-INF/cfusion/lib/jpedal.jar
 /WEB-INF/cfusion/lib/log4j.properties
 /WEB-INF/debug/classic.cfm
@@ -325,12 +331,15 @@ Added:
 /CFIDE/administrator/WEB-INF/build.xml
 /CFIDE/administrator/cfadmin.wzrd
 /CFIDE/administrator/securityerror.cfm
-/WEB-INF/cfusion/lib/updates/chf9010002.jar
-/WEB-INF/cfusion/lib/updates/hf901-00008.jar
+/CFIDE/scripts/ajax/ext/map/GMapPanel3.js
+/CFIDE/scripts/ajax/ext/map/mapiconmaker.js
+/CFIDE/scripts/ajax/resources/cf/map/marker.png
+/WEB-INF/cfusion/lib/updates/chf9010004.jar
 /WEB-INF/cfusion/lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
 /WEB-INF/cfusion/lib/commons-fileupload-1.2.jar
 /WEB-INF/cfusion/lib/esapi-2.0_rc10.jar
 /WEB-INF/cfusion/lib/ESAPI.properties
+/WEB-INF/cfusion/lib/ib6https.jar
 /WEB-INF/cfusion/lib/validation.properties
 /WEB-INF/exception/udf.cfm
 

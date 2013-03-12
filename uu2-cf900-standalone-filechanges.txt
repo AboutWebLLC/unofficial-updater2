@@ -1,7 +1,10 @@
 Modified:
 /lib/flex-messaging-common.jar
 /lib/flex-messaging-core.jar
-/lib/log4j.properties
+/lib/ib6core.jar
+/lib/ib6http.jar
+/lib/ib6swing.jar
+/lib/ib6util.jar
 /CFIDE/adminapi/administrator.cfc
 /CFIDE/adminapi/security.cfc
 /CFIDE/administrator/aboutcf.cfm
@@ -300,9 +303,12 @@ Modified:
 /CFIDE/administrator/wizards/index.cfm
 /CFIDE/classes/cfapplets.jar
 /CFIDE/componentutils/login.cfm
+/lib/log4j.properties
 /CFIDE/componentutils/Application.cfm
 /CFIDE/componentutils/cfcexplorer.cfc
 /CFIDE/scripts/ajax/FCKeditor/editor/dialog/fck_spellerpages/spellerpages/server-scripts/spellchecker.cfm
+/CFIDE/scripts/ajax/package/cflayout.js
+/CFIDE/scripts/ajax/package/cfmap.js
 /CFIDE/wizards/common/_logintowizard.cfm
 /WEB-INF/debug/classic.cfm
 /WEB-INF/exception/detail.cfm
@@ -316,14 +322,16 @@ Added:
 /lib/commons-fileupload-1.2.jar
 /lib/esapi-2.0_rc10.jar
 /lib/ESAPI.properties
+/lib/ib6https.jar
 /lib/validation.properties
-/lib/updates/chf9000001.jar
-/lib/updates/hf900-00009.jar
-/lib/updates/hf900-81860.jar
+/lib/updates/chf9000003.jar
 /lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
 /CFIDE/administrator/cfadmin.wzrd
 /CFIDE/administrator/securityerror.cfm
 /CFIDE/administrator/WEB-INF/build.xml
+/CFIDE/scripts/ajax/ext/map/GMapPanel3.js
+/CFIDE/scripts/ajax/ext/map/mapiconmaker.js
+/CFIDE/scripts/ajax/resources/cf/map/marker.png
 /WEB-INF/exception/udf.cfm
 
 Removed:
