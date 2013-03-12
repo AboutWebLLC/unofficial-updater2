@@ -240,8 +240,7 @@
 							<then>
 								<fail message="Checksum for @{hotfix} file @{filename} is not correct! Either download is corrupt or Adobe updated the file." />
 							</then>
-						</if>	
-						
+						</if>
 					</sequential>
 				</for>
 			</sequential>
@@ -556,7 +555,6 @@ Using the following directories:
 		<antcall target="cpsid_84585" />
 		<antcall target="cpsid_86589" />
 		<antcall target="apsb09-09" />
-<!--		<antcall target="apsb12-15_cf801" /> -->
 		<antcall target="apsb12-21_cf801" />
 		
 		<!-- only for jrun installs -->
@@ -738,17 +736,20 @@ Using the following directories:
 
 			<antcall target="backup" />
 			<antcall target="directoryPrep" />
-			
+<!--			
 			<antcall target="cpsid_82536" />
 			<antcall target="cpsid_82547" />
+-->			
 			<antcall target="cpsid_84585" />
+<!--			
 			<antcall target="apsb13-03_cf900" />
-					
+-->					
+			<antcall target="cf900_chf3" />
 			<antcall target="uu2.text" />
 			<antcall target="cleanup" />
 			
 		</target>
-
+<!--
     <target name="cpsid_82536" description="Cumulative Hot Fix 1 (CHF1) for ColdFusion 9.0.0">
     	
 		<echo message="Applying chf9000001.jar to ${hotfixDir}" />
@@ -759,7 +760,8 @@ Using the following directories:
 		</unzip>
     	
     </target>
-
+-->
+<!--	
     <target name="cpsid_82547" description="ColdFusion 9: Struct keys, cfswitch cases, and variable names are associated with incorrect values (hf900-81860)">
     	
 		<echo message="Applying hf900-81860.jar to ${hotfixDir}" />
@@ -770,7 +772,8 @@ Using the following directories:
 		</unzip>
     	
     </target>
-	
+-->
+<!--	
 	<target name="apsb13-03_cf900" description="Security update: Hotfix available for ColdFusion (APSB13-03)">
     	
 		<echo message="Unpacking CF9.zip" />
@@ -788,7 +791,25 @@ Using the following directories:
 		<unzip src="downloads/apsb13-03/CF9/WEB-INF.zip" dest="${webinfDir}/.." />
     	
     </target>
+-->
+	<target name="cf900_chf3" description="Cumulative Hot Fix 3 (CHF3) for ColdFusion 9.0.0">
+    	
+		<echo message="Unpacking CF9.zip" />
+		<unzip src="downloads/cf900_chf3/CF9.zip" dest="downloads/cf900_chf3/" />
+				
+		<echo message="Applying files to ${cfusionLibDir}" />
+		<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
+			<fileset dir="downloads/cf900_chf3/CF9/lib"/>
+		</copy>
+				
+		<echo message="Applying files to ${cfideDir}" />
+		<unzip src="downloads/cf900_chf3/CFIDE-9.zip" dest="${cfideDir}/.." />
 
+		<echo message="Applying files to ${webinfDir}" />
+		<unzip src="downloads/cf900_chf3/CF9/WEB-INF.zip" dest="${webinfDir}/.." />
+    	
+    </target>
+	
 	
 <!-- *********************************************** -->
 <!-- ColdFusion 9.0.1 Hot Fixes and Security Updates -->
@@ -797,16 +818,17 @@ Using the following directories:
 
 		<antcall target="backup" />
 		<antcall target="directoryPrep" />
-		
+<!--		
 		<antcall target="cpsid_91836" />
 		<antcall target="apsb13-03_cf901" />
-				
+-->				
+		<antcall target="cf901_chf4" />
 		<antcall target="uu2.text" />
 		<antcall target="cleanup" />
 		
 	</target>
 
-	
+<!--	
     <target name="cpsid_91836" description="Cumulative Hot Fix 2 (CHF2) for ColdFusion 9.0.1">
     	
 		<echo message="Unpacking CF901.zip" />
@@ -824,7 +846,8 @@ Using the following directories:
 		<unzip src="downloads/cpsid_91836/CF901/WEB-INF.zip" dest="${webinfDir}/.." />
 
     </target>
-	
+-->
+<!--	
 	<target name="apsb13-03_cf901" description="Security update: Hotfix available for ColdFusion (APSB13-03)">
     	
 		<echo message="Unpacking CF901.zip" />
@@ -842,7 +865,28 @@ Using the following directories:
 		<unzip src="downloads/apsb13-03/CF901/WEB-INF.zip" dest="${webinfDir}/.." />
     	
     </target>
+-->
+	<target name="cf901_chf4" description="Cumulative Hot Fix 4 (CHF4) for ColdFusion 9.0.1">
+    	
+		<echo message="Unpacking CF901.zip" />
+		<unzip src="downloads/cf901_chf4/CF901.zip" dest="downloads/cf901_chf4/" />
+				
+		<echo message="Applying files to ${cfusionLibDir}" />
+		<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
+			<fileset dir="downloads/cf901_chf4/CF901/lib"/>
+		</copy>
+				
+		<!-- was missed in original release of CHF4 -->
+		<unzip src="downloads/cf901_chf4/jpedal.zip" dest="${cfusionLibDir}" />
 
+		<echo message="Applying files to ${cfideDir}" />
+		<unzip src="downloads/cf901_chf4/CFIDE-901.zip" dest="${cfideDir}/.." />
+
+		<echo message="Applying files to ${webinfDir}" />
+		<unzip src="downloads/cf901_chf4/CF901/WEB-INF.zip" dest="${webinfDir}/.." />
+    	
+    </target>
+	
 
 	<!-- *********************************************** -->
 	<!-- ColdFusion 9.0.2 Hot Fixes and Security Updates -->
@@ -851,14 +895,16 @@ Using the following directories:
 
 		<antcall target="backup" />
 		<antcall target="directoryPrep" />
-			
+<!--			
 		<antcall target="apsb13-03_cf902" />
+-->
+		<antcall target="cf902_chf1" />
 					
 		<antcall target="uu2.text" />
 		<antcall target="cleanup" />
 			
 	</target>
-
+<!--
 	<target name="apsb13-03_cf902" description="Security update: Hotfix available for ColdFusion (APSB13-03)">
     	
 		<echo message="Unpacking CF902.zip" />
@@ -871,6 +917,21 @@ Using the following directories:
 				
 		<echo message="Applying files to ${cfideDir}" />
 		<unzip src="downloads/apsb13-03/CFIDE-902.zip" dest="${cfideDir}/.." />
+
+    </target>
+-->
+	<target name="cf902_chf1" description="Cumulative Hot Fix 1 (CHF1) for ColdFusion 9.0.2">
+    	
+		<echo message="Unpacking CF902.zip" />
+		<unzip src="downloads/cf902_chf1/CF902.zip" dest="downloads/cf902_chf1/" />
+				
+		<echo message="Applying files to ${cfusionLibDir}" />
+		<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
+			<fileset dir="downloads/cf902_chf1/CF902/lib"/>
+		</copy>
+				
+		<echo message="Applying files to ${cfideDir}" />
+		<unzip src="downloads/cf902_chf1/CFIDE-902.zip" dest="${cfideDir}/.." />
 
     </target>
 	

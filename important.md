@@ -17,10 +17,10 @@ bulletins to Adobe ColdFusion 8.0.1 and 9.0.x.
      - [Adobe ColdFusion 8 Update 1](http://kb2.adobe.com/cps/403/kb403277.html)
 5. Unofficial Updater 2 is **updated** whenever Adobe releases a new (or changes) a hot fix or security bulletin
  - Matrix of published hot fixes and security bulletins
-     - [Hot Fix Matrix: ColdFusion 8.0.1](https://github.com/dcepler/unofficial-updater2/blob/master/cf801-hotfix-matrix.pdf?raw=true)
-     - [Hot Fix Matrix: ColdFusion 9.0.0](https://github.com/dcepler/unofficial-updater2/blob/master/cf900-hotfix-matrix.pdf?raw=true)    
-     - [Hot Fix Matrix: ColdFusion 9.0.1](https://github.com/dcepler/unofficial-updater2/blob/master/cf901-hotfix-matrix.pdf?raw=true)    
-     - [Hot Fix Matrix: ColdFusion 9.0.2](https://github.com/dcepler/unofficial-updater2/blob/master/cf902-hotfix-matrix.pdf?raw=true)    
+     - [Hot Fix Matrix: ColdFusion 8.0.1](https://github.com/AboutWebLLC/unofficial-updater2/blob/master/cf801-hotfix-matrix.pdf?raw=true)
+     - [Hot Fix Matrix: ColdFusion 9.0.0](https://github.com/AboutWebLLC/unofficial-updater2/blob/master/cf900-hotfix-matrix.pdf?raw=true)    
+     - [Hot Fix Matrix: ColdFusion 9.0.1](https://github.com/AboutWebLLC/unofficial-updater2/blob/master/cf901-hotfix-matrix.pdf?raw=true)    
+     - [Hot Fix Matrix: ColdFusion 9.0.2](https://github.com/AboutWebLLC/unofficial-updater2/blob/master/cf902-hotfix-matrix.pdf?raw=true)    
 6. Unofficial Updater 2 will **need to be downloaded and run again** when it is updated to apply all new (or changed) hot fix or security bulletin from Adobe
 7. Unofficial Updater 2 works **in most** situations/installs, but if you have something non-standard it might not work
  - Consider contacting a [CF-oriented Troubleshooting Consultant](http://www.cf411.com/cfconsult) to ensure you are properly patched
@@ -44,18 +44,18 @@ such as *neo-***.xml* or *jvm.config*.
 A list of files that Unofficial Updater 2 updates as compared to a clean 
 install of Adobe ColdFusion 8.0.1, 9.0.0, 9.0.1, and 9.0.2 are listed below:
 
- - [File Changes: ColdFusion 8.0.1 Standalone](https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf801-standalone-filechanges.txt) 
- - [File Changes: ColdFusion 8.0.1 Multi-Server JRun4](https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf801-jrun-filechanges.txt) 
- - [File Changes: ColdFusion 8.0.1 J2EE](https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf801-j2ee-filechanges.txt) 
- - [File Changes: ColdFusion 9.0.0 Standalone](https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf900-standalone-filechanges.txt) 
- - [File Changes: ColdFusion 9.0.0 Multi-Server JRun4](https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf900-jrun-filechanges.txt) 
- - [File Changes: ColdFusion 9.0.0 J2EE](https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf900-j2ee-filechanges.txt) 
- - [File Changes: ColdFusion 9.0.1 Standalone](https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf901-standalone-filechanges.txt) 
- - [File Changes: ColdFusion 9.0.1 Multi-Server JRun4](https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf901-jrun-filechanges.txt) 
- - [File Changes: ColdFusion 9.0.1 J2EE](https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf901-j2ee-filechanges.txt) 
- - [File Changes: ColdFusion 9.0.2 Standalone](https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf902-standalone-filechanges.txt) 
- - [File Changes: ColdFusion 9.0.2 Multi-Server JRun4](https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf902-jrun-filechanges.txt) 
- - [File Changes: ColdFusion 9.0.2 J2EE](https://raw.github.com/dcepler/unofficial-updater2/master/uu2-cf902-j2ee-filechanges.txt) 
+ - [File Changes: ColdFusion 8.0.1 Standalone](https://raw.github.com/AboutWebLLC/unofficial-updater2/master/uu2-cf801-standalone-filechanges.txt) 
+ - [File Changes: ColdFusion 8.0.1 Multi-Server JRun4](https://raw.github.com/AboutWebLLC/unofficial-updater2/master/uu2-cf801-jrun-filechanges.txt) 
+ - [File Changes: ColdFusion 8.0.1 J2EE](https://raw.github.com/AboutWebLLC/unofficial-updater2/master/uu2-cf801-j2ee-filechanges.txt) 
+ - [File Changes: ColdFusion 9.0.0 Standalone](https://raw.github.com/AboutWebLLC/unofficial-updater2/master/uu2-cf900-standalone-filechanges.txt) 
+ - [File Changes: ColdFusion 9.0.0 Multi-Server JRun4](https://raw.github.com/AboutWebLLC/unofficial-updater2/master/uu2-cf900-jrun-filechanges.txt) 
+ - [File Changes: ColdFusion 9.0.0 J2EE](https://raw.github.com/AboutWebLLC/unofficial-updater2/master/uu2-cf900-j2ee-filechanges.txt) 
+ - [File Changes: ColdFusion 9.0.1 Standalone](https://raw.github.com/AboutWebLLC/unofficial-updater2/master/uu2-cf901-standalone-filechanges.txt) 
+ - [File Changes: ColdFusion 9.0.1 Multi-Server JRun4](https://raw.github.com/AboutWebLLC/unofficial-updater2/master/uu2-cf901-jrun-filechanges.txt) 
+ - [File Changes: ColdFusion 9.0.1 J2EE](https://raw.github.com/AboutWebLLC/unofficial-updater2/master/uu2-cf901-j2ee-filechanges.txt) 
+ - [File Changes: ColdFusion 9.0.2 Standalone](https://raw.github.com/AboutWebLLC/unofficial-updater2/master/uu2-cf902-standalone-filechanges.txt) 
+ - [File Changes: ColdFusion 9.0.2 Multi-Server JRun4](https://raw.github.com/AboutWebLLC/unofficial-updater2/master/uu2-cf902-jrun-filechanges.txt) 
+ - [File Changes: ColdFusion 9.0.2 J2EE](https://raw.github.com/AboutWebLLC/unofficial-updater2/master/uu2-cf902-j2ee-filechanges.txt) 
  
 If you have modified files in **CFIDE** and/or **WEB-INF** they could be changed due to files contained in the updates from Adobe.
 
@@ -80,7 +80,7 @@ If you have modified files in **CFIDE** and/or **WEB-INF** they could be changed
 5. Finish updater by pressing **Apply Updates**
 6. On OS X/Linux/UNIX verify (and possibly correct) ownership and permission of the files updated
 
-Please see the [Wiki: Using Updater 2](https://github.com/dcepler/unofficial-updater2/wiki/Using-Unofficial-Updater-2) for screenshots and walkthrough.
+Please see the [Wiki: Using Updater 2](https://github.com/AboutWebLLC/unofficial-updater2/wiki/Using-Unofficial-Updater-2) for screenshots and walkthrough.
 
 ## Details
 At the core, Unofficial Updater 2 is just an [Apache Ant](http://ant.apache.org/) script. Ant was chosen 
@@ -113,7 +113,7 @@ registry and **CVE-2009-1876** will modify the connector configuration.
 and [breaks other things](http://www.mischefamily.com/nathan/index.cfm/2009/10/1/hf80171643-Breaks-Application-Specific-Custom-Tag-Paths).
 
 ### ColdFusion 9.0.0
-All hot fixes and security bulletins published as of January 15, 2013 for 
+All hot fixes and security bulletins published as of March 8, 2013 for 
 ColdFusion 9.0.0 are applied except if they were superseded by a newer 
 patch and the following:
 
@@ -122,12 +122,12 @@ patch and the following:
 **cpsid_80719** requires modifying jetty.xml which is a system configuration change.
 
 ### ColdFusion 9.0.1
-All hot fixes and security bulletins published as of January 15, 2013 for 
+All hot fixes and security bulletins published as of March 11, 2013 for 
 ColdFusion 9.0.1 are applied except if they were superseded by a newer 
 patch.
 
 ### ColdFusion 9.0.2
-All hot fixes and security bulletins published as of January 15, 2013 for 
+All hot fixes and security bulletins published as of March 1, 2013 for 
 ColdFusion 9.0.2 are applied except if they were superseded by a newer 
 patch.
 
@@ -136,6 +136,12 @@ Please refer to the various technotes about changes to configuration options
 since Unofficial Updater 2 only updates files, it **does not modify** any 
 settings in ColdFusion such as *neo-***.xml* or *jvm.config*.
 
+#### Cumulative Hotfixes for ColdFusion 9.0.x
+ * [Cumulative Hotfix 3 for ColdFusion 9.0.0](http://helpx.adobe.com/coldfusion/kb/cumulative-hotfix-3-coldfusion-900.html)
+ * [Cumulative Hotfix 4 for ColdFusion 9.0.1](http://helpx.adobe.com/coldfusion/kb/cumulative-hotfix-4-coldfusion-901.html)
+ * [Cumulative Hotfix 1 for ColdFusion 9.0.2](http://helpx.adobe.com/coldfusion/kb/cumulative-hotfix-1-coldfusion-902.html)
+
+#### Security Bulletins
  * [APSB11-04 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb11-04.html)
  * [APSB11-14 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb11-14.html)
  * [APSB11-29 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb11-29.html)
@@ -147,10 +153,14 @@ settings in ColdFusion such as *neo-***.xml* or *jvm.config*.
  * Additional Information
    * [ColdFusion Security Hotfix APSB12-06 and Big Forms](http://www.cutterscrossing.com/index.cfm/2012/3/27/ColdFusion-Security-Hotfix-and-Big-Forms)
 
-Also it is highly recommended to update the underlying JVM that ColdFusion 
-uses to the latest available Java 6 (1.6.0) version that is available.
+#### Java Support
+It is highly recommended to update the underlying JVM that ColdFusion 
+uses to the latest available Java 6 (1.6.0) version that is available (Update 43) on ColdFusion 8.0.1 or ColdFusion 9.0.x on Mac OS X.
+Java 7 (1.7.0) is supported for ColdFusion 9.0.x on Windows (32 and 64 bit), Linux (32 and 64 bit), and Solaris (64 bit) after the CHFs released in March 2013 are applied. Again updating to the latest Java 7 (Update 17) is highly recommended.
 
  * [Upgrade Java for ColdFusion](http://helpx.adobe.com/coldfusion/kb/upgrading-java-coldfusion.html)
+ * [How to use ColdFusion with an external JVM](http://helpx.adobe.com/coldfusion/kb/change-coldfusion-jvm.html)
  * Additional Information
+   * [ColdFusion 9.0.x, Mac OS X, and Java 7](http://blogs.coldfusion.com/post.cfm/new-updates-for-coldfusion-9-9-0-1-9-0-2-and-10-java-7-now-supported#comment-869ED317-0670-4D3C-6CADD847164930CE)
    * [CF911: Have you updated your #ColdFusion JVM to _24 yet? Important security fix for CF 8/9](http://www.carehart.org/blog/client/index.cfm/2011/10/28/CF911-Have-you-updated-your-ColdFusion-JVM-to-24-yet-Important-security-fix-for-CF-89)
    * [Oracle, I download your JDK by eating magic cookies](http://blog.kdecherf.com/2012/04/12/oracle-i-download-your-jdk-by-eating-magic-cookies/)
