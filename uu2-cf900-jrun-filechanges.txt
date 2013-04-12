@@ -331,6 +331,7 @@ Added:
 /WEB-INF/cfusion/lib/ib6https.jar
 /WEB-INF/cfusion/lib/validation.properties
 /WEB-INF/cfusion/lib/updates/chf9000003.jar
+/WEB-INF/cfusion/lib/updates/hf900-00010.jar
 /WEB-INF/cfusion/lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
 /WEB-INF/exception/udf.cfm
 

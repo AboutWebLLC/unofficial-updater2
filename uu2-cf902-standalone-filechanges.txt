@@ -8,7 +8,9 @@ Modified:
 /CFIDE/administrator/Application.cfm
 /CFIDE/administrator/scheduler/scheduleedit.cfm
 /CFIDE/administrator/security/_cffunctionsoptions.cfm
+/CFIDE/administrator/security/cfadminpassword.cfm
 /CFIDE/administrator/security/cfrdspassword.cfm
+/CFIDE/administrator/security/userpassword.cfm
 /CFIDE/componentutils/Application.cfm
 /CFIDE/componentutils/cfcexplorer.cfc
 /CFIDE/scripts/ajax/package/cflayout.js
@@ -17,6 +19,7 @@ Modified:
 Added:
 /lib/ib6https.jar
 /lib/updates/chf9020001.jar
+/lib/updates/hf902-00004.jar
 /lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
 /CFIDE/scripts/ajax/ext/map/GMapPanel3.js
 /CFIDE/scripts/ajax/ext/map/mapiconmaker.js

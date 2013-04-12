@@ -3,7 +3,9 @@ Modified:
 /CFIDE/adminapi/security.cfc
 /CFIDE/administrator/scheduler/scheduleedit.cfm
 /CFIDE/administrator/security/_cffunctionsoptions.cfm
+/CFIDE/administrator/security/cfadminpassword.cfm
 /CFIDE/administrator/security/cfrdspassword.cfm
+/CFIDE/administrator/security/userpassword.cfm
 /CFIDE/administrator/Application.cfm
 /CFIDE/componentutils/Application.cfm
 /CFIDE/componentutils/cfcexplorer.cfc
@@ -19,6 +21,7 @@ Added:
 /CFIDE/scripts/ajax/ext/map/mapiconmaker.js
 /CFIDE/scripts/ajax/resources/cf/map/marker.png
 /WEB-INF/cfusion/lib/updates/chf9020001.jar
+/WEB-INF/cfusion/lib/updates/hf902-00004.jar
 /WEB-INF/cfusion/lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
 /WEB-INF/cfusion/lib/ib6https.jar
 

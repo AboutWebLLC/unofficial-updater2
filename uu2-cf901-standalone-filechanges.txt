@@ -334,6 +334,7 @@ Added:
 /lib/ib6https.jar
 /lib/validation.properties
 /lib/updates/chf9010004.jar
+/lib/updates/hf901-00009.jar
 /lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
 /CFIDE/administrator/cfadmin.wzrd
 /CFIDE/administrator/securityerror.cfm
