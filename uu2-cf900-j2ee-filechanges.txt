@@ -319,6 +319,7 @@ Modified:
 /WEB-INF/exception/java/lang/NoSuchFieldError.cfm
 
 Added:
+/CFIDE/adminapi/customtags/l10n.cfm
 /CFIDE/administrator/cfadmin.wzrd
 /CFIDE/administrator/securityerror.cfm
 /CFIDE/administrator/WEB-INF/build.xml
@@ -331,7 +332,7 @@ Added:
 /WEB-INF/cfusion/lib/ib6https.jar
 /WEB-INF/cfusion/lib/validation.properties
 /WEB-INF/cfusion/lib/updates/chf9000003.jar
-/WEB-INF/cfusion/lib/updates/hf900-00010.jar
+/WEB-INF/cfusion/lib/updates/hf900-00011.jar
 /WEB-INF/cfusion/lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
 /WEB-INF/exception/udf.cfm
 

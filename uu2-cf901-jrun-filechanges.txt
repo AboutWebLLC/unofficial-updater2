@@ -328,6 +328,7 @@ Modified:
 /WEB-INF/exception/detail.cfm
 
 Added:
+/CFIDE/adminapi/customtags/l10n.cfm
 /CFIDE/administrator/WEB-INF/build.xml
 /CFIDE/administrator/cfadmin.wzrd
 /CFIDE/administrator/securityerror.cfm
@@ -335,7 +336,7 @@ Added:
 /CFIDE/scripts/ajax/ext/map/mapiconmaker.js
 /CFIDE/scripts/ajax/resources/cf/map/marker.png
 /WEB-INF/cfusion/lib/updates/chf9010004.jar
-/WEB-INF/cfusion/lib/updates/hf901-00009.jar
+/WEB-INF/cfusion/lib/updates/hf901-00010.jar
 /WEB-INF/cfusion/lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
 /WEB-INF/cfusion/lib/commons-fileupload-1.2.jar
 /WEB-INF/cfusion/lib/esapi-2.0_rc10.jar
