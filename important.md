@@ -113,7 +113,7 @@ registry and **CVE-2009-1876** will modify the connector configuration.
 and [breaks other things](http://www.mischefamily.com/nathan/index.cfm/2009/10/1/hf80171643-Breaks-Application-Specific-Custom-Tag-Paths).
 
 ### ColdFusion 9.0.0
-All hot fixes and security bulletins published as of April 9, 2013 for 
+All hot fixes and security bulletins published as of May 14, 2013 for 
 ColdFusion 9.0.0 are applied except if they were superseded by a newer 
 patch and the following:
 
@@ -122,12 +122,12 @@ patch and the following:
 **cpsid_80719** requires modifying jetty.xml which is a system configuration change.
 
 ### ColdFusion 9.0.1
-All hot fixes and security bulletins published as of April 9, 2013 for 
+All hot fixes and security bulletins published as of May 14, 2013 for 
 ColdFusion 9.0.1 are applied except if they were superseded by a newer 
 patch.
 
 ### ColdFusion 9.0.2
-All hot fixes and security bulletins published as of April 9, 2013 for 
+All hot fixes and security bulletins published as of May 14, 2013 for 
 ColdFusion 9.0.2 are applied except if they were superseded by a newer 
 patch.
 
@@ -151,13 +151,14 @@ settings in ColdFusion such as *neo-***.xml* or *jvm.config*.
  * [APSB12-26 - Security update: Hotfix available for ColdFusion 10 and earlier](http://www.adobe.com/support/security/bulletins/apsb12-26.html)
  * [APSB13-03 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb13-03.html)
  * [APSB13-10 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb13-10.html)
+ * [APSB13-13 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb13-13.html)
  * Additional Information
    * [ColdFusion Security Hotfix APSB12-06 and Big Forms](http://www.cutterscrossing.com/index.cfm/2012/3/27/ColdFusion-Security-Hotfix-and-Big-Forms)
 
 #### Java Support
 It is highly recommended to update the underlying JVM that ColdFusion 
-uses to the latest available Java 6 (1.6.0) version that is available (Update 43) on ColdFusion 8.0.1 or ColdFusion 9.0.x on Mac OS X.
-Java 7 (1.7.0) is supported for ColdFusion 9.0.x on Windows (32 and 64 bit), Linux (32 and 64 bit), and Solaris (64 bit) after the CHFs released in March 2013 are applied. Again updating to the latest Java 7 (Update 17) is highly recommended.
+uses to the latest available Java 6 (1.6.0) version that is available (Update 45) on ColdFusion 8.0.1 or ColdFusion 9.0.x on Mac OS X.
+Java 7 (1.7.0) is supported for ColdFusion 9.0.x on Windows (32 and 64 bit), Linux (32 and 64 bit), and Solaris (64 bit) after the CHFs released in March 2013 are applied. Again updating to the latest Java 7 (Update 21) is highly recommended.
 
  * [Upgrade Java for ColdFusion](http://helpx.adobe.com/coldfusion/kb/upgrading-java-coldfusion.html)
  * [How to use ColdFusion with an external JVM](http://helpx.adobe.com/coldfusion/kb/change-coldfusion-jvm.html)
