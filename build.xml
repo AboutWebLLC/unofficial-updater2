@@ -233,13 +233,14 @@
 					<sequential>
 				    	<get src="${@{hotfix}.url}@{filename}" dest="downloads/@{hotfix}/@{filename}" verbose="true" usetimestamp="true" />
 
-						<checksum algorithm="SHA-512" file="downloads/@{hotfix}/@{filename}" property="${@{hotfix}.@{filename}.sha-512}" verifyproperty="@{filename}_isOK" />
+						<checksum algorithm="SHA-512" file="downloads/@{hotfix}/@{filename}" property="${@{hotfix}.@{filename}.sha-512}" verifyproperty="@{filename}_isOK" /> 
 						<if>
 							<isfalse value="${@{filename}_isOK}" />
 							<then>
 								<fail message="Checksum for @{hotfix} file @{filename} is not correct! Either download is corrupt or Adobe updated the file." />
 							</then>
 						</if>
+						
 					</sequential>
 				</for>
 			</sequential>
@@ -249,7 +250,6 @@
 			<entry key="download.date" type="date" value="now" pattern="EEEE, MMMM dd, yyyy 'at' HH:mm:ss z" />
 			<entry key="download.result" value="success" />
 		</propertyfile>
-						
 	</target>
 		
 
@@ -741,6 +741,7 @@ Using the following directories:
 			<antcall target="cf900_chf3" />
 <!--			<antcall target="apsb13-10_cf900" /> -->
 			<antcall target="apsb13-13_cf900" />
+			<antcall target="apsb13-19" />
 
 			<antcall target="uu2.text" />
 			<antcall target="cleanup" />
@@ -811,6 +812,7 @@ Using the following directories:
 		<antcall target="cf901_chf4" />
 <!--		<antcall target="apsb13-10_cf901" /> -->
 		<antcall target="apsb13-13_cf901" />
+		<antcall target="apsb13-19" />
 
 		<antcall target="uu2.text" />
 		<antcall target="cleanup" />
@@ -884,6 +886,7 @@ Using the following directories:
 		<antcall target="cf902_chf1" />
 <!--		<antcall target="apsb13-10_cf902" /> -->
 		<antcall target="apsb13-13_cf902" />
+		<antcall target="apsb13-19" />
 
 		<antcall target="uu2.text" />
 		<antcall target="cleanup" />
@@ -935,6 +938,29 @@ Using the following directories:
 		<echo message="Applying files to ${cfideDir}" />
 		<unzip src="downloads/apsb13-13/CFIDE-902.zip" dest="${cfideDir}/.." />
 
+	</target>
+
+	<target name="apsb13-19" description="Security update: Hotfix available for ColdFusion (APSB13-19)">
+	    	
+		<echo message="Unpacking 3329722.zip" />
+		<unzip src="downloads/apsb13-19/3329722.zip" dest="downloads/apsb13-19/" />
+
+		<switch value="${installType}">
+			<case value="standalone">
+				<copy todir="${cfInstallDir}/runtime/servers/lib" verbose="true" overwrite="true" preservelastmodified="true">
+					<fileset dir="downloads/apsb13-19/3329722/" />
+				</copy>
+			</case>
+			<case value="jrun">
+				<copy todir="${jrunInstallDir}/servers/lib" verbose="true" overwrite="true" preservelastmodified="true">
+					<fileset dir="downloads/apsb13-19/3329722/" />
+				</copy>
+			</case>
+			<default>
+				<echo message="APSB13-19 does not need to be applied to J2EE (non-JRun) installations" />
+			</default>
+		</switch>		
+		
 	</target>
 	
 </project>

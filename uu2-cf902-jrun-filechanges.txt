@@ -25,6 +25,7 @@ Added:
 /WEB-INF/cfusion/lib/updates/hf902-00005.jar
 /WEB-INF/cfusion/lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
 /WEB-INF/cfusion/lib/ib6https.jar
+{JRun-Home}/servers/lib/jrun-hotfix-3329722.jar
 
 Removed:
 /WEB-INF/cfclasses/*.class

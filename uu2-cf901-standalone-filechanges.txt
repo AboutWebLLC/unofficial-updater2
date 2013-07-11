@@ -344,6 +344,7 @@ Added:
 /CFIDE/scripts/ajax/ext/map/mapiconmaker.js
 /CFIDE/scripts/ajax/resources/cf/map/marker.png
 /WEB-INF/exception/udf.cfm
+{ColdFusion-Home}/runtime/servers/lib/jrun-hotfix-3329722.jar
 
 Removed:
 /lib/updates/*.jar (UU2 removes all hotfixes before update)

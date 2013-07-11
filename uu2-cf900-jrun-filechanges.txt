@@ -335,6 +335,7 @@ Added:
 /WEB-INF/cfusion/lib/updates/hf900-00011.jar
 /WEB-INF/cfusion/lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
 /WEB-INF/exception/udf.cfm
+{JRun-Home}/servers/lib/jrun-hotfix-3329722.jar
 
 Removed:
 //WEB-INF/cfclasses/*.class
