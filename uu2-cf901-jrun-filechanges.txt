@@ -344,6 +344,7 @@ Added:
 /WEB-INF/cfusion/lib/ib6https.jar
 /WEB-INF/cfusion/lib/validation.properties
 /WEB-INF/exception/udf.cfm
+{JRun-Home}/servers/lib/jrun-hotfix-3329722.jar
 
 Removed:
 /WEB-INF/cfclasses/*.class
