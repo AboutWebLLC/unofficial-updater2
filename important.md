@@ -85,6 +85,8 @@ If you have modified files in **CFIDE** and/or **WEB-INF** they could be changed
  - **Be sure to fill the directory locations correctly**, Unofficial Updater 2 will try to validate they are correct before letting you proceed to the next step
 5. Finish updater by pressing **Apply Updates**
 6. On OS X/Linux/UNIX verify (and possibly correct) ownership and permission of the files updated
+7. Repeat process for all instances for Multi-Server JRun or J2EE deployments, starting with step 2
+
 
 Please see the [Wiki: Using Updater 2](https://github.com/AboutWebLLC/unofficial-updater2/wiki/Using-Unofficial-Updater-2) for screenshots and walkthrough.
 
@@ -119,7 +121,7 @@ registry and **CVE-2009-1876** will modify the connector configuration.
 and [breaks other things](http://www.mischefamily.com/nathan/index.cfm/2009/10/1/hf80171643-Breaks-Application-Specific-Custom-Tag-Paths).
 
 ### ColdFusion 9.0.0
-All hot fixes and security bulletins published as of July 9, 2013 for 
+All hot fixes and security bulletins published as of November 12, 2013 for 
 ColdFusion 9.0.0 are applied except if they were superseded by a newer 
 patch and the following:
 
@@ -128,12 +130,12 @@ patch and the following:
 **cpsid_80719** requires modifying jetty.xml which is a system configuration change.
 
 ### ColdFusion 9.0.1
-All hot fixes and security bulletins published as of July 9, 2013 for 
+All hot fixes and security bulletins published as of November 12, 2013 for 
 ColdFusion 9.0.1 are applied except if they were superseded by a newer 
 patch.
 
 ### ColdFusion 9.0.2
-All hot fixes and security bulletins published as of July 9, 2013 for 
+All hot fixes and security bulletins published as of November 12, 2013 for 
 ColdFusion 9.0.2 are applied except if they were superseded by a newer 
 patch.
 
@@ -159,13 +161,14 @@ settings in ColdFusion such as *neo-***.xml* or *jvm.config*.
  * [APSB13-10 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb13-10.html)
  * [APSB13-13 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb13-13.html)
  * [APSB13-19 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb13-19.html)
+ * [APSB13-27 - Security update: Hotfix available for ColdFusion](http://www.adobe.com/support/security/bulletins/apsb13-27.html)
  * Additional Information
    * [ColdFusion Security Hotfix APSB12-06 and Big Forms](http://www.cutterscrossing.com/index.cfm/2012/3/27/ColdFusion-Security-Hotfix-and-Big-Forms)
 
 #### Java Support
 It is highly recommended to update the underlying JVM that ColdFusion 
 uses to the latest available Java 6 (1.6.0) version that is available (Update 45) on ColdFusion 8.0.1 or ColdFusion 9.0.x on Mac OS X.
-Java 7 (1.7.0) is supported for ColdFusion 9.0.x on Windows (32 and 64 bit), Linux (32 and 64 bit), and Solaris (64 bit) after the CHFs released in March 2013 are applied. Again updating to the latest Java 7 (Update 25) is highly recommended.
+Java 7 (1.7.0) is supported for ColdFusion 9.0.x on Windows (32 and 64 bit), Linux (32 and 64 bit), and Solaris (64 bit) after the CHFs released in March 2013 are applied. Again updating to the latest Java 7 (Update 45) is highly recommended.
 
  * [Upgrade Java for ColdFusion](http://helpx.adobe.com/coldfusion/kb/upgrading-java-coldfusion.html)
  * [How to use ColdFusion with an external JVM](http://helpx.adobe.com/coldfusion/kb/change-coldfusion-jvm.html)

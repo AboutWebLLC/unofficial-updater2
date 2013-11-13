@@ -1,6 +1,7 @@
 Modified:
 /CFIDE/adminapi/administrator.cfc
 /CFIDE/adminapi/security.cfc
+/CFIDE/adminapi/customtags/l10n.cfm
 /CFIDE/administrator/aboutcf.cfm
 /CFIDE/administrator/Application.cfm
 /CFIDE/administrator/checkfile.cfm
@@ -190,6 +191,7 @@ Modified:
 /CFIDE/administrator/logviewer/searchlog.cfm
 /CFIDE/administrator/mail/_charsets.cfm
 /CFIDE/administrator/mail/index.cfm
+/CFIDE/administrator/mail/undeliveredmail.cfc
 /CFIDE/administrator/mail/undeliveredmail.cfm
 /CFIDE/administrator/monitor/display_snapshot.cfm
 /CFIDE/administrator/monitor/index.cfm
@@ -312,14 +314,12 @@ Modified:
 /WEB-INF/cfusion/lib/log4j.properties
 /WEB-INF/debug/classic.cfm
 /WEB-INF/exception/detail.cfm
-/WEB-INF/exception/coldfusion/filter/FormValidationException.cfm
 /WEB-INF/exception/coldfusion/runtime/IllegalNumberFormatArgumentException.cfm
 /WEB-INF/exception/coldfusion/runtime/IllegalTimeFormatArgumentException.cfm
 /WEB-INF/exception/java/lang/ClassCastException.cfm
 /WEB-INF/exception/java/lang/NoSuchFieldError.cfm
 
 Added:
-/CFIDE/adminapi/customtags/l10n.cfm
 /CFIDE/administrator/cfadmin.wzrd
 /CFIDE/administrator/securityerror.cfm
 /CFIDE/administrator/WEB-INF/build.xml
@@ -332,12 +332,12 @@ Added:
 /WEB-INF/cfusion/lib/ib6https.jar
 /WEB-INF/cfusion/lib/validation.properties
 /WEB-INF/cfusion/lib/updates/chf9000003.jar
-/WEB-INF/cfusion/lib/updates/hf900-00011.jar
+/WEB-INF/cfusion/lib/updates/hf900-00012.jar
 /WEB-INF/cfusion/lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
 /WEB-INF/exception/udf.cfm
 {JRun-Home}/servers/lib/jrun-hotfix-3329722.jar
 
 Removed:
-//WEB-INF/cfclasses/*.class
-//WEB-INF/cfusion/lib/updates/*.jar (UU2 removes all hotfixes before update)
-//WEB-INF/cfusion/lib/updates/empty.txt
+/WEB-INF/cfclasses/*.class
+/WEB-INF/cfusion/lib/updates/*.jar (UU2 removes all hotfixes before update)
+/WEB-INF/cfusion/lib/updates/empty.txt

@@ -1,6 +1,11 @@
 Modified:
 /CFIDE/adminapi/administrator.cfc
 /CFIDE/adminapi/security.cfc
+/CFIDE/adminapi/customtags/l10n.cfm
+/CFIDE/administrator/cftags/l10n.cfm
+/CFIDE/administrator/cftags/l10n_testing.cfm
+/CFIDE/administrator/logviewer/_searchloglogic.cfm
+/CFIDE/administrator/logviewer/_searchloglogic_other.cfm
 /CFIDE/administrator/scheduler/scheduleedit.cfm
 /CFIDE/administrator/security/_cffunctionsoptions.cfm
 /CFIDE/administrator/security/cfadminpassword.cfm
@@ -17,12 +22,11 @@ Modified:
 /WEB-INF/cfusion/lib/ib6util.jar
 
 Added:
-/CFIDE/adminapi/customtags/l10n.cfm
 /CFIDE/scripts/ajax/ext/map/GMapPanel3.js
 /CFIDE/scripts/ajax/ext/map/mapiconmaker.js
 /CFIDE/scripts/ajax/resources/cf/map/marker.png
 /WEB-INF/cfusion/lib/updates/chf9020001.jar
-/WEB-INF/cfusion/lib/updates/hf902-00005.jar
+/WEB-INF/cfusion/lib/updates/hf902-00006.jar
 /WEB-INF/cfusion/lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
 /WEB-INF/cfusion/lib/ib6https.jar
 
