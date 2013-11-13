@@ -8,6 +8,7 @@ Modified:
 /lib/jpedal.jar
 /CFIDE/adminapi/administrator.cfc
 /CFIDE/adminapi/security.cfc
+/CFIDE/adminapi/customtags/l10n.cfm
 /CFIDE/administrator/analyzer/featureview.cfm
 /CFIDE/administrator/analyzer/featureviewloader.cfm
 /CFIDE/administrator/analyzer/featureviewtop.cfm
@@ -320,7 +321,6 @@ Modified:
 /CFIDE/scripts/ajax/package/cfwindow.js
 /CFIDE/wizards/common/_logintowizard.cfm
 /WEB-INF/debug/classic.cfm
-/WEB-INF/exception/coldfusion/filter/FormValidationException.cfm
 /WEB-INF/exception/coldfusion/runtime/IllegalNumberFormatArgumentException.cfm
 /WEB-INF/exception/coldfusion/runtime/IllegalTimeFormatArgumentException.cfm
 /WEB-INF/exception/java/lang/ClassCastException.cfm
@@ -334,9 +334,8 @@ Added:
 /lib/ib6https.jar
 /lib/validation.properties
 /lib/updates/chf9010004.jar
-/lib/updates/hf901-00010.jar
+/lib/updates/hf901-00011.jar
 /lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
-/CFIDE/adminapi/customtags/l10n.cfm
 /CFIDE/administrator/cfadmin.wzrd
 /CFIDE/administrator/securityerror.cfm
 /CFIDE/administrator/WEB-INF/build.xml

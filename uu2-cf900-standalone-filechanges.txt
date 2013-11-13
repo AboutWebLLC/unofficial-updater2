@@ -7,6 +7,7 @@ Modified:
 /lib/ib6util.jar
 /CFIDE/adminapi/administrator.cfc
 /CFIDE/adminapi/security.cfc
+/CFIDE/adminapi/customtags/l10n.cfm
 /CFIDE/administrator/aboutcf.cfm
 /CFIDE/administrator/Application.cfm
 /CFIDE/administrator/checkfile.cfm
@@ -312,7 +313,6 @@ Modified:
 /CFIDE/wizards/common/_logintowizard.cfm
 /WEB-INF/debug/classic.cfm
 /WEB-INF/exception/detail.cfm
-/WEB-INF/exception/coldfusion/filter/FormValidationException.cfm
 /WEB-INF/exception/coldfusion/runtime/IllegalNumberFormatArgumentException.cfm
 /WEB-INF/exception/coldfusion/runtime/IllegalTimeFormatArgumentException.cfm
 /WEB-INF/exception/java/lang/ClassCastException.cfm
@@ -325,9 +325,8 @@ Added:
 /lib/ib6https.jar
 /lib/validation.properties
 /lib/updates/chf9000003.jar
-/lib/updates/hf900-00011.jar
+/lib/updates/hf900-00012.jar
 /lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
-/CFIDE/adminapi/customtags/l10n.cfm
 /CFIDE/administrator/cfadmin.wzrd
 /CFIDE/administrator/securityerror.cfm
 /CFIDE/administrator/WEB-INF/build.xml
@@ -341,3 +340,4 @@ Removed:
 /lib/updates/*.jar (UU2 removes all hotfixes before update)
 /lib/updates/empty.txt
 /WEB-INF/cfclasses/*.class 
+
