@@ -739,8 +739,8 @@ Using the following directories:
 
 			<antcall target="cpsid_84585" />
 			<antcall target="cf900_chf3" />
-<!--			<antcall target="apsb13-13_cf900" /> -->
-			<antcall target="apsb13-27_cf900" />
+<!---			<antcall target="apsb13-27_cf900" /> -->
+			<antcall target="apsb14-23_cf900" />
 			<antcall target="apsb13-19" />
 
 			<antcall target="uu2.text" />
@@ -767,25 +767,6 @@ Using the following directories:
     </target>
 	
 <!--	
-	<target name="apsb13-13_cf900" description="Security update: Hotfix available for ColdFusion (APSB13-13)">
-	    	
-		<echo message="Unpacking CF9.zip" />
-		<unzip src="downloads/apsb13-13_full/CF9.zip" dest="downloads/apsb13-13/" />
-					
-		<echo message="Applying files to ${cfusionLibDir}" />
-		<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
-			<fileset dir="downloads/apsb13-13/CF9/lib"/>
-		</copy>
-					
-		<echo message="Applying files to ${cfideDir}" />
-		<unzip src="downloads/apsb13-13/CFIDE-9.zip" dest="${cfideDir}/.." />
-
-		<echo message="Applying files to ${webinfDir}" />
-		<unzip src="downloads/apsb13-13/CF9/WEB-INF.zip" dest="${webinfDir}/.." />
-		
-	</target>
--->
-	
 	<target name="apsb13-27_cf900" description="Security update: Hotfix available for ColdFusion (APSB13-27)">
 	    	
 		<echo message="Unpacking CF9.zip" />
@@ -803,7 +784,26 @@ Using the following directories:
 		<unzip src="downloads/apsb13-27/CF9/WEB-INF.zip" dest="${webinfDir}/.." />
 		
 	</target>
-	
+-->
+
+	<target name="apsb14-23_cf900" description="Security update: Hotfix available for ColdFusion (APSB14-23)">
+	    	
+		<echo message="Unpacking CF9.zip" />
+		<unzip src="downloads/apsb14-23/CF9.zip" dest="downloads/apsb14-23/" />
+					
+		<echo message="Applying files to ${cfusionLibDir}" />
+		<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
+			<fileset dir="downloads/apsb14-23/CF9/lib"/>
+		</copy>
+					
+		<echo message="Applying files to ${cfideDir}" />
+		<unzip src="downloads/apsb14-23/CFIDE-9.zip" dest="${cfideDir}/.." />
+
+		<echo message="Applying files to ${webinfDir}" />
+		<unzip src="downloads/apsb14-23/CF9/WEB-INF.zip" dest="${webinfDir}/.." />
+		
+	</target>
+
 <!-- *********************************************** -->
 <!-- ColdFusion 9.0.1 Hot Fixes and Security Updates -->
 <!-- *********************************************** -->
@@ -813,8 +813,8 @@ Using the following directories:
 		<antcall target="directoryPrep" />
 
 		<antcall target="cf901_chf4" />
-<!--		<antcall target="apsb13-13_cf901" /> -->
-		<antcall target="apsb13-27_cf901" />
+<!--		<antcall target="apsb13-27_cf901" /> -->
+		<antcall target="apsb14-23_cf901" />
 		<antcall target="apsb13-19" />
 
 		<antcall target="uu2.text" />
@@ -844,25 +844,6 @@ Using the following directories:
     </target>
 	
 <!--
-	<target name="apsb13-13_cf901" description="Security update: Hotfix available for ColdFusion (APSB13-13)">
-	    	
-		<echo message="Unpacking CF901.zip" />
-		<unzip src="downloads/apsb13-13_full/CF901.zip" dest="downloads/apsb13-13/" />
-					
-		<echo message="Applying files to ${cfusionLibDir}" />
-		<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
-			<fileset dir="downloads/apsb13-13/CF901/lib"/>
-		</copy>
-					
-		<echo message="Applying files to ${cfideDir}" />
-		<unzip src="downloads/apsb13-13/CFIDE-901.zip" dest="${cfideDir}/.." />
-
-		<echo message="Applying files to ${webinfDir}" />
-		<unzip src="downloads/apsb13-13/CF901/WEB-INF.zip" dest="${webinfDir}/.." />
-		
-    </target>
--->
-
 	<target name="apsb13-27_cf901" description="Security update: Hotfix available for ColdFusion (APSB13-27)">
 	    	
 		<echo message="Unpacking CF901.zip" />
@@ -880,7 +861,26 @@ Using the following directories:
 		<unzip src="downloads/apsb13-27/CF901/WEB-INF.zip" dest="${webinfDir}/.." />
 		
     </target>
-	
+-->
+
+	<target name="apsb14-23_cf901" description="Security update: Hotfix available for ColdFusion (APSB14-23)">
+	    	
+		<echo message="Unpacking CF901.zip" />
+		<unzip src="downloads/apsb14-23/CF901.zip" dest="downloads/apsb14-23/" />
+					
+		<echo message="Applying files to ${cfusionLibDir}" />
+		<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
+			<fileset dir="downloads/apsb14-23/CF901/lib"/>
+		</copy>
+					
+		<echo message="Applying files to ${cfideDir}" />
+		<unzip src="downloads/apsb14-23/CFIDE-901.zip" dest="${cfideDir}/.." />
+
+		<echo message="Applying files to ${webinfDir}" />
+		<unzip src="downloads/apsb14-23/CF901/WEB-INF.zip" dest="${webinfDir}/.." />
+		
+    </target>
+
 	<!-- *********************************************** -->
 	<!-- ColdFusion 9.0.2 Hot Fixes and Security Updates -->
 	<!-- *********************************************** -->
@@ -890,8 +890,8 @@ Using the following directories:
 		<antcall target="directoryPrep" />
 
 		<antcall target="cf902_chf1" />
-<!--		<antcall target="apsb13-13_cf902" /> -->
-		<antcall target="apsb13-27_cf902" />
+<!--		<antcall target="apsb13-27_cf902" /> -->
+		<antcall target="apsb14-23_cf902" />
 		<antcall target="apsb13-19" />
 
 		<antcall target="uu2.text" />
@@ -915,22 +915,6 @@ Using the following directories:
     </target>
 	
 <!--
-	<target name="apsb13-13_cf902" description="Security update: Hotfix available for ColdFusion (APSB13-13)">
-	    	
-		<echo message="Unpacking CF902.zip" />
-		<unzip src="downloads/apsb13-13_full/CF902.zip" dest="downloads/apsb13-13/" />
-					
-		<echo message="Applying files to ${cfusionLibDir}" />
-		<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
-			<fileset dir="downloads/apsb13-13/CF902/lib"/>
-		</copy>
-					
-		<echo message="Applying files to ${cfideDir}" />
-		<unzip src="downloads/apsb13-13/CFIDE-902.zip" dest="${cfideDir}/.." />
-
-	</target>
--->
-	
 	<target name="apsb13-27_cf902" description="Security update: Hotfix available for ColdFusion (APSB13-27)">
 	    	
 		<echo message="Unpacking CF902.zip" />
@@ -945,7 +929,26 @@ Using the following directories:
 		<unzip src="downloads/apsb13-27/CFIDE-902.zip" dest="${cfideDir}/.." />
 
 	</target>
-	
+-->
+
+	<target name="apsb14-23_cf902" description="Security update: Hotfix available for ColdFusion (APSB14-23)">
+	    	
+		<echo message="Unpacking CF902.zip" />
+		<unzip src="downloads/apsb14-23/CF902.zip" dest="downloads/apsb14-23/" />
+					
+		<echo message="Applying files to ${cfusionLibDir}" />
+		<copy todir="${cfusionLibDir}" verbose="true" overwrite="true" preservelastmodified="true">
+			<fileset dir="downloads/apsb14-23/CF902/lib"/>
+		</copy>
+					
+		<echo message="Applying files to ${cfideDir}" />
+		<unzip src="downloads/apsb14-23/CFIDE-902.zip" dest="${cfideDir}/.." />
+
+		<echo message="Applying files to ${webinfDir}" />
+		<unzip src="downloads/apsb14-23/CF902/WEB-INF.zip" dest="${webinfDir}/.." />
+
+	</target>
+
 	<target name="apsb13-19" description="Security update: Hotfix available for ColdFusion (APSB13-19)">
 	    	
 		<echo message="Unpacking 3329722.zip" />

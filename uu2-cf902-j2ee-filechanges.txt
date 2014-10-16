@@ -26,7 +26,7 @@ Added:
 /CFIDE/scripts/ajax/ext/map/mapiconmaker.js
 /CFIDE/scripts/ajax/resources/cf/map/marker.png
 /WEB-INF/cfusion/lib/updates/chf9020001.jar
-/WEB-INF/cfusion/lib/updates/hf902-00006.jar
+/WEB-INF/cfusion/lib/updates/hf902-00007.jar
 /WEB-INF/cfusion/lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
 /WEB-INF/cfusion/lib/ib6https.jar
 
