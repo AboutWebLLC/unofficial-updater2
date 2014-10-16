@@ -24,7 +24,7 @@ Modified:
 Added:
 /lib/ib6https.jar
 /lib/updates/chf9020001.jar
-/lib/updates/hf902-00006.jar
+/lib/updates/hf902-00007.jar
 /lib/updates/unofficial-updater2.txt (created by UU2 to indicate run date)
 /CFIDE/scripts/ajax/ext/map/GMapPanel3.js
 /CFIDE/scripts/ajax/ext/map/mapiconmaker.js
