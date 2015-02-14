@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE installer PUBLIC "-//tp23 //DTD Ant Installer Config//EN" "http://antinstaller.sf.net/dtd/antinstall-config-0.8.dtd">
 <!--
-	Copyright (c) 2011-2013, David C. Epler
+	Copyright (c) 2011-2015, David C. Epler
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@
 			minJavaVersion="1.5"
 			finishButtonText="  GO!  "
 			wide="600:250"
-			version="2014.10.16">
+			version="2015.02.14">
 
 	<page type="input" name="welcome" displayText="Welcome to Unofficial Updater 2">
 		<hidden property="firstRun" value="true" />
@@ -39,7 +39,7 @@
 		<comment displayText="Please read the next screen completely before using" title="true" />
 		<comment displayText="" />
 		<comment displayText="Unofficial Updater 2 Release" bold="true" />
-		<comment displayText="2014.10.16"/>
+		<comment displayText="2015.02.14"/>
 		<comment displayText="" />
 		<comment displayText="Latest Patch Applied" bold="true" />
 		<comment displayText="APSB14-23 - October 14, 2014"/>
